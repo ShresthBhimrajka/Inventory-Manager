@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/headCheckInv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:text="@string/Inventory"
+        android:textSize="40sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TableLayout
+        android:id="@+id/tableLayoutHead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-100dp"
+        android:layout_marginBottom="-100dp"
+        android:stretchColumns="1,2,3"
+        app:layout_constraintBottom_toTopOf="@id/ScrollView"
+        app:layout_constraintTop_toBottomOf="@+id/headCheckInv">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/ID"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_column="1"
+                android:background="@drawable/cell_shape"
+                android:gravity="center"
+                android:text="ID"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/Name"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_column="1"
+                android:background="@drawable/cell_shape"
+                android:gravity="center"
+                android:text="Name"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/Quantity"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_column="1"
+                android:background="@drawable/cell_shape"
+                android:gravity="center"
+                android:text="Quantity"
+                android:textSize="14sp" />
+        </TableRow>
+    </TableLayout>
+
+    <ScrollView
+        android:id="@+id/ScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="93dp"
+        android:scrollbars="horizontal|vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayoutHead">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1,2,3">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_inv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </TableLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
