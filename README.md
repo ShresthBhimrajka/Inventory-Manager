@@ -28,11 +28,3 @@ Inventory Manager v1.0:
 			Quantity
 			Date
 			IN/EX
-			
-build.gradle, gradle, local, settings.gradle go inside your main project folder InventoryManager/
-
-The gradle scripts inside the app folder go inside InventoryManager/app
-
-Copy paste the gradle/wrapper into maine folder InventoryManager/
-
-The java, res and maifest file inside mainifest folder go inside InventoryManager/app/src/main/
