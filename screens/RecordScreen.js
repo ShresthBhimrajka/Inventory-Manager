@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
 
+import { Colors } from '../assets/Colors';
 import Card from '../components/Card';
 
 const Data = [
@@ -39,7 +40,9 @@ const RecordScreen = () => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: Colors.primaryBackgroud  
     },
 
     item: {

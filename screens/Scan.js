@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 import { Colors } from '../assets/Colors';
 import Card from '../components/Card';
 
-const Profile = () => {
+const Scan = () => {
     return (
         <View style={styles.screen}>
             <Card>
-                <Text>Profile</Text>
+                <Text>Scan</Text>
             </Card>
         </View>
     );
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Profile;
+export default Scan;
