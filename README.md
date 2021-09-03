@@ -1,6 +1,7 @@
 # Inventory-Manager
 
 Dependencies required:
+
   -Step 1: cd project_folder
   
   -Step 2: npm install @react-navigation/native
