@@ -1,3 +1,7 @@
+[05.09.2021 17:33]
+
+Login Screen UI, Employee Screen UI added and added dependency for firebase
+
 [04.09.2021 00:15]
 
 UI update
