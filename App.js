@@ -40,7 +40,7 @@ const scanTouchable = ({children, onPress}) => {
 
 function navBar() {
   return (
-    <Tabs.Navigator>
+    <Tabs.Navigator screenOtions={{tabBarStyle: {backgroundColor: 'black'}}}>
       <Tabs.Screen name='HomeScreen' component={Home} options={{headerShown: false, tabBarIcon: ({focused}) => (<View><Image source={require('./assets/homeIcon.png')}/></View>)}}/>
       <Tabs.Screen name='Scan' component={Scan} options={{headerTitleAlign: 'center', tabBarIcon: ({focused}) => (<Image source={require('./assets/scanQR.png')} resizeMode='contain' style={styles.navButton}/>), scanTouchable}}/>
       <Tabs.Screen name='Profile' component={Profile} options={{headerTitleAlign: 'center', tabBarIcon: ({focused}) => (<View><Image source={require('./assets/profileIcon.png')}/></View>)}}/>
@@ -52,9 +52,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Login'>
-        <Stack.Screen name='NavBar' component={navBar} options={{headerShown: false}}/>
-        {/*<Stack.Screen name='Login' component={LoginScreen} options={{headerShown: false}}/>
-        <Stack.Screen name='Signup' component={SignUp} options={{headerTitle:'', headerBackVisible: true, headerStyle: styles.signup}}/>*/}
+        {/*<Stack.Screen name='NavBar' component={navBar} options={{headerShown: false}}/>*/}
+        <Stack.Screen name='Login' component={LoginScreen} options={{headerShown: false}}/>
+        <Stack.Screen name='Signup' component={SignUp} options={{headerTitle:'', headerBackVisible: true, headerStyle: styles.signup}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -68,14 +68,14 @@ const styles = StyleSheet.create({
   },
 
   scanImg: {
-    width: 100,
-    height: 100,
+    width: 30,
+    height: 30,
     borderRadius: 50
   },
 
   navButton: {
-    width: 50,
-    height: 50
+    width: 30,
+    height: 30
   },
 
   signup: {
