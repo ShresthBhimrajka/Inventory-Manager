@@ -11,3 +11,5 @@ Dependencies required:
   -Step 4: npm install @react-navigation/native-stack
   
   -Step 5: npm install @react-navigation/bottom-tabs
+  
+  -Step 6: npm install --save @react-native-firebase/app
