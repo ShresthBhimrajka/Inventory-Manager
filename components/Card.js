@@ -11,8 +11,6 @@ const Card = props => {
 
 const styles = StyleSheet.create({
     card: {
-        width: 300,
-        maxWidth: '70%',
         alignItems: 'center',
         backgroundColor: 'white',
         justifyContent: 'center',

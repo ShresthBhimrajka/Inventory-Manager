@@ -7,15 +7,18 @@ import Card from '../components/Card';
 const Data = [
     {
         id: '1',
-        data: 'Item 1'
+        itemName: 'Item 1',
+        itemQuantity: '999'
     },
     {
         id: '2',
-        data: 'Item 2'
+        itemName: 'Item 2',
+        itemQuantity: '999'
     },
     {
         id: '3',
-        data: 'Item 3'
+        itemName: 'Item 3',
+        itemQuantity: '999'
     },
 ];
 
@@ -23,7 +26,9 @@ const InventoryScreen = () => {
 
     const renderItem = ({item}) => (
         <Card style={styles.item}>
-            <Text>{item.data}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>ID:   {item.id}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.itemName}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {item.itemQuantity}</Text>
         </Card>
     );
 
@@ -47,10 +52,16 @@ const styles = StyleSheet.create({
 
     item: {
         flex: 1,
-        alignItems: 'center',
+        width: 300,
+        
+        alignItems: 'flex-start',
         justifyContent: 'center',
         paddingVertical: 10,
         margin: '5%'
+    },
+
+    cardText: {
+        textAlign: 'left',
     }
 }); 
 

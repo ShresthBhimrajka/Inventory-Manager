@@ -2,14 +2,18 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Image, Button } from 'react-native';
 
 import InventoryScreen from './screens/InventoryScreen';
 import RecordScreen from './screens/RecordScreen';
 import StatusScreen from './screens/StatusScreen';
-import HomeScreen from './screens/HomeScreen';
+import HomeScreenAdmin from './screens/HomeScreenAdmin';
+import HomeScreenEmployee from './screens/HomeScreeEmployee';
 import Profile from './screens/Profile';
 import Scan from './screens/Scan';
+import SignUp from './screens/SignUpScreen';
+import LoginScreen from './screens/LoginScreen';
+import { Colors } from './assets/Colors';
 
 const Stack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -18,7 +22,7 @@ const HomeStack = createNativeStackNavigator();
 function Home() {
   return(
     <HomeStack.Navigator initialRouteName='Home'>
-      <HomeStack.Screen name='Home' component={HomeScreen} options={{headerTitleAlign: 'center'}}/>
+      <HomeStack.Screen name='Home' component={HomeScreenAdmin} options={{headerTitleAlign: 'center'}}/>
       <HomeStack.Screen name='Inventory' component={InventoryScreen} options={{headerTitleAlign: 'center'}}/>
       <HomeStack.Screen name='Records' component={RecordScreen} options={{headerTitleAlign: 'center'}}/>
       <HomeStack.Screen name='Status' component={StatusScreen} options={{headerTitleAlign: 'center'}}/>
@@ -27,7 +31,7 @@ function Home() {
 }
 
 const scanTouchable = ({children, onPress}) => {
-  <TouchableOpacity style={StyleSheet.scanQR}>
+  <TouchableOpacity style={styles.scanQR}>
     <View style={styles.scanImg} onPress={onPress}>
       {children}
     </View>
@@ -47,8 +51,10 @@ function navBar() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName='Login'>
         <Stack.Screen name='NavBar' component={navBar} options={{headerShown: false}}/>
+        {/*<Stack.Screen name='Login' component={LoginScreen} options={{headerShown: false}}/>
+        <Stack.Screen name='Signup' component={SignUp} options={{headerTitle:'', headerBackVisible: true, headerStyle: styles.signup}}/>*/}
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -70,5 +76,9 @@ const styles = StyleSheet.create({
   navButton: {
     width: 50,
     height: 50
-  }
+  },
+
+  signup: {
+    backgroundColor: Colors.primaryBackgroud,
+   }
 });

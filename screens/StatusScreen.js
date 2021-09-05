@@ -7,15 +7,24 @@ import Card from '../components/Card';
 const Data = [
     {
         id: '1',
-        data: 'Status 1'
+        itemName: 'Item 1',
+        itemQuantity: '999',
+        dateTimePlaced: '10.10.2021-12:12:40',
+        status: 'EX'
     },
     {
         id: '2',
-        data: 'Status 2'
+        itemName: 'Item 2',
+        itemQuantity: '999',
+        dateTimePlaced: '10.10.2021-12:12:40',
+        status: 'IN'
     },
     {
         id: '3',
-        data: 'Status 3'
+        itemName: 'Item 3',
+        itemQuantity: '999',
+        dateTimePlaced: '10.10.2021-12:12:40',
+        status: 'IN'
     },
 ];
 
@@ -23,7 +32,11 @@ const StatusScreen = () => {
 
     const renderItem = ({item}) => (
         <Card style={styles.item}>
-            <Text>{item.data}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>ID: {item.id}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.itemName}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {item.itemQuantity}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Order Placed: {item.dateTimePlaced}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Status:   {item.status}</Text>
         </Card>
     );
 
@@ -47,8 +60,15 @@ const styles = StyleSheet.create({
 
     item: {
         flex: 1,
+        width: 300,
+        alignItems: 'flex-start',
+        justifyContent: 'center',
         paddingVertical: 10,
         margin: '5%'
+    },
+
+    cardText: {
+        textAlign: 'left',
     }
 });
 

@@ -7,15 +7,21 @@ import Card from '../components/Card';
 const Data = [
     {
         id: '1',
-        data: 'Record 1'
+        itemName: 'Item 1',
+        itemQuantity: '999',
+        dateTime: '10.10.2021-12:12:40'
     },
     {
         id: '2',
-        data: 'Record 2'
+        itemName: 'Item 2',
+        itemQuantity: '999',
+        dateTime: '10.10.2021-12:12:40'
     },
     {
         id: '3',
-        data: 'Record 3'
+        itemName: 'Item 3',
+        itemQuantity: '999',
+        dateTime: '10.10.2021-12:12:40'
     },
 ];
 
@@ -23,7 +29,10 @@ const RecordScreen = () => {
 
     const renderItem = ({item}) => (
         <Card style={styles.item}>
-            <Text>{item.data}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>ID:   {item.id}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.itemName}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {item.itemQuantity}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Date: {item.dateTime}</Text>
         </Card>
     );
 
@@ -47,8 +56,16 @@ const styles = StyleSheet.create({
 
     item: {
         flex: 1,
+        width: 300,
+        
+        alignItems: 'flex-start',
+        justifyContent: 'center',
         paddingVertical: 10,
         margin: '5%'
+    },
+
+    cardText: {
+        textAlign: 'left',
     }
 });
 
