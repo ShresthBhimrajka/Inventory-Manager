@@ -17,7 +17,9 @@ const Profile = ({navigation}) => {
             <Card style={styles.card}>
                 <Text>Profile</Text>
             </Card>
-            <Button title='Sign Out' onPress={signoutHandler} color='red'/>
+            <View style={{marginBottom: 20}}>
+                <Button title='Sign Out' onPress={signoutHandler} color='red'/>
+            </View>
         </View>
     );
 };

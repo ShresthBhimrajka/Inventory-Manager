@@ -34,19 +34,19 @@ const HomeScreen = ({navigation}) => {
 
             <Text style={styles.hello} adjustsFontSizeToFit numberOfLines={1}>Welcome {name} of Organization {org}</Text>
 
-            <TouchableOpacity activeOpacity={0.6} onPress={() => navigation.push('Inventory')}>
+            <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Inventory')}>
               <Card style={styles.buttonContainer}>
                 <Text style={styles.buttonText}>Inventory</Text>
               </Card>
             </TouchableOpacity> 
     
-            <TouchableOpacity activeOpacity={0.6} onPress={() => navigation.push('Records')}>
+            <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Records')}>
               <Card style={styles.buttonContainer}>
                 <Text style={styles.buttonText}>Records</Text>
               </Card>
             </TouchableOpacity> 
     
-            <TouchableOpacity activeOpacity={0.6} onPress={() => navigation.push('Status')}>
+            <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Status')}>
               <Card style={styles.buttonContainer}>
                 <Text style={styles.buttonText}>Status</Text>
               </Card>
@@ -112,7 +112,8 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       textShadowColor: 'black',
       textShadowOffset: {width: 0, height: 5},
-      fontSize: 20
+      fontSize: 20,
+      color: Colors.primaryText
     }
 });
 

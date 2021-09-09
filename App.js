@@ -18,6 +18,7 @@ import AuthLoadingScreen from './screens/AuthLoadingScreen';
 import SignupOrgScreen from './screens/SignupOrgScreen';
 import { Colors } from './assets/Colors';
 import SignUpEmployee from './screens/SignupEmployeeScreen';
+import ResetPasswordScreen from './screens/ResetPasswordScreen';
 
 const Stack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -45,7 +46,7 @@ const scanTouchable = ({children, onPress}) => {
 function navBar() {
   return (
     <Tabs.Navigator screenOtions={{tabBarStyle: {backgroundColor: 'black'}}}>
-      <Tabs.Screen name='HomeScreen' component={Home} options={{headerShown: false, tabBarIcon: ({focused}) => (<View><Image source={require('./assets/homeIcon.png')}/></View>)}}/>
+      <Tabs.Screen name='HomeScreen' component={Home} options={{headerShown: false,tabBarIcon: ({focused}) => (<View><Image source={require('./assets/homeIcon.png')}/></View>)}}/>
       <Tabs.Screen name='Scan' component={Scan} options={{headerTitleAlign: 'center', tabBarIcon: ({focused}) => (<Image source={require('./assets/scanQR.png')} resizeMode='contain' style={styles.navButton}/>), scanTouchable}}/>
       <Tabs.Screen name='Profile' component={Profile} options={{headerTitleAlign: 'center', tabBarIcon: ({focused}) => (<View><Image source={require('./assets/profileIcon.png')}/></View>)}}/>
     </Tabs.Navigator>
@@ -65,6 +66,7 @@ export default function App() {
         <Stack.Screen name='Loading' component={AuthLoadingScreen} options={{headerShown: false}}/>
         <Stack.Screen name='SignupEmployee' component={SignUpEmployee} options={{headerShown: false}}/>
         <Stack.Screen name='SignupAdmin' component={SignUp} options={{headerShown: false}}/>
+        <Stack.Screen name='ForgotPassword' component={ResetPasswordScreen} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

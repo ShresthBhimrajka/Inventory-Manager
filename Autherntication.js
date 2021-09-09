@@ -88,3 +88,12 @@ export async function loggingOut() {
     Alert.alert('There is something wrong!', err.message);
   }
 }
+
+export async function resetPassword(email) {
+  try {
+    await firebase.auth().sendPasswordResetEmail(email);
+    Alert.alert('Password rest link sent to your registered email address');
+  } catch (err) {
+    Alert.alert('There is something wrong!', err.message);
+  }
+}
