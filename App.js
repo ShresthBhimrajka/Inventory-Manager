@@ -1,19 +1,23 @@
-import * as React from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet, View, TouchableOpacity, Image, Button } from 'react-native';
+import firebase from 'firebase';
+import apiKeys from './apiKeys';
 
 import InventoryScreen from './screens/InventoryScreen';
 import RecordScreen from './screens/RecordScreen';
 import StatusScreen from './screens/StatusScreen';
-import HomeScreenAdmin from './screens/HomeScreenAdmin';
-import HomeScreenEmployee from './screens/HomeScreeEmployee';
+import HomeScreen from './screens/HomeScreen';
 import Profile from './screens/Profile';
 import Scan from './screens/Scan';
 import SignUp from './screens/SignUpScreen';
 import LoginScreen from './screens/LoginScreen';
+import AuthLoadingScreen from './screens/AuthLoadingScreen';
+import SignupOrgScreen from './screens/SignupOrgScreen';
 import { Colors } from './assets/Colors';
+import SignUpEmployee from './screens/SignupEmployeeScreen';
 
 const Stack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -22,7 +26,7 @@ const HomeStack = createNativeStackNavigator();
 function Home() {
   return(
     <HomeStack.Navigator initialRouteName='Home'>
-      <HomeStack.Screen name='Home' component={HomeScreenAdmin} options={{headerTitleAlign: 'center'}}/>
+      <HomeStack.Screen name='Home' component={HomeScreen} options={{headerTitleAlign: 'center'}}/>
       <HomeStack.Screen name='Inventory' component={InventoryScreen} options={{headerTitleAlign: 'center'}}/>
       <HomeStack.Screen name='Records' component={RecordScreen} options={{headerTitleAlign: 'center'}}/>
       <HomeStack.Screen name='Status' component={StatusScreen} options={{headerTitleAlign: 'center'}}/>
@@ -49,12 +53,18 @@ function navBar() {
 }
 
 export default function App() {
+  if (!firebase.apps.length) {
+    firebase.initializeApp(apiKeys.FirebaseConfigs);
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Login'>
-        {/*<Stack.Screen name='NavBar' component={navBar} options={{headerShown: false}}/>*/}
+        <Stack.Screen name='NavBar' component={navBar} options={{headerShown: false}}/>
         <Stack.Screen name='Login' component={LoginScreen} options={{headerShown: false}}/>
-        <Stack.Screen name='Signup' component={SignUp} options={{headerTitle:'', headerBackVisible: true, headerStyle: styles.signup}}/>
+        <Stack.Screen name='Loading' component={AuthLoadingScreen} options={{headerShown: false}}/>
+        <Stack.Screen name='SignupEmployee' component={SignUpEmployee} options={{headerShown: false}}/>
+        <Stack.Screen name='SignupAdmin' component={SignUp} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -76,9 +86,5 @@ const styles = StyleSheet.create({
   navButton: {
     width: 30,
     height: 30
-  },
-
-  signup: {
-    backgroundColor: Colors.primaryBackgroud,
-   }
+  }
 });

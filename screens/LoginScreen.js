@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import { View, Text, TouchableOpacity, TouchableWithoutFeedback, StyleSheet, Keyboard } from 'react-native';
+import { View, Text, TouchableOpacity, TouchableWithoutFeedback, StyleSheet, Keyboard, Alert } from 'react-native';
 
+import { signIn } from '../Autherntication';
 import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
 import { Colors } from '../assets/Colors';
@@ -8,6 +9,21 @@ import { Colors } from '../assets/Colors';
 const LoginScreen = ({navigation}) => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+
+    const loginHandler = () => {
+        if(!email){
+            Alert.alert('Enter a valid email');
+        }
+        else if(!password){
+            Alert.alert('Enter a valid password');
+        }
+        else{
+            signIn(email, password);
+            setEmail('');
+            setPassword('');
+            navigation.push('Loading');
+        }
+    };
 
     return (
         <View style={styles.screen}>
@@ -19,14 +35,18 @@ const LoginScreen = ({navigation}) => {
 
                     <FormInput labelValue={password} onChangeText={(userPassword) => {setPassword(userPassword)}} placeholder='Password' secureTextEntry={true}/>
 
-                    <FormButton buttonTitle='Sign In' onPress={() => {}}/>
+                    <FormButton buttonTitle='Sign In' onPress={loginHandler}/>
                     
                     <TouchableOpacity style={styles.forgotButton} onPress={() => {}}>
                         <Text style={styles.navButtonText}>Forgot Password</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.forgotButton} onPress={() => navigation.push('Signup')}>
-                        <Text style={styles.navButtonText}>Create Account</Text>
+                    <TouchableOpacity style={styles.forgotButton} onPress={() => navigation.push('SignupEmployee')}>
+                        <Text style={styles.navButtonText}>Create Account as an Employee</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.forgotButton} onPress={() => navigation.push('SignupAdmin')}>
+                        <Text style={styles.navButtonText}>Sign Up as an Organization and create Admin Account</Text>
                     </TouchableOpacity>
                 </View>
             </TouchableWithoutFeedback>
@@ -65,7 +85,7 @@ const styles = StyleSheet.create({
     navButtonText: {
         fontSize: 18,
         fontWeight: '500',
-        textAlign: 'right',
+        textAlign: 'center',
         color: Colors.primaryText
     }
 });

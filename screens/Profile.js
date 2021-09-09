@@ -1,15 +1,23 @@
 import * as React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Button } from 'react-native';
+import firebase from 'firebase';
+import { loggingOut } from '../Autherntication';
 
 import { Colors } from '../assets/Colors';
 import Card from '../components/Card';
 
-const Profile = () => {
+const Profile = ({navigation}) => {
+    const signoutHandler = () => {
+        loggingOut();
+        navigation.push('Login');
+    };
+
     return (
         <View style={styles.screen}>
-            <Card>
+            <Card style={styles.card}>
                 <Text>Profile</Text>
             </Card>
+            <Button title='Sign Out' onPress={signoutHandler} color='red'/>
         </View>
     );
 };
@@ -18,8 +26,12 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: Colors.primaryBackgroud
+        justifyContent: 'space-between',
+        backgroundColor: Colors.primaryBackgroud,
+    },
+
+    card: {
+        marginVertical: 20
     }
 });
 
