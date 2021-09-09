@@ -12,4 +12,4 @@ Dependencies required:
   
   -Step 5: npm install @react-navigation/bottom-tabs
   
-  -Step 6: npm install --save @react-native-firebase/app
+  -Step 6: expo install firebase
