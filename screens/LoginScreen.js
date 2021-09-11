@@ -29,7 +29,7 @@ const LoginScreen = ({navigation}) => {
         <View style={styles.screen}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
                 <View style={styles.container}>
-                    <Text style={styles.text}>Inventory Manager</Text>
+                    <Text style={styles.text}>Vennto</Text>
 
                     <FormInput labelValue={email} onChangeText={(userEmail) => {setEmail(userEmail)}} placeholder='Email' keyboardType='email-address' autoCapitalize='none' autoCorrect={false}/>
 

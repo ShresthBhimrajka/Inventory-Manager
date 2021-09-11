@@ -9,19 +9,25 @@ const Data = [
         id: '1',
         itemName: 'Item 1',
         itemQuantity: '999',
-        dateTime: '10.10.2021-12:12:40'
+        dateTime: '10.10.2021 - 12:12:40',
+        inex: 'in',
+        emp: 'shresth1'
     },
     {
         id: '2',
         itemName: 'Item 2',
         itemQuantity: '999',
-        dateTime: '10.10.2021-12:12:40'
+        dateTime: '10.10.2021 - 12:12:40',
+        inex: 'in',
+        emp: 'shresth2'
     },
     {
         id: '3',
         itemName: 'Item 3',
         itemQuantity: '999',
-        dateTime: '10.10.2021-12:12:40'
+        dateTime: '10.10.2021 - 12:12:40',
+        inex: 'in',
+        emp: 'shresth'
     },
 ];
 
@@ -33,6 +39,8 @@ const RecordScreen = () => {
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.itemName}</Text>
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {item.itemQuantity}</Text>
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Date: {item.dateTime}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Employee: {item.emp}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>In/Ex: {item.inex}</Text>
         </Card>
     );
 

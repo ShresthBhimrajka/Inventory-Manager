@@ -1,5 +1,6 @@
-import React from 'react';
-import { StyleSheet, View, Text, FlatList } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { StyleSheet, View, Text, FlatList, Alert } from 'react-native';
+import firebase from 'firebase';
 
 import { Colors } from '../assets/Colors';
 import Card from '../components/Card';
@@ -22,7 +23,44 @@ const Data = [
     },
 ];
 
+/*const Data = () => {
+    const [data, setData] = useState([]);
+    const [orgname, setOrgName] = useState('');
+
+    let userId = firebase.auth().currentUser.uid;
+
+    useEffect(() => {
+        async function getUserInfo(){
+          let docuser = await firebase.firestore().collection('allusers').doc(userId).get();
+
+          if (!docuser.exists){
+            Alert.alert('No user data found!')
+          } 
+          else {
+            let dataObj = docuser.data();
+            setOrgName(dataObj.orgname);
+          }
+          const inv = firebase.firestore().collection('organizations').doc(orgname).collection('inventory').onSnapshot(
+            querySnapshot => {
+                const data = [];
+                querySnapshot.forEach(documentSnapshot =>{
+                    data.push({
+                        ...documentSnapshot.data(),
+                        key: documentSnapshot.id,
+                    });
+                });
+                setData(data);
+            });
+            return () => inv;
+        }
+        getUserInfo();
+    }, []);
+    return data;   
+}*/
+
+
 const InventoryScreen = () => {
+    //const data = Data();
 
     const renderItem = ({item}) => (
         <Card style={styles.item}>
@@ -53,7 +91,6 @@ const styles = StyleSheet.create({
     item: {
         flex: 1,
         width: 300,
-        
         alignItems: 'flex-start',
         justifyContent: 'center',
         paddingVertical: 10,
