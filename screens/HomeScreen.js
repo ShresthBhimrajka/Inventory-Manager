@@ -1,42 +1,41 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Alert} from 'react-native';
 import firebase from 'firebase';
 
 import { Colors } from '../assets/Colors';
 import Card from '../components/Card';
 
 const HomeScreen = ({navigation}) => {
-    let userId = firebase.auth().currentUser.uid;  
+
     const [access, setAccess] = useState('');
     const [orgname, setOrgName] = useState('');
+    let userId = firebase.auth().currentUser.uid;  
 
     useEffect(() => {
-      async function getUserInfo(){
-        let docuser = await firebase.firestore().collection('allusers').doc(userId).get();
-  
-        if (!docuser.exists){
-          Alert.alert('No user data found!')
-        } 
-        else {
-          let dataObj = docuser.data();
-          setAccess(dataObj.access);
-          setOrgName(dataObj.orgname);
+        async function getUserInfo(){
+            let docuser = await firebase.firestore().collection('allusers').doc(userId).get();
+            if (!docuser.exists){
+                Alert.alert('No user data found!')
+            } 
+            else {
+                let dataObj = docuser.data();
+                setAccess(dataObj.access);
+                setOrgName(dataObj.orgname);
+            }
         }
-      }
-      getUserInfo();
+        getUserInfo();
     })
 
     const admin = (
       <View style={styles.screen}>
         <View style={styles.touchableContainerAdmin}>
-
-          <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Inventory')}>
+          <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Inventory', {orgname: orgname, access: access})}>
             <Card style={styles.buttonContainer}>
               <Text style={styles.buttonText}>Inventory</Text>
             </Card>
           </TouchableOpacity> 
 
-          <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Records')}>
+          <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Records', {orgname: orgname})}>
             <Card style={styles.buttonContainer}>
               <Text style={styles.buttonText}>Records</Text>
             </Card>
@@ -54,7 +53,7 @@ const HomeScreen = ({navigation}) => {
     const emp = (
       <View style={styles.screen}>
         <View style={styles.touchableContainerEmp}>
-            <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Inventory')}>
+            <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Inventory', {orgname: orgname, access: access})}>
               <Card style={styles.buttonContainer}>
                 <Text style={styles.buttonText}>Inventory</Text>
               </Card>

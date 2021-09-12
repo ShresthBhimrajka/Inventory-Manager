@@ -96,7 +96,8 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 20,
         marginBottom: 10,
-        color: Colors.primaryText
+        color: Colors.primaryText,
+        fontWeight: 'bold'
     },
 
     navButton: {

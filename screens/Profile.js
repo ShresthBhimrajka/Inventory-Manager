@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, Text, Button, Alert } from 'react-native';
+import { StyleSheet, View, Text, Button, Alert, TouchableOpacity } from 'react-native';
 import firebase from 'firebase';
 import { loggingOut } from '../Autherntication';
 
+import ViewUsers from './ViewUsers';
 import { Colors } from '../assets/Colors';
 import Card from '../components/Card';
 
@@ -15,13 +16,9 @@ const Profile = ({navigation}) => {
     const [orgname, setOrgName] = useState('');
 
     useEffect(() => {
-        async function getUserInfo() {
-            let docuser = await firebase.firestore().collection('allusers').doc(userId).get();
-  
-            if (!docuser.exists){
-                Alert.alert('No user data found!');
-            }
-            else{
+        async function getUserInfo() {  
+            let docuser = await firebase.firestore().collection('allusers').doc(userId).get();    
+            if(docuser.exists){
                 let dataObj = docuser.data();
                 setName(dataObj.name);
                 setOrgName(dataObj.orgname);
@@ -33,6 +30,9 @@ const Profile = ({navigation}) => {
                     setAccess(dataObj.access);
                 }
             }
+            else{
+                Alert.alert('Info not available');
+            }
         }
         getUserInfo();
     })
@@ -42,15 +42,28 @@ const Profile = ({navigation}) => {
         navigation.push('Login');
     };
 
+    const viewopts = (
+        <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Users', {orgname: orgname})}>
+            <Card style={styles.buttonContainer}>
+                <Text style={styles.buttonText}>View Users</Text>
+            </Card>
+        </TouchableOpacity> 
+    );
+
     return (
         <View style={styles.screen}>
             <Card style={styles.card}>
-                <Text style={styles.text}>Name:     {name}</Text>
-                <Text style={styles.text}>Organization:     {orgname}</Text>
-                <Text style={styles.text}>Phone:    {phone}</Text>
-                <Text style={styles.text}>Email:    {email}</Text>
-                <Text style={styles.text}>Access:   {(access=='emp' ? 'employee' : 'admin')}</Text>
+                <Text style={styles.heading}>User Details</Text>
+                <Text></Text>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Name:     {name}</Text>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Organization:     {orgname}</Text>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Phone:    {phone}</Text>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Email:    {email}</Text>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Access:   {(access=='emp' ? 'employee' : 'admin')}</Text>
             </Card>
+
+            {(access=='admin' ? viewopts: <View></View>)}
+
             <View style={{marginBottom: 20}}>
                 <Button title='Sign Out' onPress={signoutHandler} color='red'/>
             </View>
@@ -76,6 +89,24 @@ const styles = StyleSheet.create({
 
     text: { 
         textAlign: 'left',
+    },
+
+    heading: {
+        textAlign: 'center',
+        fontWeight: 'bold'
+    },
+
+    buttonContainer: {
+        height: 100,
+        width: 300,
+        maxWidth: '70%',
+        backgroundColor: Colors.homeTouchable,
+        marginBottom: '60%'
+    },
+    
+    buttonText: {
+        fontSize: 22,
+        color: 'black'
     }
 });
 
