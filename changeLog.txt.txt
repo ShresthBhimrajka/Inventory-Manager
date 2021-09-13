@@ -1,3 +1,7 @@
+[12.09.2021 19:34]
+Added functions to read the inventory and records
+Added feature for admin to access all user's details
+
 [09.09.2021 14:34]
 
 Login done
