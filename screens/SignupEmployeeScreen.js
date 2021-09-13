@@ -44,7 +44,8 @@ const SignUpEmployee = ({navigation}) => {
             setEmail('');
             setPassword('');
             setConfirmPassword('');
-            navigation.push('Loading');
+            Alert.alert('Sign up successful. Please login');
+            navigation.push('Login');
         }
     };
 
@@ -56,7 +57,7 @@ const SignUpEmployee = ({navigation}) => {
                     
                     <FormInput labelValue={name} onChangeText={(username) => {setName(username)}} placeholder='Name' autoCapitalize='words' autoCorrect={false}/>
 
-                    <FormInput labelValue={phone} onChangeText={(phone) => {setPhone(phone)}} placeholder='Phone Number' keyboardType='numeric' autoCorrect={false}/>
+                    <FormInput labelValue={phone} onChangeText={(phone) => {setPhone(phone)}} placeholder='Phone Number' keyboardType='numeric' autoCorrect={false} maxLength={10}/>
 
                     <FormInput labelValue={orgcode} onChangeText={(orgcode) => {setOrgCode(orgcode)}} placeholder='Organization Code' autoCapitalize='none' autoCorrect={false}/>
 
@@ -82,6 +83,7 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         backgroundColor: Colors.primaryBackgroud,
+        paddingTop: 40
     },
 
     container: {

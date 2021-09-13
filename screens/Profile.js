@@ -14,6 +14,7 @@ const Profile = ({navigation}) => {
     const [email, setEmail] = useState('');
     const [access, setAccess] = useState('');
     const [orgname, setOrgName] = useState('');
+    const [orgcode, setOrgCode] = useState('');
 
     useEffect(() => {
         async function getUserInfo() {  
@@ -22,12 +23,13 @@ const Profile = ({navigation}) => {
                 let dataObj = docuser.data();
                 setName(dataObj.name);
                 setOrgName(dataObj.orgname);
-                let doc = await firebase.firestore().collection('organizations').doc(orgname).collection('users').doc(userId).get();
+                doc = await firebase.firestore().collection('organizations').doc(orgname).collection('users').doc(userId).get();
                 if(doc.exists) { 
-                    data = doc.data();
+                    let data = doc.data();
                     setPhone(data.phone);
                     setEmail(data.email);
                     setAccess(dataObj.access);
+                    setOrgCode(dataObj.orgcode);
                 }
             }
             else{
@@ -50,10 +52,15 @@ const Profile = ({navigation}) => {
         </TouchableOpacity> 
     );
 
+    const code = (
+        <Text style={styles.heading}>Organization Code: {orgcode}</Text>
+    );
+
     return (
         <View style={styles.screen}>
             <Card style={styles.card}>
                 <Text style={styles.heading}>User Details</Text>
+                {access=='admin' ? code : <View></View>}
                 <Text></Text>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Name:     {name}</Text>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Organization:     {orgname}</Text>

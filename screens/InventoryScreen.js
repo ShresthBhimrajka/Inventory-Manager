@@ -1,12 +1,30 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, Text, FlatList, Alert } from 'react-native';
+import { StyleSheet, View, Text, FlatList, Alert, TouchableOpacity } from 'react-native';
 import firebase from 'firebase';
 
 import { Colors } from '../assets/Colors';
 import Card from '../components/Card';
+import { removeItem } from '../Autherntication';
+
+const admin = ({item}) => {
+    return (
+        <View style={styles.removeButton}>
+            <TouchableOpacity onPress = {() => removeItem(item)}>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.remove}>Remove Item</Text>
+            </TouchableOpacity>
+        </View>
+    );
+};
+
+const emp = ({item}) => {
+    return (
+        <View></View>
+    );
+};
 
 const InventoryScreen = ({route}) => {
     const orgname = route.params.orgname;
+    const access = route.params.access;
     const [invData, setInvData] = useState([]);
 
     useEffect(() => {
@@ -30,9 +48,12 @@ const InventoryScreen = ({route}) => {
 
     const renderItem = ({item}) => (
         <Card style={styles.item}>
-            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>ID:   {item.id}</Text>
-            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.name}</Text>
-            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {item.quantity}</Text>
+            <View style={styles.card}>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>ID:   {item.id}</Text>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.name}</Text>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {item.quantity}</Text>
+            </View>
+            {access=='admin' ? admin({item}) : emp({item})}
         </Card>
     );
 
@@ -50,7 +71,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: Colors.primaryBackgroud  
+        backgroundColor: Colors.primaryBackgroud,
+        padding: 10
     },
 
     item: {
@@ -64,6 +86,23 @@ const styles = StyleSheet.create({
 
     cardText: {
         textAlign: 'left',
+    },
+
+    card: {
+        flex: 1,
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        padding: 10
+    },
+
+    remove: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: 'red'
+    },
+
+    removeButton: {
+        paddingHorizontal: 80
     }
 }); 
 

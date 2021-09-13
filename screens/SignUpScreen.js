@@ -44,7 +44,8 @@ const SignUp = ({navigation}) => {
             setEmail('');
             setPassword('');
             setConfirmPassword('');
-            navigation.push('Loading');
+            Alert.alert('Sign up successful. Please login');
+            navigation.push('Login');
         }
     };
 
@@ -58,7 +59,7 @@ const SignUp = ({navigation}) => {
                     
                     <FormInput labelValue={name} onChangeText={(username) => {setName(username)}} placeholder='Admin Name' autoCapitalize='words' autoCorrect={false}/>
 
-                    <FormInput labelValue={phone} onChangeText={(phone) => {setPhone(phone)}} placeholder='Admin Phone number' keyboardType='numeric' autoCorrect={false}/>
+                    <FormInput labelValue={phone} onChangeText={(phone) => {setPhone(phone)}} placeholder='Admin Phone number' keyboardType='numeric' autoCorrect={false} maxLength={10}/>
 
                     <FormInput labelValue={email} onChangeText={(userEmail) => {setEmail(userEmail)}} placeholder='Admin Email' keyboardType='email-address' autoCapitalize='none' autoCorrect={false}/>
 

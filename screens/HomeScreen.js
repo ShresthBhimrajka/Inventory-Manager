@@ -32,7 +32,7 @@ const HomeScreen = ({navigation}) => {
           <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Inventory', {orgname: orgname, access: access})}>
             <Card style={styles.buttonContainer}>
               <Text style={styles.buttonText}>Inventory</Text>
-            </Card>
+            </Card> 
           </TouchableOpacity> 
 
           <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Records', {orgname: orgname})}>
