@@ -4,7 +4,7 @@ import firebase from 'firebase';
 
 import { Colors } from '../assets/Colors';
 import Card from '../components/Card';
-import { removeUser, promote } from '../Autherntication';
+import { removeUser, promote } from '../Authentication';
 import Popup from '../components/Popup';
 
 const emp = ({item,orgname}) => {

@@ -1,7 +1,6 @@
 import firebase from 'firebase';
 import 'firebase/firestore';
 import {Alert} from 'react-native';
-import { useState } from 'react';
 
 export async function registrationAdmin(orgname, email, password, phone, name) {
   try {
@@ -109,17 +108,6 @@ export async function removeUser(item, orgname) {
     }
   } catch (err) {
     Alert.alert('There is something wrong!', err.message);
-  }
-}
-
-export async function removeItem(item, orgname) {
-  try {
-    const res = await firebase.firestore().collection('organizations').doc(orgname).collection('inventory').doc(item.id).delete();
-    if( res ) {
-      Alert.alert('Item successfully deleted');
-    }
-  } catch (err) {
-      Alert.alert('There is something wrong !!!', err.message);
   }
 }
 

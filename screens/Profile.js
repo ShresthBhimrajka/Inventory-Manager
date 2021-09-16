@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, View, Text, Button, Alert, TouchableOpacity } from 'react-native';
 import firebase from 'firebase';
-import { loggingOut } from '../Autherntication';
+import { loggingOut } from '../Authentication';
 
 import ViewUsers from './ViewUsers';
 import { Colors } from '../assets/Colors';

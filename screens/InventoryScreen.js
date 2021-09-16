@@ -4,12 +4,12 @@ import firebase from 'firebase';
 
 import { Colors } from '../assets/Colors';
 import Card from '../components/Card';
-import { removeItem } from '../Autherntication';
+import { removeItem, updateInv } from '../DataBaseUpdate';
 
-const admin = ({item}) => {
+const admin = ({item,orgname}) => {
     return (
         <View style={styles.removeButton}>
-            <TouchableOpacity onPress = {() => removeItem(item)}>
+            <TouchableOpacity onPress = {() => removeItem(item,orgname)}>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.remove}>Remove Item</Text>
             </TouchableOpacity>
         </View>
@@ -37,7 +37,9 @@ const InventoryScreen = ({route}) => {
                           key: documentSnapshot.id
                       });
                   });
-                  setInvData(data);
+                  setInvData(data.sort(function(a,b) {
+                        return ((a['name'] < b['name']) ? -1 : ((a['name'] > b['name']) ? 1 : 0));
+                        }));
               });
               return () => inv;
           } 
@@ -53,7 +55,7 @@ const InventoryScreen = ({route}) => {
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.name}</Text>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {item.quantity}</Text>
             </View>
-            {access=='admin' ? admin({item}) : emp({item})}
+            {access=='admin' ? admin({item,orgname}) : emp({item})}
         </Card>
     );
 

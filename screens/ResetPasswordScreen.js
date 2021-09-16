@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TouchableOp
 
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
-import { resetPassword } from "../Autherntication";
+import { resetPassword } from "../Authentication";
 import { Colors } from "../assets/Colors";
 
 const ResetPasswordScreen = ({navigation}) => {

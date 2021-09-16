@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 
-import { registrationEmployee } from '../Autherntication';
+import { registrationEmployee } from '../Authentication';
 import { Colors } from '../assets/Colors';
 import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
@@ -45,37 +45,40 @@ const SignUpEmployee = ({navigation}) => {
             setPassword('');
             setConfirmPassword('');
             Alert.alert('Sign up successful. Please login');
-            navigation.push('Login');
+            navigation.replace('Login');
         }
     };
 
     return (
-        <View style={styles.screen}>
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
-                <View style={styles.container}>
-                    <Text style={styles.text}>Create Employee Account</Text>
-                    
-                    <FormInput labelValue={name} onChangeText={(username) => {setName(username)}} placeholder='Name' autoCapitalize='words' autoCorrect={false}/>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.screen}>
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
+                    <View style={styles.container}>
+                        <Text style={styles.text}>Create Employee Account</Text>
+                        
+                        <FormInput labelValue={name} onChangeText={(username) => {setName(username)}} placeholder='Name' autoCapitalize='words' autoCorrect={false}/>
 
-                    <FormInput labelValue={phone} onChangeText={(phone) => {setPhone(phone)}} placeholder='Phone Number' keyboardType='numeric' autoCorrect={false} maxLength={10}/>
+                        <FormInput labelValue={phone} onChangeText={(phone) => {setPhone(phone)}} placeholder='Phone Number' keyboardType='numeric' autoCorrect={false} maxLength={10}/>
 
-                    <FormInput labelValue={orgcode} onChangeText={(orgcode) => {setOrgCode(orgcode)}} placeholder='Organization Code' autoCapitalize='none' autoCorrect={false}/>
+                        <FormInput labelValue={orgcode} onChangeText={(orgcode) => {setOrgCode(orgcode)}} placeholder='Organization Code' autoCapitalize='none' autoCorrect={false}/>
 
-                    <FormInput labelValue={email} onChangeText={(userEmail) => {setEmail(userEmail)}} placeholder='Email' keyboardType='email-address' autoCapitalize='none' autoCorrect={false}/>
+                        <FormInput labelValue={email} onChangeText={(userEmail) => {setEmail(userEmail)}} placeholder='Email' keyboardType='email-address' autoCapitalize='none' autoCorrect={false}/>
 
-                    <FormInput labelValue={password} onChangeText={(userPassword) => {setPassword(userPassword)}} placeholder='Password' secureTextEntry={true}/>
+                        <FormInput labelValue={password} onChangeText={(userPassword) => {setPassword(userPassword)}} placeholder='Password' secureTextEntry={true}/>
 
-                    <FormInput labelValue={confirmPassword} onChangeText={(userPassword) => {setConfirmPassword(userPassword)}} placeholder='Confirm Password' secureTextEntry={true}/>
+                        <FormInput labelValue={confirmPassword} onChangeText={(userPassword) => {setConfirmPassword(userPassword)}} placeholder='Confirm Password' secureTextEntry={true}/>
 
-                    <FormButton buttonTitle='Sign Up' onPress={signupHandler}/>
+                        <FormButton buttonTitle='Sign Up' onPress={signupHandler}/>
 
-                    <TouchableOpacity style={styles.navButton} onPress={() => navigation.push('Login')}>
-                        <Text style={styles.navButtonText}>Already registered? Log in</Text>
-                    </TouchableOpacity>
+                        <TouchableOpacity style={styles.navButton} onPress={() => navigation.push('Login')}>
+                            <Text style={styles.navButtonText}>Already registered? Log in</Text>
+                        </TouchableOpacity>
 
-                </View>
-            </TouchableWithoutFeedback>
-        </View>
+                    </View>
+                </TouchableWithoutFeedback>
+            </View>
+        </TouchableWithoutFeedback>
+        
     );
 };
 

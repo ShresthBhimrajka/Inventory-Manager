@@ -19,7 +19,9 @@ const RecordScreen = ({route}) => {
                           key: documentSnapshot.id
                       });
                   });
-                  setRecData(data);
+                  setRecData(data.sort(function(a,b) {
+                      return new Date(a['mil']).getTime() - new Date(b['mil']).getTime();
+                  }));
               });
               return () => rec;
           } 

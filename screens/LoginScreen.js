@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { View, Text, TouchableOpacity, TouchableWithoutFeedback, StyleSheet, Keyboard, Alert } from 'react-native';
 
-import { signIn } from '../Autherntication';
+import { signIn } from '../Authentication';
 import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
 import { Colors } from '../assets/Colors';
