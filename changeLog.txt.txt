@@ -1,4 +1,8 @@
-[13.09.2021 21:04]
+[16.09.2021 23:00]
+Added the feature to manually add items in inventory and update the records
+Now displaying the inventory sorted based on names
+
+13.09.2021 21:04]
 Added feature to remove or promote employee
 Added feature to remove items from inventory
 Added redirect to login screen after signup process
