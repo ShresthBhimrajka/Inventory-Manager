@@ -6,7 +6,6 @@ import { loggingOut, changeEmail, changePhone, changePassword } from '../Authent
 import Popup from '../components/Popup';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
-import { Colors } from '../assets/Colors';
 import Card from '../components/Card';
 
 const Profile = ({navigation}) => {
@@ -20,6 +19,8 @@ const Profile = ({navigation}) => {
     const [visible, setVisible] = useState(false);
     const [newEmail, setNewEmail] = useState('');
     const [newPhone, setNewPhone] = useState('');
+    const [pass, setNewPass] = useState('');
+    const [conPass, setConPass] = useState('');
 
     useEffect(() => {
         async function getUserInfo() {  
@@ -62,11 +63,14 @@ const Profile = ({navigation}) => {
     );
 
     const updateHandler = () => {
-        if(!newEmail) {
-            changeEmail(userId, newEmail);
+        if(newEmail !== '') {
+            changeEmail(userId, newEmail, orgname);
         }
-        if(!newPhone) {
-            changePhone(userId, newPhone);
+        if(newPhone !== '') {
+            changePhone(userId, newPhone, orgname);
+        }
+        if(pass !== '' && conPass !== '' && pass == conPass) {
+            changePassword(pass);
         }
         Keyboard.dismiss;
         setNewEmail('');
@@ -81,6 +85,8 @@ const Profile = ({navigation}) => {
                 <Text style={{fontWeight: 'bold'}}>Enter your details</Text>
                 <FormInput labelValue={newEmail} onChangeText={(newEmail) => setNewEmail(newEmail)} placeholder='Email' autocapitalize='false' autocorrect='none' keyboardType='email-address'/>
                 <FormInput labelValue={newPhone} onChangeText={(newPhone) => setNewPhone(newPhone)} placeholder='Phone' keyboardType='numeric' maxLength={10} autocorrect='none'/>
+                <FormInput labelValue={pass} onChangeText={(pass) => setNewPass(pass)} placeholder='Password' autocapitalize='false' autocorrect='none'/>
+                <FormInput labelValue={conPass} onChangeText={(conPass) => setConPass(conPass)} placeholder='Confirm Password' autocapitalize='false' autocorrect='none'/>
                 <FormButton buttonTitle='Update' onPress={updateHandler}/>
                 <View style={styles.modal}>
                     <Button title='Cancel' color='red' onPress={() => setVisible(false)}/>
@@ -143,7 +149,7 @@ const styles = StyleSheet.create({
         width: 300,
         maxWidth: '70%',
         backgroundColor: "#a9ceff",
-        marginBottom: '60%'
+        marginBottom: '50%'
 
     },
     

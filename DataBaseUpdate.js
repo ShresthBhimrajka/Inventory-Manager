@@ -1,10 +1,10 @@
 import firebase from "firebase";
 import { Alert } from "react-native";
 
-export async function removeItem(item, orgname, empName, empId) {
+export async function removeItem(id, orgname) {
     try {
-        updateRec(item.id, item.name, item.quantity, 'removed', empName, empId, orgname);
-        const res = await firebase.firestore().collection('organizations').doc(orgname).collection('inventory').doc(item.id).delete();
+        
+        const res = await firebase.firestore().collection('organizations').doc(orgname).collection('inventory').doc(id).delete();
       if( res ) {
         Alert.alert('Item successfully deleted');
       }
@@ -44,7 +44,7 @@ export async function updateInv(item, name, id, quantity, empName, empId, orgnam
         var curid = item.id;
         var curname = item.name;
         var curquantity = item.quantity;
-        if(id !== ''){
+        if(id !== '' && id !== curid){
             const res = firebase.firestore().collection('organizations').doc(orgname).collection('inventory').doc(curid).delete();
             curid = id;
         }

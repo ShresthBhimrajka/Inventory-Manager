@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {ImageBackground, StyleSheet, View, Text, TouchableOpacity, Alert} from 'react-native';
 import firebase from 'firebase';
 
-import { Colors } from '../assets/Colors';
 import Card from '../components/Card';
 
 const HomeScreen = ({navigation}) => {
@@ -48,7 +47,7 @@ const HomeScreen = ({navigation}) => {
 
           <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Status')}>
             <Card style={styles.buttonContainer}>
-              <Text style={styles.buttonText}>Status</Text>
+              <Text style={styles.buttonText}>Shipment</Text>
             </Card>
           </TouchableOpacity> 
         </View>
@@ -69,7 +68,7 @@ const HomeScreen = ({navigation}) => {
 
             <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Status')}>
               <Card style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>Status</Text>
+                <Text style={styles.buttonText}>Shipment</Text>
               </Card>
             </TouchableOpacity> 
         </View>

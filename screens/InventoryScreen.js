@@ -2,26 +2,11 @@ import React, {useState, useEffect} from 'react';
 import { StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Button, Keyboard, ImageBackground } from 'react-native';
 import firebase from 'firebase';
 
-import { Colors } from '../assets/Colors';
 import Card from '../components/Card';
-import { removeItem, updateInv } from '../DataBaseUpdate';
+import { removeItem, updateInv, updateRec } from '../DataBaseUpdate';
 import Popup from '../components/Popup';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton'
-
-const admin = ({item,orgname,empName,empId}) => {
-    return (
-            <TouchableOpacity onPress = {() => removeItem(item,orgname,empName,empId)}>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.remove}>Remove Item</Text>
-            </TouchableOpacity>
-    );
-};
-
-const emp = ({item}) => {
-    return (
-        <View></View>
-    );
-};
 
 const InventoryScreen = ({route}) => {
     const orgname = route.params.orgname;
@@ -29,10 +14,11 @@ const InventoryScreen = ({route}) => {
     const empName = route.params.empName;
     const empId = route. params.empId;
     const [invData, setInvData] = useState([]);
-    const [visible, setVisibile] = useState(false);
+    const [visibleUpdate, setVisibileUpdate] = useState(false);
     const [newId, setNewId] = useState('');
     const [newName, setNewName] = useState('');
     const [newQuantity, setNewQuantity] = useState('');
+    const [visibleRemove, setVisibileRemove] = useState(false);
 
     const changeHandler = ({item}) => {
         updateInv(item, newName, newId, newQuantity, empName, empId, orgname);
@@ -40,7 +26,7 @@ const InventoryScreen = ({route}) => {
         setNewName('');
         setNewQuantity('');
         Keyboard.dismiss;
-        setVisibile(false);
+        setVisibileUpdate(false);
     };
 
     useEffect(() => {
@@ -64,16 +50,42 @@ const InventoryScreen = ({route}) => {
           }
     }, [])
 
+    const removeHandler = ({item, orgname}) => {
+        removeItem(item.id, orgname);
+        updateRec(item.id, item.name, item.quantity, 'removed', empName, empId, orgname);
+        setVisibileRemove(false);
+    };
+
+    const emp = ({item}) =>(<View></View>);
+
+    const admin = ({}) => (
+        <TouchableOpacity onPress = {() => setVisibileRemove(true)}>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.remove}>Remove Item</Text>
+        </TouchableOpacity>
+    );
+
     const renderItem = ({item}) => (
         <Card style={styles.item}>
-            <Popup visible={visible}>
+            <Popup visible={visibleRemove}>
+                <Text>Are you Sure?</Text>
+                <View style={styles.buttons}>
+                    <TouchableOpacity onPress={() => setVisibileRemove(false)}>
+                        <Text adjustsFontSizeToFit numberOfLines={1} style={styles.remove}>Cancel</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => removeHandler({item, orgname})}>
+                        <Text adjustsFontSizeToFit numberOfLines={1} style={styles.update}>Confirm</Text>
+                    </TouchableOpacity>
+                </View>
+            </Popup>
+
+            <Popup visible={visibleUpdate}>
                 <Text>Enter the changes</Text>
                 <FormInput labelValue={newId} onChangeText={(newId) => setNewId(newId)} placeholder='Id' autocapitalize='none' autocorrect='none'/>
                 <FormInput labelValue={newName} onChangeText={(newName) => setNewName(newName)} placeholder='Name' autocapitalize='none' autocorrect='none'/>
                 <FormInput labelValue={newQuantity} onChangeText={(newQuantity) => setNewQuantity(newQuantity)} placeholder='Quantity' keyboardType='numeric' autocorrect='none'/>
                 <FormButton buttonTitle='Update Item' onPress={() => changeHandler({item})}/>
                 <View style={styles.modal}>
-                    <Button title='Cancel' color='red' onPress={() => setVisibile(false)}/>
+                    <Button title='Cancel' color='red' onPress={() => setVisibileUpdate(false)}/>
                 </View>   
             </Popup>
             <View style={styles.card}> 
@@ -83,7 +95,7 @@ const InventoryScreen = ({route}) => {
             </View>
             <View style={styles.buttons}>
                 {access=='admin' ? admin({item,orgname,empName,empId}) : emp({item})}
-                <TouchableOpacity onPress = {() => setVisibile(true)}>
+                <TouchableOpacity onPress = {() => setVisibileUpdate(true)}>
                     <Text adjustsFontSizeToFit numberOfLines={1} style={styles.update}>Update</Text>
                  </TouchableOpacity> 
             </View>
