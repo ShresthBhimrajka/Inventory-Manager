@@ -1,18 +1,19 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, Text, FlatList, Alert, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Button, Keyboard } from 'react-native';
 import firebase from 'firebase';
 
 import { Colors } from '../assets/Colors';
 import Card from '../components/Card';
 import { removeItem, updateInv } from '../DataBaseUpdate';
+import Popup from '../components/Popup';
+import FormInput from '../components/FormInput';
+import FormButton from '../components/FormButton'
 
 const admin = ({item,orgname,empName,empId}) => {
     return (
-        <View style={styles.removeButton}>
             <TouchableOpacity onPress = {() => removeItem(item,orgname,empName,empId)}>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.remove}>Remove Item</Text>
             </TouchableOpacity>
-        </View>
     );
 };
 
@@ -28,6 +29,19 @@ const InventoryScreen = ({route}) => {
     const empName = route.params.empName;
     const empId = route. params.empId;
     const [invData, setInvData] = useState([]);
+    const [visible, setVisibile] = useState(false);
+    const [newId, setNewId] = useState('');
+    const [newName, setNewName] = useState('');
+    const [newQuantity, setNewQuantity] = useState('');
+
+    const changeHandler = ({item}) => {
+        updateInv(item, newName, newId, newQuantity, empName, empId, orgname);
+        setNewId('');
+        setNewName('');
+        setNewQuantity('');
+        Keyboard.dismiss;
+        setVisibile(false);
+    };
 
     useEffect(() => {
           try {  
@@ -52,12 +66,27 @@ const InventoryScreen = ({route}) => {
 
     const renderItem = ({item}) => (
         <Card style={styles.item}>
-            <View style={styles.card}>
+            <Popup visible={visible}>
+                <Text>Enter the changes</Text>
+                <FormInput labelValue={newId} onChangeText={(newId) => setNewId(newId)} placeholder='Id' autocapitalize='none' autocorrect='none'/>
+                <FormInput labelValue={newName} onChangeText={(newName) => setNewName(newName)} placeholder='Name' autocapitalize='none' autocorrect='none'/>
+                <FormInput labelValue={newQuantity} onChangeText={(newQuantity) => setNewQuantity(newQuantity)} placeholder='Quantity' keyboardType='numeric' autocorrect='none'/>
+                <FormButton buttonTitle='Update Item' onPress={() => changeHandler({item})}/>
+                <View style={styles.modal}>
+                    <Button title='Cancel' color='red' onPress={() => setVisibile(false)}/>
+                </View>   
+            </Popup>
+            <View style={styles.card}> 
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>ID:   {item.id}</Text>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.name}</Text>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {item.quantity}</Text>
             </View>
-            {access=='admin' ? admin({item,orgname,empName,empId}) : emp({item})}
+            <View style={styles.buttons}>
+                {access=='admin' ? admin({item,orgname,empName,empId}) : emp({item})}
+                <TouchableOpacity onPress = {() => setVisibile(true)}>
+                    <Text adjustsFontSizeToFit numberOfLines={1} style={styles.update}>Update</Text>
+                 </TouchableOpacity> 
+            </View>
         </Card>
     );
 
@@ -82,14 +111,10 @@ const styles = StyleSheet.create({
     item: {
         flex: 1,
         width: 300,
-        alignItems: 'flex-start',
+        alignItems: 'center',
         justifyContent: 'center',
         paddingVertical: 10,
         margin: '5%'
-    },
-
-    cardText: {
-        textAlign: 'left',
     },
 
     card: {
@@ -99,14 +124,32 @@ const styles = StyleSheet.create({
         padding: 10
     },
 
+    cardText: {
+        textAlign: 'left',
+    },
+
     remove: {
         textAlign: 'center',
         fontWeight: 'bold',
         color: 'red'
     },
 
-    removeButton: {
-        paddingHorizontal: 80
+    buttons: {
+        flex: 1,
+        flexDirection: 'row',
+        alignContent: 'center',
+        justifyContent: 'space-between',
+        width: '85%'
+    },
+
+    update: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: '#32cd32'
+    },
+
+    modal: {
+        padding: 20
     }
 }); 
 

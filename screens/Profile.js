@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, Text, Button, Alert, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Button, Alert, TouchableOpacity, Keyboard } from 'react-native';
 import firebase from 'firebase';
-import { loggingOut } from '../Authentication';
+import { loggingOut, changeEmail, changePhone, changePassword } from '../Authentication';
 
-import ViewUsers from './ViewUsers';
+import Popup from '../components/Popup';
+import FormInput from '../components/FormInput';
+import FormButton from '../components/FormButton';
 import { Colors } from '../assets/Colors';
 import Card from '../components/Card';
 
@@ -15,6 +17,9 @@ const Profile = ({navigation}) => {
     const [access, setAccess] = useState('');
     const [orgname, setOrgName] = useState('');
     const [orgcode, setOrgCode] = useState('');
+    const [visible, setVisible] = useState(false);
+    const [newEmail, setNewEmail] = useState('');
+    const [newPhone, setNewPhone] = useState('');
 
     useEffect(() => {
         async function getUserInfo() {  
@@ -56,8 +61,30 @@ const Profile = ({navigation}) => {
         <Text style={styles.heading}>Organization Code: {orgcode}</Text>
     );
 
+    const updateHandler = () => {
+        if(!newEmail) {
+            changeEmail(userId, newEmail);
+        }
+        if(!newPhone) {
+            changePhone(userId, newPhone);
+        }
+        Keyboard.dismiss;
+        setNewEmail('');
+        setNewPhone('');
+        setVisible(false);
+    };
+
     return (
         <View style={styles.screen}>
+            <Popup visible={visible}>
+                <Text style={{fontWeight: 'bold'}}>Enter your details</Text>
+                <FormInput labelValue={newEmail} onChangeText={(newEmail) => setNewEmail(newEmail)} placeholder='Email' autocapitalize='false' autocorrect='none' keyboardType='email-address'/>
+                <FormInput labelValue={newPhone} onChangeText={(newPhone) => setNewPhone(newPhone)} placeholder='Phone' keyboardType='numeric' maxLength={10} autocorrect='none'/>
+                <FormButton buttonTitle='Update' onPress={updateHandler}/>
+                <View style={styles.modal}>
+                    <Button title='Cancel' color='red' onPress={() => setVisible(false)}/>
+                </View>
+            </Popup>
             <Card style={styles.card}>
                 <Text style={styles.heading}>User Details</Text>
                 {access=='admin' ? code : <View></View>}
@@ -67,6 +94,9 @@ const Profile = ({navigation}) => {
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Phone:    {phone}</Text>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Email:    {email}</Text>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Access:   {(access=='emp' ? 'employee' : 'admin')}</Text>
+                <TouchableOpacity onPress={() => setVisible(true)}>
+                    <Text style={styles.update}>Update Details</Text>
+                </TouchableOpacity>
             </Card>
 
             {(access=='admin' ? viewopts: <View></View>)}
@@ -108,12 +138,23 @@ const styles = StyleSheet.create({
         width: 300,
         maxWidth: '70%',
         backgroundColor: Colors.homeTouchable,
-        marginBottom: '60%'
+        marginBottom: '50%'
     },
     
     buttonText: {
         fontSize: 22,
         color: 'black'
+    },
+
+    modal: {
+        padding: 20
+    },
+
+    update: {
+        fontWeight: 'bold',
+        color: 'grey',
+        fontSize: 16,
+        textAlign: 'center'
     }
 });
 
