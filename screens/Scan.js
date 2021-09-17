@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, StyleSheet, Alert, Keyboard, TouchableWithoutFeedback} from 'react-native';
+import {ImageBackground, View, Text, StyleSheet, Alert, Keyboard, TouchableWithoutFeedback} from 'react-native';
 import firebase from 'firebase';
 
 import { addItem, updateRec } from '../DataBaseUpdate';
@@ -53,6 +53,7 @@ const Scan = () => {
     };
 
     return (
+        <ImageBackground style={styles.background} source={require('../assets/scan.png')}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <View style={styles.screen}>
                     <Card >
@@ -64,15 +65,21 @@ const Scan = () => {
                     </Card>
                 </View>
             </TouchableWithoutFeedback>
+            </ImageBackground>
     );
 };
 
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        backgroundColor: Colors.primaryBackgroud,
+        
         padding: 30
-    }
+    },
+    background:{
+        flex:1,
+        justifyContent:'flex-end',
+        alignItems:'center',
+    },
 });
 
 export default Scan;

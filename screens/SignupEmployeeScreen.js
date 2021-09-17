@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import {ImageBackground,ScrollView, Text, View, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 
 import { registrationEmployee } from '../Authentication';
 import { Colors } from '../assets/Colors';
@@ -50,6 +50,8 @@ const SignUpEmployee = ({navigation}) => {
     };
 
     return (
+        <ScrollView showsVerticalScrollIndicator={false}>
+            <ImageBackground style={styles.background} source={require('../assets/employee.png')}>  
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.screen}>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
@@ -78,6 +80,8 @@ const SignUpEmployee = ({navigation}) => {
                 </TouchableWithoutFeedback>
             </View>
         </TouchableWithoutFeedback>
+        </ImageBackground>
+        </ScrollView>
         
     );
 };
@@ -85,17 +89,21 @@ const SignUpEmployee = ({navigation}) => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        backgroundColor: Colors.primaryBackgroud,
+        
         paddingTop: 40
     },
-
+    background:{
+        flex:1,
+        justifyContent:'flex-end',
+        alignItems:'center',
+    },
     container: {
-        backgroundColor: Colors.primaryBackgroud,
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 20,
-        marginBottom: '60%'
+        //padding: 20,
+        marginTop: '20%',
+        marginBottom: '50%'
     },
 
     text: {

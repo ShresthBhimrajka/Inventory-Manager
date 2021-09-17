@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TouchableOpacity, Alert} from "react-native";
+import {ImageBackground, ScrollView, StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TouchableOpacity, Alert} from "react-native";
 
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
@@ -21,6 +21,8 @@ const ResetPasswordScreen = ({navigation}) => {
     };
 
     return (
+        <ScrollView showsVerticalScrollIndicator={false}>
+            <ImageBackground style={styles.background} source={require('../assets/forgot.png')}>            
         <View style={styles.screen}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <View style={styles.container}>
@@ -33,23 +35,29 @@ const ResetPasswordScreen = ({navigation}) => {
                 </View>
             </TouchableWithoutFeedback>
         </View>
+        </ImageBackground>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        backgroundColor: Colors.primaryBackgroud
+        
     },
-
+    background:{
+        flex:1,
+        justifyContent:'flex-end',
+        alignItems:'center',
+    },
     container: {
         flex: 1,
         alignContent: 'center',
         justifyContent: 'space-between',
-        backgroundColor: Colors.primaryBackgroud,
+        
         padding: 30,
         marginTop: '50%',
-        marginBottom: '60%'
+        marginBottom: '85%'
     },
 
     text: {

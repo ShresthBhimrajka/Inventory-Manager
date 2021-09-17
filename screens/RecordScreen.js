@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, Text, FlatList, Alert } from 'react-native';
+import {ImageBackground, StyleSheet, View, Text, FlatList, Alert } from 'react-native';
 import firebase from 'firebase';
 
 import { Colors } from '../assets/Colors';
@@ -43,11 +43,13 @@ const RecordScreen = ({route}) => {
     );
 
     return (
+        <ImageBackground style={styles.background} source={require('../assets/records.png')}>
         <View style={styles.screen}>
             <FlatList
                 data={recData}
                 renderItem={renderItem}/>
         </View>
+        </ImageBackground>
     );
 };
 
@@ -56,10 +58,13 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: Colors.primaryBackgroud,
         padding: 10  
     },
-
+    background:{
+        flex:1,
+        justifyContent:'flex-end',
+        alignItems:'center',
+    },
     item: {
         flex: 1,
         width: 300,

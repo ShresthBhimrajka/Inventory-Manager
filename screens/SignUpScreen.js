@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import {ImageBackground, ScrollView, Text, View, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 
 import { registrationAdmin } from '../Authentication';
 import { Colors } from '../assets/Colors';
@@ -50,6 +50,8 @@ const SignUp = ({navigation}) => {
     };
 
     return (
+        <ScrollView showsVerticalScrollIndicator={false}>
+            <ImageBackground style={styles.background} source={require('../assets/organization.png')}> 
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.screen}>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
@@ -78,6 +80,8 @@ const SignUp = ({navigation}) => {
                 </TouchableWithoutFeedback>
             </View>
         </TouchableWithoutFeedback>
+        </ImageBackground>
+        </ScrollView>
         
     );
 };
@@ -85,16 +89,20 @@ const SignUp = ({navigation}) => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        backgroundColor: Colors.primaryBackgroud,
     },
-
+    background:{
+        flex:1,
+        justifyContent:'flex-end',
+        alignItems:'center',
+    },
     container: {
-        backgroundColor: Colors.primaryBackgroud,
+        //backgroundColor: Colors.primaryBackgroud,
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 20,
-        marginBottom: '40%'
+        padding: 30,
+        paddingTop: 50, 
+        marginBottom: '60%'
     },
 
     text: {

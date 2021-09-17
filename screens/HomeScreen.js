@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Alert} from 'react-native';
+import {ImageBackground, StyleSheet, View, Text, TouchableOpacity, Alert} from 'react-native';
 import firebase from 'firebase';
 
 import { Colors } from '../assets/Colors';
@@ -31,6 +31,7 @@ const HomeScreen = ({navigation}) => {
     })
 
     const admin = (
+      <ImageBackground style={styles.background} source={require('../assets/home.png')}>
       <View style={styles.screen}>
         <View style={styles.touchableContainerAdmin}>
           <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Inventory', {orgname: orgname, access: access, empId: empId, empName: empName})}>
@@ -52,9 +53,12 @@ const HomeScreen = ({navigation}) => {
           </TouchableOpacity> 
         </View>
       </View>
+      </ImageBackground>
     );
 
     const emp = (
+      
+            <ImageBackground style={styles.background} source={require('../assets/home.png')}>  
       <View style={styles.screen}>
         <View style={styles.touchableContainerEmp}>
             <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Inventory', {orgname: orgname, access: access, empName: empName, empId: empId})}>
@@ -70,6 +74,7 @@ const HomeScreen = ({navigation}) => {
             </TouchableOpacity> 
         </View>
       </View>
+      </ImageBackground>
     );
 
     return (access == 'admin' ? admin : emp)
@@ -80,9 +85,13 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: Colors.primaryBackgroud
+        
     },
-
+    background:{
+      flex:1,
+      justifyContent:'flex-end',
+      alignItems:'center',
+    },
     touchableContainerAdmin: {
       flex: 1,
       alignItems: 'center',
@@ -103,7 +112,7 @@ const styles = StyleSheet.create({
       height: 100,
       width: 300,
       maxWidth: '70%',
-      backgroundColor: Colors.homeTouchable
+      backgroundColor: "#ffee90"
     },
   
     buttonText: {
