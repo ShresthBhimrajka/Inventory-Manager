@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { View, Text, TouchableOpacity, TouchableWithoutFeedback, StyleSheet, Keyboard, Alert } from 'react-native';
+import {Image, ImageBackground,ScrollView, View, Text,TouchableOpacity, TouchableWithoutFeedback, StyleSheet, Keyboard, Alert } from 'react-native';
 
 import { signIn } from '../Authentication';
 import FormButton from '../components/FormButton';
@@ -20,15 +20,19 @@ const LoginScreen = ({navigation}) => {
         else{
             signIn(email, password);
             setEmail('');
+            
             setPassword('');
             navigation.push('Loading');
         }
     };
 
     return (
+        <ScrollView showsVerticalScrollIndicator={false}>
+            <ImageBackground style={styles.background} source={require('../assets/login.png')}> 
         <View style={styles.screen}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
                 <View style={styles.container}>
+                    <Image style={styles.logo} source={require('../assets/Vennto.png')}/>
                     <Text style={styles.text}>Vennto</Text>
 
                     <FormInput labelValue={email} onChangeText={(userEmail) => {setEmail(userEmail)}} placeholder='Email' keyboardType='email-address' autoCapitalize='none' autoCorrect={false}/>
@@ -51,25 +55,40 @@ const LoginScreen = ({navigation}) => {
                 </View>
             </TouchableWithoutFeedback>
         </View>
+        </ImageBackground>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        backgroundColor: Colors.primaryBackgroud
+        
     },
-
+    background:{
+        flex:1,
+        justifyContent:'flex-end',
+        alignItems:'center',
+    },
+    logo:{
+        width:40,
+        height:60,
+        alignItems:'center',
+        justifyContent: 'center',
+    },
     container: {
-        backgroundColor: Colors.primaryBackgroud,
+        
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 20,
+        padding: 30,
+        marginTop: '30%',
+        marginBottom: '39%',
+        
     },
 
     text: {
-        fontSize: 20,
+        fontSize: 25,
         marginBottom: 10,
         fontWeight: 'bold',
         color: Colors.primaryText

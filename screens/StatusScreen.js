@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, FlatList } from 'react-native';
+import {ImageBackground, StyleSheet, View, Text, FlatList } from 'react-native';
 
 import { Colors } from '../assets/Colors';
 import Card from '../components/Card';
@@ -41,12 +41,14 @@ const StatusScreen = () => {
     );
 
     return (
+        <ImageBackground style={styles.background} source={require('../assets/status.png')}>
         <View style={styles.screen}>
             <FlatList
                 keyExtractor={item => item.id}
                 data={Data}
                 renderItem={renderItem}/>
         </View>
+        </ImageBackground>
     );
 };
 
@@ -55,10 +57,13 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: Colors.primaryBackgroud,
         padding: 10  
     },
-
+    background:{
+        flex:1,
+        justifyContent:'flex-end',
+        alignItems:'center',
+    },
     item: {
         flex: 1,
         width: 300,

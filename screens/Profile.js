@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, Text, Button, Alert, TouchableOpacity } from 'react-native';
+import {ImageBackground, StyleSheet, View, Text, Button, Alert, TouchableOpacity } from 'react-native';
 import firebase from 'firebase';
 import { loggingOut } from '../Authentication';
 
@@ -57,6 +57,7 @@ const Profile = ({navigation}) => {
     );
 
     return (
+        <ImageBackground style={styles.background} source={require('../assets/profile.png')}>
         <View style={styles.screen}>
             <Card style={styles.card}>
                 <Text style={styles.heading}>User Details</Text>
@@ -75,6 +76,7 @@ const Profile = ({navigation}) => {
                 <Button title='Sign Out' onPress={signoutHandler} color='red'/>
             </View>
         </View>
+        </ImageBackground>
     );
 };
 
@@ -83,9 +85,12 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: Colors.primaryBackgroud,
     },
-
+    background:{
+        flex:1,
+        justifyContent:'flex-end',
+        alignItems:'center',
+    },
     card: {
         marginVertical: 20,
         alignItems: 'flex-start',
@@ -107,7 +112,7 @@ const styles = StyleSheet.create({
         height: 100,
         width: 300,
         maxWidth: '70%',
-        backgroundColor: Colors.homeTouchable,
+        backgroundColor: "#a9ceff",
         marginBottom: '60%'
     },
     
