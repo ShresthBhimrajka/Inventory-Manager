@@ -139,3 +139,32 @@ export async function promote(item, orgname) {
       Alert.alert('There is something wrong !!!', err.message);
   }
 }
+
+export async function changeEmail(userId, email) {
+  try {
+    await firebase.auth().currentUser.updateEmail(email);
+    await firebase.firestore().collection('organizations').doc(orgname).collection('users').doc(userId).update({
+      email: email
+    });
+  } catch (err) {
+      Alert.alert('There is something wrong !!!', err.message);
+  }
+}
+
+export async function changePhone(userId, phone) {
+  try {
+    await firebase.firestore().collection('organizations').doc(orgname).collection('users').doc(userId).update({
+      phone: phone
+    });
+  } catch (err) {
+      Alert.alert('There is something wrong !!!', err.message);
+  }
+}
+
+export async function changePassword(password) {
+  try {
+    await firebase.auth().currentUser.updatePassword(password);
+  } catch (err) {
+      Alert.alert('There is something wrong !!!', err.message);
+  }
+}

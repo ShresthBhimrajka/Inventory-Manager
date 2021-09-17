@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { StyleSheet, Modal, View } from "react-native";
+import { StyleSheet, Modal, View, ScrollView} from "react-native";
 
 const Popup = ({visible,children}) => {
     const [showModal, setShowModal] = useState(visible);
@@ -19,9 +19,11 @@ const Popup = ({visible,children}) => {
 
     return(
         <Modal transparent visible={showModal}>
-            <View style={styles.modal}>
-                {children}
-            </View>
+            <ScrollView>
+                <View style={styles.modal}>
+                    {children}
+                </View>
+            </ScrollView>
         </Modal>
     );
 };
@@ -31,10 +33,16 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        width: '70%',
-        height: '40%',
         backgroundColor: 'white',
-        padding: 10
+        padding: 30,
+        marginVertical: '10%',
+        marginHorizontal: '5%',
+        borderRadius: 10,
+        shadowColor: 'black',
+        shadowOffset: {width: 0, height: 5},
+        shadowRadius: 20,
+        shadowOpacity: 1,
+        elevation: 9,
     }
 });
 
