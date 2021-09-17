@@ -20,7 +20,7 @@ const RecordScreen = ({route}) => {
                       });
                   });
                   setRecData(data.sort(function(a,b) {
-                      return new Date(a['mil']).getTime() - new Date(b['mil']).getTime();
+                      return parseInt(b['mil']) - parseInt(a['mil']);
                   }));
               });
               return () => rec;
@@ -36,7 +36,8 @@ const RecordScreen = ({route}) => {
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.name}</Text>
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {item.quantity}</Text>
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Date: {item.datetime}</Text>
-            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Employee: {item.emp}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Employee Name: {item.empname}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Employee Id: {item.empid}</Text>
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>In/Ex: {item.inex}</Text>
         </Card>
     );

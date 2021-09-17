@@ -9,6 +9,8 @@ const HomeScreen = ({navigation}) => {
 
     const [access, setAccess] = useState('');
     const [orgname, setOrgName] = useState('');
+    const [empName, setEmpName] = useState('');
+    const [empId, setEmpId] = useState('');
     let userId = firebase.auth().currentUser.uid;  
 
     useEffect(() => {
@@ -21,6 +23,8 @@ const HomeScreen = ({navigation}) => {
                 let dataObj = docuser.data();
                 setAccess(dataObj.access);
                 setOrgName(dataObj.orgname);
+                setEmpName(dataObj.name);
+                setEmpId(userId);
             }
         }
         getUserInfo();
@@ -29,7 +33,7 @@ const HomeScreen = ({navigation}) => {
     const admin = (
       <View style={styles.screen}>
         <View style={styles.touchableContainerAdmin}>
-          <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Inventory', {orgname: orgname, access: access})}>
+          <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Inventory', {orgname: orgname, access: access, empId: empId, empName: empName})}>
             <Card style={styles.buttonContainer}>
               <Text style={styles.buttonText}>Inventory</Text>
             </Card> 
@@ -53,7 +57,7 @@ const HomeScreen = ({navigation}) => {
     const emp = (
       <View style={styles.screen}>
         <View style={styles.touchableContainerEmp}>
-            <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Inventory', {orgname: orgname, access: access})}>
+            <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Inventory', {orgname: orgname, access: access, empName: empName, empId: empId})}>
               <Card style={styles.buttonContainer}>
                 <Text style={styles.buttonText}>Inventory</Text>
               </Card>

@@ -6,10 +6,10 @@ import { Colors } from '../assets/Colors';
 import Card from '../components/Card';
 import { removeItem, updateInv } from '../DataBaseUpdate';
 
-const admin = ({item,orgname}) => {
+const admin = ({item,orgname,empName,empId}) => {
     return (
         <View style={styles.removeButton}>
-            <TouchableOpacity onPress = {() => removeItem(item,orgname)}>
+            <TouchableOpacity onPress = {() => removeItem(item,orgname,empName,empId)}>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.remove}>Remove Item</Text>
             </TouchableOpacity>
         </View>
@@ -25,6 +25,8 @@ const emp = ({item}) => {
 const InventoryScreen = ({route}) => {
     const orgname = route.params.orgname;
     const access = route.params.access;
+    const empName = route.params.empName;
+    const empId = route. params.empId;
     const [invData, setInvData] = useState([]);
 
     useEffect(() => {
@@ -55,7 +57,7 @@ const InventoryScreen = ({route}) => {
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.name}</Text>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {item.quantity}</Text>
             </View>
-            {access=='admin' ? admin({item,orgname}) : emp({item})}
+            {access=='admin' ? admin({item,orgname,empName,empId}) : emp({item})}
         </Card>
     );
 
