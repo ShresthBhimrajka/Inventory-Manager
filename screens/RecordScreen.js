@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import {ImageBackground, StyleSheet, View, Text, FlatList, Alert } from 'react-native';
+import {ImageBackground, StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Button } from 'react-native';
 import firebase from 'firebase';
 
-import { Colors } from '../assets/Colors';
 import Card from '../components/Card';
+import Popup from '../components/Popup';
 
 const RecordScreen = ({route}) => {
     const orgname = route.params.orgname;
     const [recData, setRecData] = useState([]);
+    const [visible, setVisible] = useState(false);
+    const [selected, setSelected] = useState(null);
 
     useEffect(() => {
           try {  
@@ -30,25 +32,50 @@ const RecordScreen = ({route}) => {
           }
     }, [])
 
+    const setDetails = ({item}) => {
+        setVisible(true);
+        setSelected(item);
+    };
+
+    const closeDetails = () => {
+        setSelected(null);
+        setVisible(false);
+    }
+
+    const showDetails = () => (
+        <Popup visible={visible}>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>ID:   {selected.id}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {selected.name}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {selected.quantity}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Date: {selected.datetime}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Employee Name: {selected.empname}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Employee Id: {selected.empid}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>In/Ex: {selected.inex}</Text>
+            <View style={styles.modal}>
+                <Button title='Cancel' color='red' onPress={closeDetails}/>
+            </View>
+        </Popup>
+    );
+
     const renderItem = ({item}) => (
-        <Card style={styles.item}>
-            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>ID:   {item.id}</Text>
-            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.name}</Text>
-            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {item.quantity}</Text>
-            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Date: {item.datetime}</Text>
-            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Employee Name: {item.empname}</Text>
-            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Employee Id: {item.empid}</Text>
-            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>In/Ex: {item.inex}</Text>
-        </Card>
+        <TouchableOpacity activeOpacity={0.9} onPress={() => setDetails({item})}>
+            <Card style={styles.item}>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.name}</Text>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Date: {item.datetime}</Text>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>In/Ex: {item.inex}</Text>
+            </Card>
+        </TouchableOpacity>   
     );
 
     return (
         <ImageBackground style={styles.background} source={require('../assets/records.png')}>
-        <View style={styles.screen}>
-            <FlatList
-                data={recData}
-                renderItem={renderItem}/>
-        </View>
+            <View style={styles.screen}>
+                <FlatList
+                    keyExtractor={item => item.mil}
+                    data={recData}
+                    renderItem={renderItem}/>
+                {visible ? showDetails() : <View></View>}
+            </View>
         </ImageBackground>
     );
 };
@@ -77,6 +104,10 @@ const styles = StyleSheet.create({
 
     cardText: {
         textAlign: 'left',
+    },
+
+    modal: {
+        padding: 10
     }
 });
 

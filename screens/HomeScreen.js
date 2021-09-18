@@ -45,7 +45,7 @@ const HomeScreen = ({navigation}) => {
             </Card>
           </TouchableOpacity> 
 
-          <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Status')}>
+          <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Status', {orgname: orgname})}>
             <Card style={styles.buttonContainer}>
               <Text style={styles.buttonText}>Shipment</Text>
             </Card>

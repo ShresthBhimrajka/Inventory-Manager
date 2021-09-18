@@ -6,20 +6,6 @@ import Card from '../components/Card';
 import { removeUser, promote } from '../Authentication';
 import Popup from '../components/Popup';
 
-const emp = ({item,orgname}) => {
-    return (
-        <View style={styles.buttons}>
-            <TouchableOpacity onPress={() => removeUser(item, orgname)}>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.remove}>Remove Employee</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => promote(item, orgname)}>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.promote}>Make Admin</Text>
-            </TouchableOpacity>
-        </View>
-    );
-};
-
 const admin = ({item}) => {
     return (
         <View></View>
