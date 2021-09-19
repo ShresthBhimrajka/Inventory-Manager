@@ -13,3 +13,7 @@ Dependencies required:
   -Step 5: npm install @react-navigation/bottom-tabs
   
   -Step 6: expo install firebase
+  
+  -Step 7: expo install expo-barcode-scanner
+  
+  -Step 8: expo install expo-camera (for future camera based featurs)
