@@ -10,7 +10,7 @@ import InventoryScreen from './screens/InventoryScreen';
 import RecordScreen from './screens/RecordScreen';
 import StatusScreen from './screens/StatusScreen';
 import HomeScreen from './screens/HomeScreen';
-import Scan from './screens/Scan';
+import ScannerView from './screens/ScannerView';
 import SignUp from './screens/SignUpScreen';
 import LoginScreen from './screens/LoginScreen';
 import AuthLoadingScreen from './screens/AuthLoadingScreen';
@@ -45,7 +45,7 @@ function navBar() {
   return (
     <Tabs.Navigator screenOtions={{tabBarStyle: {backgroundColor: 'black'}}}>
       <Tabs.Screen name='HomeScreen' component={Home} options={{title: 'Home', headerShown: false,tabBarIcon: ({focused}) => (<View><Image source={require('./assets/homeIcon.png')}/></View>)}}/>
-      <Tabs.Screen name='Scan' component={Scan} options={{headerTitleAlign: 'center', tabBarIcon: ({focused}) => (<Image source={require('./assets/scanQR.png')} resizeMode='contain' style={styles.navButton}/>), scanTouchable}}/>
+      <Tabs.Screen name='Scan' component={ScannerView} options={{headerTitleAlign: 'center', tabBarIcon: ({focused}) => (<Image source={require('./assets/scanQR.png')} resizeMode='contain' style={styles.navButton}/>), scanTouchable}}/>
       <Tabs.Screen name='ProfileScreen' component={ProfileScreen} options={{title: 'Profile', headerTitleAlign: 'center', tabBarIcon: ({focused}) => (<View><Image source={require('./assets/profileIcon.png')}/></View>)}}/>
     </Tabs.Navigator>
   );
