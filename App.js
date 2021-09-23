@@ -17,6 +17,7 @@ import AuthLoadingScreen from './screens/AuthLoadingScreen';
 import SignUpEmployee from './screens/SignupEmployeeScreen';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import HistoryScreen from './screens/HistoryScreen';
 
 const Stack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -25,10 +26,11 @@ const HomeStack = createNativeStackNavigator();
 function Home() {
   return(
     <HomeStack.Navigator initialRouteName='Home'>
-      <HomeStack.Screen name='Home' component={HomeScreen} options={{headerTitleAlign: 'center'}}/>
+      <HomeStack.Screen  name='Home' component={HomeScreen} options={{headerTitleAlign: 'center'}}/>
       <HomeStack.Screen name='Inventory' component={InventoryScreen} options={{headerTitleAlign: 'center'}}/>
       <HomeStack.Screen name='Records' component={RecordScreen} options={{headerTitleAlign: 'center'}}/>
       <HomeStack.Screen name='Status' component={StatusScreen} options={{headerTitleAlign: 'center'}}/>
+      <HomeStack.Screen name='History' component={HistoryScreen} options={{headerTitleAlign: 'center'}}/>
     </HomeStack.Navigator>
   );
 }
@@ -44,9 +46,15 @@ const scanTouchable = ({children, onPress}) => {
 function navBar() {
   return (
     <Tabs.Navigator screenOtions={{tabBarStyle: {backgroundColor: 'black'}}}>
+<<<<<<< Updated upstream
       <Tabs.Screen name='HomeScreen' component={Home} options={{title: 'Home', headerShown: false,tabBarIcon: ({focused}) => (<View><Image source={require('./assets/homeIcon.png')}/></View>)}}/>
       <Tabs.Screen name='Scan' component={Scan} options={{headerTitleAlign: 'center', tabBarIcon: ({focused}) => (<Image source={require('./assets/scanQR.png')} resizeMode='contain' style={styles.navButton}/>), scanTouchable}}/>
       <Tabs.Screen name='ProfileScreen' component={ProfileScreen} options={{title: 'Profile', headerTitleAlign: 'center', tabBarIcon: ({focused}) => (<View><Image source={require('./assets/profileIcon.png')}/></View>)}}/>
+=======
+      <Tabs.Screen name='HomeScreen' component={Home} options={{title: 'Home', headerShown: false,tabBarIcon: ({focused}) => (<View><Image style={{width:50, height:50}} source={require('./assets/homeIcon.png')}/></View>)}}/>
+      <Tabs.Screen name='Scan' component={ScannerView} options={{headerTitleAlign: 'center', tabBarIcon: ({focused}) => (<Image source={require('./assets/scanQR.png')} resizeMode='contain' style={styles.navButton}/>), scanTouchable}}/>
+      <Tabs.Screen name='ProfileScreen' component={ProfileScreen} options={{title: 'Profile', headerTitleAlign: 'center', tabBarIcon: ({focused}) => (<View><Image style={{width:50, height:50}} source={require('./assets/profileIcon.png')}/></View>)}}/>
+>>>>>>> Stashed changes
     </Tabs.Navigator>
   );
 }

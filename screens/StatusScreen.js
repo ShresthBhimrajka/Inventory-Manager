@@ -1,9 +1,17 @@
+<<<<<<< Updated upstream
 import React from 'react';
 import {ImageBackground, StyleSheet, View, Text, FlatList } from 'react-native';
+=======
+import React, {useState, useEffect} from 'react';
+import {ImageBackground, StyleSheet, View, Text, FlatList, TouchableOpacity, Button } from 'react-native';
+import firebase from 'firebase';
+import SearchBar from './SearchBar';
+>>>>>>> Stashed changes
 
 import { Colors } from '../assets/Colors';
 import Card from '../components/Card';
 
+<<<<<<< Updated upstream
 const Data = [
     {
         id: '1',
@@ -27,6 +35,43 @@ const Data = [
         status: 'IN'
     },
 ];
+=======
+
+const StatusScreen = ({route}) => {
+    const orgname = route.params.orgname;
+    const [visible, setVisible] = useState(false);
+    const [selected, setSelected] = useState(null);
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        try {  
+            const ship = firebase.firestore().collection('organizations').doc(orgname).collection('shipment').onSnapshot(querySnapshot => {
+                const data = [];
+                querySnapshot.forEach(documentSnapshot => {
+                    data.push({
+                        ...documentSnapshot.data(),
+                        key: documentSnapshot.id
+                    });
+                });
+                setData(data);
+            });
+            return () => ship;
+        } 
+        catch (err) {
+            Alert.alert('Shipment  Error !');
+        }
+  }, [])
+
+    const setDetails = ({item}) => {
+        setVisible(true);
+        setSelected(item);
+    };
+
+    const closeDetails = () => {
+        setSelected(null);
+        setVisible(false);
+    }
+>>>>>>> Stashed changes
 
 const StatusScreen = () => {
 
@@ -43,6 +88,10 @@ const StatusScreen = () => {
     return (
         <ImageBackground style={styles.background} source={require('../assets/status.png')}>
         <View style={styles.screen}>
+            <SearchBar
+            data={data}
+            onChangeValue={(newValue)=>setData(newValue)}
+            onValueSubmitted={()=> alert(data)}/>
             <FlatList
                 keyExtractor={item => item.id}
                 data={Data}

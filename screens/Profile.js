@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, Text, Button, Alert, TouchableOpacity, Keyboard, ImageBackground } from 'react-native';
+import {Image, StyleSheet, View, Text, Button, Alert, TouchableOpacity, Keyboard, ImageBackground } from 'react-native';
 import firebase from 'firebase';
 import { loggingOut, changeEmail, changePhone, changePassword } from '../Authentication';
 
@@ -52,7 +52,7 @@ const Profile = ({navigation}) => {
     const viewopts = (
         <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Users', {orgname: orgname})}>
             <Card style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>View Users</Text>
+            <Text style={styles.buttonText}><Image style={styles.user} source={require("../assets/users.png")}/> View Users</Text>
             </Card>
         </TouchableOpacity> 
     );
@@ -87,7 +87,8 @@ const Profile = ({navigation}) => {
                 </View>
             </Popup>
             <Card style={styles.card}>
-                <Text style={styles.heading}>User Details</Text>
+            <Image style={styles.profile} source={require("../assets/bigprofileicon.png")}/>
+                <Text style={styles.heading1}>User Details</Text>
                 {access=='admin' ? code : <View></View>}
                 <Text></Text>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Name:     {name}</Text>
@@ -96,7 +97,8 @@ const Profile = ({navigation}) => {
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Email:    {email}</Text>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Access:   {(access=='emp' ? 'employee' : 'admin')}</Text>
                 <TouchableOpacity onPress={() => setVisible(true)}>
-                    <Text style={styles.update}>Update Details</Text>
+                    <Text style={styles.update}>Update Details<Image style={styles.logo} source={require('../assets/edit.png')}/>
+                    </Text>
                 </TouchableOpacity>
             </Card>
 
@@ -116,6 +118,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
     },
+    profile:{
+        alignSelf:"center",
+        justifyContent:"center",
+        height: 100,
+        width:100,
+    },
+    logo:{
+        width:20,
+        height:20,
+        alignItems:'center',
+        justifyContent: 'center',
+    },
     background:{
         flex:1,
         justifyContent:'flex-end',
@@ -123,37 +137,54 @@ const styles = StyleSheet.create({
     },
     card: {
         marginVertical: 20,
-        alignItems: 'flex-start',
+        //alignItems: 'flex-start',
         justifyContent: 'center',
-        width: 300,
-        width: '70%'
+        alignItems:"center",
+        width: '90%',
+        
     },
 
     text: { 
         textAlign: 'left',
     },
-
+    heading1: {
+        fontSize: 22,
+        alignItems: "center",
+        fontWeight:"bold"        
+    },
     heading: {
         textAlign: 'center',
         fontWeight: 'bold'
     },
 
     buttonContainer: {
+<<<<<<< Updated upstream
         height: 100,
         width: 300,
         maxWidth: '70%',
         backgroundColor: "#a9ceff",
         marginBottom: '60%'
+=======
+        height: 50,
+        width: 200,
+        //maxWidth: '70%',
+        backgroundColor: "#a9cefe",
+        marginBottom: '5%'
+>>>>>>> Stashed changes
 
     },
     
     buttonText: {
-        fontSize: 22,
+        fontSize: 15,
         color: 'black'
     },
 
     modal: {
         padding: 20
+    },
+    user:{
+        height:15,
+        width:20,
     },
 
     update: {

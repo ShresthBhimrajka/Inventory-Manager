@@ -52,11 +52,19 @@ const SignUpEmployee = ({navigation}) => {
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <ImageBackground style={styles.background} source={require('../assets/employee.png')}>  
+<<<<<<< Updated upstream
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.screen}>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
                     <View style={styles.container}>
                         <Text style={styles.text}>Create Employee Account</Text>
+=======
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                    <View style={styles.screen}>
+                        <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
+                            <View style={styles.container}>
+                                <Text style={styles.text}>            Create Employee Account          </Text>
+>>>>>>> Stashed changes
                         
                         <FormInput labelValue={name} onChangeText={(username) => {setName(username)}} placeholder='Name' autoCapitalize='words' autoCorrect={false}/>
 
@@ -89,8 +97,12 @@ const SignUpEmployee = ({navigation}) => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
+<<<<<<< Updated upstream
         
         paddingTop: 40
+=======
+        //paddingTop: "10%"
+>>>>>>> Stashed changes
     },
     background:{
         flex:1,

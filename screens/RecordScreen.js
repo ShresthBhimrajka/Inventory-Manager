@@ -1,13 +1,23 @@
 import React, {useState, useEffect} from 'react';
 import {ImageBackground, StyleSheet, View, Text, FlatList, Alert } from 'react-native';
 import firebase from 'firebase';
+<<<<<<< Updated upstream
 
 import { Colors } from '../assets/Colors';
+=======
+import SearchBar from './SearchBar';
+>>>>>>> Stashed changes
 import Card from '../components/Card';
 
 const RecordScreen = ({route}) => {
     const orgname = route.params.orgname;
     const [recData, setRecData] = useState([]);
+<<<<<<< Updated upstream
+=======
+    const [visible, setVisible] = useState(false);
+    const [selected, setSelected] = useState(null);
+    const [data, setData] = useState([]);
+>>>>>>> Stashed changes
 
     useEffect(() => {
           try {  
@@ -44,11 +54,26 @@ const RecordScreen = ({route}) => {
 
     return (
         <ImageBackground style={styles.background} source={require('../assets/records.png')}>
+<<<<<<< Updated upstream
         <View style={styles.screen}>
             <FlatList
                 data={recData}
                 renderItem={renderItem}/>
         </View>
+=======
+            
+            <View style={styles.screen}>
+            <SearchBar
+            data={data}
+            onChangeValue={(newValue)=>setData(newValue)}
+            onValueSubmitted={()=> alert(data)}/>
+                <FlatList
+                    keyExtractor={item => item.mil}
+                    data={recData}
+                    renderItem={renderItem}/>
+                {visible ? showDetails() : <View></View>}
+            </View>
+>>>>>>> Stashed changes
         </ImageBackground>
     );
 };
