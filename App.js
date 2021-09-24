@@ -17,6 +17,7 @@ import AuthLoadingScreen from './screens/AuthLoadingScreen';
 import SignUpEmployee from './screens/SignupEmployeeScreen';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import HistoryScreen from './screens/HistoryScreen';
 
 const Stack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -29,6 +30,7 @@ function Home() {
       <HomeStack.Screen name='Inventory' component={InventoryScreen} options={{headerTitleAlign: 'center'}}/>
       <HomeStack.Screen name='Records' component={RecordScreen} options={{headerTitleAlign: 'center'}}/>
       <HomeStack.Screen name='Status' component={StatusScreen} options={{headerTitleAlign: 'center'}}/>
+      <HomeStack.Screen name='History' component={HistoryScreen} options={{headerTitleAlign: 'center'}}/>
     </HomeStack.Navigator>
   );
 }

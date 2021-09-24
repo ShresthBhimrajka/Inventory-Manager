@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Button, Keyb
 import firebase from 'firebase';
 
 import Card from '../components/Card';
-import { removeItem, updateInv, updateRec } from '../DataBaseUpdate';
+import { removeItem, updateInv, updateRec, updateHistoy } from '../DataBaseUpdate';
 import Popup from '../components/Popup';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton'
@@ -56,6 +56,7 @@ const InventoryScreen = ({route}) => {
     const removeHandler = () => {
         removeItem(selected.id, orgname);
         updateRec(selected.id, selected.name, selected.quantity, 'removed', empName, empId, orgname);
+        updateHistoy(selected.id, selected.name, selected.quantity, 'removed', empId, orgname);
         setVisibleRemove(false);
         setSelected(null);
     };
@@ -128,38 +129,36 @@ const InventoryScreen = ({route}) => {
 
     return (
         <ImageBackground style={styles.background} source={require('../assets/inventory.png')}>
-        <View style={styles.screen}>
-            <FlatList
-                keyExtractor={item => item.id}
-                data={invData}
-                renderItem={renderItem}/>  
+            <View style={styles.screen}>
+                <FlatList
+                    keyExtractor={item => item.id}
+                    data={invData}
+                    renderItem={renderItem}/>  
 
-            <Popup visible={visibleRemove}>
-                <Text>Are you Sure?</Text>
-                <View style={styles.buttons}>
-                    <TouchableOpacity onPress={() => setVisibleRemove(false)}>
-                        <Text adjustsFontSizeToFit numberOfLines={1} style={styles.remove}>Cancel</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={removeHandler}>
-                        <Text adjustsFontSizeToFit numberOfLines={1} style={styles.update}>Confirm</Text>
-                    </TouchableOpacity>
-                </View>
-            </Popup>
+                <Popup visible={visibleRemove}>
+                    <Text>Are you Sure?</Text>
+                    <View style={styles.buttons}>
+                        <TouchableOpacity onPress={() => setVisibleRemove(false)}>
+                            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.remove}>Cancel</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={removeHandler}>
+                            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.update}>Confirm</Text>
+                        </TouchableOpacity>
+                    </View>
+                </Popup>
 
-            <Popup visible={visibleUpdate}>
-                <Text>Enter the changes</Text>
-                <FormInput labelValue={newId} onChangeText={(newId) => setNewId(newId)} placeholder='ID' autocapitalize='none' autocorrect='none'/>
-                <FormInput labelValue={newName} onChangeText={(newName) => setNewName(newName)} placeholder='Name' autocapitalize='none' autocorrect='none'/>
-                <FormInput labelValue={newQuantity} onChangeText={(newQuantity) => setNewQuantity(newQuantity)} placeholder='Quantity' keyboardType='numeric' autocorrect='none'/>
-                <FormButton buttonTitle='Update Item' onPress={changeHandler}/>
-                <View style={styles.modal}>
-                    <Button title='Cancel' color='red' onPress={() => setVisibleUpdate(false)}/>
-                </View>   
-            </Popup>
-
-            {visibleDetails==true ? showDetails() : <View></View>}
-
-        </View>
+                <Popup visible={visibleUpdate}>
+                    <Text>Enter the changes</Text>
+                    <FormInput labelValue={newId} onChangeText={(newId) => setNewId(newId)} placeholder='ID' autocapitalize='none' autocorrect='none'/>
+                    <FormInput labelValue={newName} onChangeText={(newName) => setNewName(newName)} placeholder='Name' autocapitalize='none' autocorrect='none'/>
+                    <FormInput labelValue={newQuantity} onChangeText={(newQuantity) => setNewQuantity(newQuantity)} placeholder='Quantity' keyboardType='numeric' autocorrect='none'/>
+                    <FormButton buttonTitle='Update Item' onPress={changeHandler}/>
+                    <View style={styles.modal}>
+                        <Button title='Cancel' color='red' onPress={() => setVisibleUpdate(false)}/>
+                    </View>   
+                </Popup>
+                {visibleDetails==true ? showDetails() : <View></View>}
+            </View>
         </ImageBackground>
     ); 
 };

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { Text, View, StyleSheet, Button, TouchableWithoutFeedback, Keyboard, Dimensions, Alert } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import firebase from 'firebase';
 
-import {addItem, updateRec} from '../DataBaseUpdate';
+import {addItem, updateHistoy, updateRec} from '../DataBaseUpdate';
 import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
 import Popup from '../components/Popup';
@@ -17,7 +17,7 @@ const ScannerView = () => {
     const [empId, setEmpId] = useState('');
     const [empName, setEmpName] = useState('');
     const [orgname, setOrgName] = useState('');
-    const [visible, setVisible] = useState('');
+    const [visible, setVisible] = useState(false);
     const userId = firebase.auth().currentUser.uid;
 
     useEffect(() => {(
@@ -56,6 +56,7 @@ const ScannerView = () => {
         else{
             addItem(id, name, quantity, orgname);
             updateRec(id, name, quantity, 'added', empName, empId, orgname);
+            updateHistoy(id, name, quantity, 'added', empId, orgname);
             setQuantity('');
             setId('');
             setItemName('');
@@ -70,7 +71,10 @@ const ScannerView = () => {
 
     const resetHandler = () => {
         setVisible(false);
-        setScanned(false)
+        setScanned(false);
+        setQuantity('');
+        setId('');
+        setItemName('');
     };
 
     if (hasPermission === null) {
@@ -96,10 +100,13 @@ const ScannerView = () => {
     );
 
     return (
-        <View style={styles.container}>
-            <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={StyleSheet.absoluteFillObject}/>
-            {scanned==true ? form() : <View></View>}
-        </View>
+            <View style={styles.container}>
+                <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={StyleSheet.absoluteFillObject}/>
+                {scanned==true || visible? form() : <View></View>}
+                <View style={styles.button}>
+                    <Button title='Enter data' onPress={() => setVisible(true)}/>
+                </View> 
+            </View>
     );
 }
 
@@ -108,6 +115,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
     },
+
+    button: {
+        alignItems: 'center',
+        marginTop: Dimensions.get('screen').height/1.5,
+    }
 });
 
 export default ScannerView;
