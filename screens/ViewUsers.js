@@ -1,25 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {ImageBackground, StyleSheet, View, Text, FlatList, Alert, TouchableOpacity} from 'react-native';
+import {ImageBackground, StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Keyboard} from 'react-native';
 import firebase from 'firebase';
 
-import { Colors } from '../assets/Colors';
 import Card from '../components/Card';
 import { removeUser, promote } from '../Authentication';
 import Popup from '../components/Popup';
-
-const emp = ({item,orgname}) => {
-    return (
-        <View style={styles.buttons}>
-            <TouchableOpacity onPress={() => removeUser(item, orgname)}>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.remove}>Remove Employee</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => promote(item, orgname)}>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.promote}>Make Admin</Text>
-            </TouchableOpacity>
-        </View>
-    );
-};
 
 const admin = ({item}) => {
     return (
@@ -30,6 +15,8 @@ const admin = ({item}) => {
 const ViewUsers = ({route}) => {
     const orgname = route.params.orgname;
     const [users, setUsers] = useState([]);
+    const [visibleRemove, setVisibleRemove] = useState(false);
+    const [visiblePromote, setVisiblePromote] = useState(false);
 
     useEffect(() => {
             try {  
@@ -49,6 +36,52 @@ const ViewUsers = ({route}) => {
                 Alert.alert('User Info Error !');
             }
     }, [])
+
+    const removeHandler = ({item, orgname}) => {
+        removeUser(item,orgname);
+        setVisibleRemove(false);
+    };
+
+    const promoteHandler = ({item, orgname}) => {
+        promote(item,orgname);
+        setVisiblePromote(false);
+    };
+
+    const emp = ({item,orgname}) => (
+        <View style={styles.buttons}>
+            <Popup visible={visibleRemove}>
+                <Text>Are you Sure?</Text>
+                <View style={styles.buttons}>
+                    <TouchableOpacity onPress={() => setVisibleRemove(false)}>
+                        <Text adjustsFontSizeToFit numberOfLines={1} style={styles.remove}>Cancel</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => removeHandler({item, orgname})}>
+                        <Text adjustsFontSizeToFit numberOfLines={1} style={styles.promote}>Confirm</Text>
+                    </TouchableOpacity>
+                </View>
+            </Popup>
+
+            <Popup visible={visiblePromote}>
+                <Text>Are you Sure?</Text>
+                <View style={styles.buttons}>
+                    <TouchableOpacity onPress={() => setVisiblePromote(false)}>
+                        <Text adjustsFontSizeToFit numberOfLines={1} style={styles.remove}>Cancel</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => promoteHandler({item, orgname})}>
+                        <Text adjustsFontSizeToFit numberOfLines={1} style={styles.promote}>Confirm</Text>
+                    </TouchableOpacity>
+                </View>
+            </Popup>
+
+            <TouchableOpacity onPress={() => setVisibleRemove(true)}>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.remove}>Remove Employee</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => setVisiblePromote(true)}>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.promote}>Make Admin</Text>
+            </TouchableOpacity>
+        </View>
+    );
 
     const renderItem = ({item}) => (
         <Card style={styles.item}>
@@ -130,7 +163,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignContent: 'center',
         justifyContent: 'space-between',
-        width: '85%'
+        width: '85%',
+        paddingVertical: 10
     }
 });
 

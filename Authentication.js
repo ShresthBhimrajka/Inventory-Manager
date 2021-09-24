@@ -140,7 +140,7 @@ export async function promote(item, orgname) {
   }
 }
 
-export async function changeEmail(userId, email) {
+export async function changeEmail(userId, email, orgname) {
   try {
     await firebase.auth().currentUser.updateEmail(email);
     await firebase.firestore().collection('organizations').doc(orgname).collection('users').doc(userId).update({
@@ -151,7 +151,7 @@ export async function changeEmail(userId, email) {
   }
 }
 
-export async function changePhone(userId, phone) {
+export async function changePhone(userId, phone, orgname) {
   try {
     await firebase.firestore().collection('organizations').doc(orgname).collection('users').doc(userId).update({
       phone: phone

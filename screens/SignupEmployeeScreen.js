@@ -52,43 +52,34 @@ const SignUpEmployee = ({navigation}) => {
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <ImageBackground style={styles.background} source={require('../assets/employee.png')}>  
-<<<<<<< Updated upstream
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={styles.screen}>
-                <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
-                    <View style={styles.container}>
-                        <Text style={styles.text}>Create Employee Account</Text>
-=======
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View style={styles.screen}>
                         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
                             <View style={styles.container}>
                                 <Text style={styles.text}>            Create Employee Account          </Text>
->>>>>>> Stashed changes
                         
-                        <FormInput labelValue={name} onChangeText={(username) => {setName(username)}} placeholder='Name' autoCapitalize='words' autoCorrect={false}/>
+                                <FormInput labelValue={name} onChangeText={(username) => {setName(username)}} placeholder='Name' autoCapitalize='words' autoCorrect={false}/>
 
-                        <FormInput labelValue={phone} onChangeText={(phone) => {setPhone(phone)}} placeholder='Phone Number' keyboardType='numeric' autoCorrect={false} maxLength={10}/>
+                                <FormInput labelValue={phone} onChangeText={(phone) => {setPhone(phone)}} placeholder='Phone Number' keyboardType='numeric' autoCorrect={false} maxLength={10}/>
 
-                        <FormInput labelValue={orgcode} onChangeText={(orgcode) => {setOrgCode(orgcode)}} placeholder='Organization Code' autoCapitalize='none' autoCorrect={false}/>
+                                <FormInput labelValue={orgcode} onChangeText={(orgcode) => {setOrgCode(orgcode)}} placeholder='Organization Code' autoCapitalize='none' autoCorrect={false}/>
 
-                        <FormInput labelValue={email} onChangeText={(userEmail) => {setEmail(userEmail)}} placeholder='Email' keyboardType='email-address' autoCapitalize='none' autoCorrect={false}/>
+                                <FormInput labelValue={email} onChangeText={(userEmail) => {setEmail(userEmail)}} placeholder='Email' keyboardType='email-address' autoCapitalize='none' autoCorrect={false}/>
 
-                        <FormInput labelValue={password} onChangeText={(userPassword) => {setPassword(userPassword)}} placeholder='Password' secureTextEntry={true}/>
+                                <FormInput labelValue={password} onChangeText={(userPassword) => {setPassword(userPassword)}} placeholder='Password' secureTextEntry={true}/>
 
-                        <FormInput labelValue={confirmPassword} onChangeText={(userPassword) => {setConfirmPassword(userPassword)}} placeholder='Confirm Password' secureTextEntry={true}/>
+                                <FormInput labelValue={confirmPassword} onChangeText={(userPassword) => {setConfirmPassword(userPassword)}} placeholder='Confirm Password' secureTextEntry={true}/>
 
-                        <FormButton buttonTitle='Sign Up' onPress={signupHandler}/>
-
-                        <TouchableOpacity style={styles.navButton} onPress={() => navigation.push('Login')}>
-                            <Text style={styles.navButtonText}>Already registered? Log in</Text>
-                        </TouchableOpacity>
-
+                                <FormButton buttonTitle='Sign Up' onPress={signupHandler}/>
+    
+                                <TouchableOpacity style={styles.navButton} onPress={() => navigation.push('Login')}>
+                                    <Text style={styles.navButtonText}>Already registered? Log in</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </TouchableWithoutFeedback>
                     </View>
                 </TouchableWithoutFeedback>
-            </View>
-        </TouchableWithoutFeedback>
-        </ImageBackground>
+            </ImageBackground>
         </ScrollView>
         
     );
@@ -97,23 +88,19 @@ const SignUpEmployee = ({navigation}) => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-<<<<<<< Updated upstream
-        
         paddingTop: 40
-=======
-        //paddingTop: "10%"
->>>>>>> Stashed changes
     },
+    
     background:{
         flex:1,
         justifyContent:'flex-end',
         alignItems:'center',
     },
+
     container: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        //padding: 20,
         marginTop: '20%',
         marginBottom: '50%'
     },
