@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {ImageBackground, StyleSheet, View, Text, TouchableOpacity, Alert} from 'react-native';
 import firebase from 'firebase';
+import { useFonts } from 'expo-font';
 
 import Card from '../components/Card';
 
@@ -9,6 +10,18 @@ const HomeScreen = ({navigation}) => {
     const [orgname, setOrgName] = useState('');
     const [empName, setEmpName] = useState('');
     const [empId, setEmpId] = useState('');
+	/*const [loaded] = useFonts({
+      bold: require('../assets/fonts/GemunuLibre-Bold.ttf'),
+      extrabold: require('../assets/fonts/GemunuLibre-ExtraBold.ttf'),
+      extralight: require('../assets/fonts/GemunuLibre-ExtraLight.ttf'),
+      light: require('../assets/fonts/GemunuLibre-Light.ttf'),
+      medium: require('../assets/fonts/GemunuLibre-Medium.ttf'),
+      regular: require('../assets/fonts/GemunuLibre-Regular.ttf'),
+      semibold: require('../assets/fonts/GemunuLibre-SemiBold.ttf'),
+    });
+    if (!loaded) {
+      return null;
+    }*/
     let userId = firebase.auth().currentUser.uid;  
 
     useEffect(() => {
@@ -30,59 +43,61 @@ const HomeScreen = ({navigation}) => {
 
     const admin = (
       <ImageBackground style={styles.background} source={require('../assets/home.png')}>
-        <View style={styles.screen}>
-          <View style={styles.touchableContainerAdmin}>
-            <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Inventory', {orgname: orgname, access: access, empId: empId, empName: empName})}>
-              <Card style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>Inventory</Text>
-              </Card> 
-            </TouchableOpacity> 
+          <View style={styles.screen}>
+      
+              <View style={styles.touchableContainerAdmin}>
+                  <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Inventory', {orgname: orgname, access: access, empId: empId, empName: empName})}>
+                      <Card style={styles.buttonContainer}>
+                          <Text style={styles.buttonText}>Inventory</Text>
+                      </Card> 
+                  </TouchableOpacity> 
+                  
+                  <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Records', {orgname: orgname})}>
+                      <Card style={styles.buttonContainer}>
+                          <Text style={styles.buttonText}>Records</Text>
+                      </Card>
+                  </TouchableOpacity>
+                  
+                  <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Status')}>
+                      <Card style={styles.buttonContainer}>
+                          <Text style={styles.buttonText}>Status</Text>
+                      </Card>
+                  </TouchableOpacity> 
 
-            <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Records', {orgname: orgname})}>
-              <Card style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>Records</Text>
-              </Card>
-            </TouchableOpacity> 
-
-            <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('History', {orgname: orgname})}>
-              <Card style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>History</Text>
-              </Card>
-            </TouchableOpacity> 
-
-            <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Status', {orgname: orgname})}>
-              <Card style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>Shipment</Text>
-              </Card>
-            </TouchableOpacity> 
+                  <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('History', {orgname: orgname})}>
+                      <Card style={styles.buttonContainer}>
+                          <Text style={styles.buttonText}>History</Text>
+                      </Card>
+                  </TouchableOpacity> 
+              </View>
           </View>
-        </View>
       </ImageBackground>
     );
 
     const emp = (
       <ImageBackground style={styles.background} source={require('../assets/home.png')}>  
-        <View style={styles.screen}>
-          <View style={styles.touchableContainerEmp}>
-              <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Inventory', {orgname: orgname, access: access, empName: empName, empId: empId})}>
-                <Card style={styles.buttonContainer}>
-                  <Text style={styles.buttonText}>Inventory</Text>
-                </Card>
-              </TouchableOpacity> 
+          <View style={styles.screen}>
+              <View style={styles.touchableContainerEmp}>
+                
+                  <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Inventory', {orgname: orgname, access: access, empName: empName, empId: empId})}>
+                      <Card style={styles.buttonContainer}>
+                          <Text style={styles.buttonText}>Inventory</Text>
+                      </Card>
+                  </TouchableOpacity> 
 
-              <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('History', {orgname: orgname})}>
-                <Card style={styles.buttonContainer}>
-                  <Text style={styles.buttonText}>History</Text>
-                </Card>
-              </TouchableOpacity> 
+                  <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('History', {orgname: orgname})}>
+                      <Card style={styles.buttonContainer}>
+                          <Text style={styles.buttonText}>History</Text>
+                      </Card>
+                  </TouchableOpacity> 
 
-              <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Status')}>
-                <Card style={styles.buttonContainer}>
-                  <Text style={styles.buttonText}>Shipment</Text>
-                </Card>
-              </TouchableOpacity> 
+                  <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Status')}>
+                      <Card style={styles.buttonContainer}>
+                          <Text style={styles.buttonText}>Shipment</Text>
+                      </Card>
+                  </TouchableOpacity> 
+              </View>
           </View>
-        </View>
       </ImageBackground>
     );
 
@@ -96,11 +111,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         
     },
+  
     background:{
       flex:1,
       justifyContent:'flex-end',
       alignItems:'center',
     },
+  
     touchableContainerAdmin: {
       flex: 1,
       alignItems: 'center',
@@ -118,14 +135,15 @@ const styles = StyleSheet.create({
     },
   
     buttonContainer: {
-      height: 100,
-      width: 300,
+      height: 70,
+      width: 250,
       maxWidth: '70%',
       backgroundColor: "#ffee90"
     },
   
     buttonText: {
       fontSize: 22,
+      
       color: 'black'
     },
 

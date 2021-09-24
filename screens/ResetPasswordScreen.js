@@ -42,19 +42,19 @@ const ResetPasswordScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
     screen: {
-        flex: 1,
+        //flex: 1,
         
     },
     background:{
         flex:1,
         justifyContent:'flex-end',
         alignItems:'center',
+        
     },
     container: {
         flex: 1,
         alignContent: 'center',
         justifyContent: 'space-between',
-        
         padding: 30,
         marginTop: '50%',
         marginBottom: '85%'

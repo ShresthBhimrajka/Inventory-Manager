@@ -56,7 +56,7 @@ const SignUpEmployee = ({navigation}) => {
                     <View style={styles.screen}>
                         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
                             <View style={styles.container}>
-                                <Text style={styles.text}>Create Employee Account</Text>
+                                <Text style={styles.text}>            Create Employee Account          </Text>
                         
                                 <FormInput labelValue={name} onChangeText={(username) => {setName(username)}} placeholder='Name' autoCapitalize='words' autoCorrect={false}/>
 

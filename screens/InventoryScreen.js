@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Button, Keyboard, ImageBackground } from 'react-native';
+import {Image,  StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Button, Keyboard, ImageBackground } from 'react-native';
 import firebase from 'firebase';
 
+import { Colors } from '../assets/Colors';
+import SearchBar from './SearchBar';
 import Card from '../components/Card';
 import { removeItem, updateInv, updateRec, updateHistoy } from '../DataBaseUpdate';
 import Popup from '../components/Popup';
@@ -18,6 +20,7 @@ const InventoryScreen = ({route}) => {
     const [newId, setNewId] = useState('');
     const [newName, setNewName] = useState('');
     const [newQuantity, setNewQuantity] = useState('');
+    const [data, setData] = useState([]);
     const [visibleRemove, setVisibleRemove] = useState(false);
     const [selected, setSelected] = useState(null);
     const [visibleDetails, setVisibleDetails] = useState(false);
@@ -84,12 +87,20 @@ const InventoryScreen = ({route}) => {
     const showDetails = () => (
         <Popup visible={visibleDetails}>
             <View style={styles.card}> 
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>ID:   {selected.id}</Text>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {selected.name}</Text>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {selected.quantity}</Text>
-                <View style={styles.modal}>
-                    <Button title='Cancel' color='red' onPress={closeDetails}/>
-                </View>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>ID:   {item.id}</Text>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.name}</Text>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {item.quantity}</Text>
+            </View>
+
+            <View style={styles.buttons}>
+                {access=='admin' ? admin({item,orgname,empName,empId}) : emp({item})}
+                <TouchableOpacity onPress = {() => setVisibile(true)}>
+                    <Text adjustsFontSizeToFit numberOfLines={1} style={styles.update}>Update</Text>
+                 </TouchableOpacity> 
+            </View>
+
+            <View style={styles.modal}>
+                 <Button title='Cancel' color='red' onPress={closeDetails}/>
             </View>
         </Popup>
     );
@@ -97,7 +108,7 @@ const InventoryScreen = ({route}) => {
     const emp = ({item}) => (
         <View style={styles.buttons}>
             <TouchableOpacity onPress = {() => setUpdate({item})}>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.update}>Update</Text>
+                <Image style={styles.logo} source={require('../assets/edit.png')}/>
             </TouchableOpacity> 
         </View>
     );
@@ -105,12 +116,12 @@ const InventoryScreen = ({route}) => {
     const admin = ({item}) => (
         <View style={styles.buttons}>
             <TouchableOpacity onPress = {() => setRemove({item})}>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.remove}>Remove Item</Text>
+                <Image style={styles.logo} source={require('../assets/remove.png')}/> 
             </TouchableOpacity>
 
             <TouchableOpacity onPress = {() => setUpdate({item})}>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.update}>Update</Text>
-            </TouchableOpacity> 
+                <Image style={styles.logo} source={require('../assets/edit.png')}/>
+            </TouchableOpacity>
         </View>  
     );
 
@@ -118,11 +129,16 @@ const InventoryScreen = ({route}) => {
         <TouchableOpacity activeOpacity={0.9} onPress={() => setDetails({item})}>
             <Card style={styles.item}>
                 <View style={styles.card}> 
-                    <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>ID:   {item.id}</Text>
-                    <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.name}</Text>
-                    <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {item.quantity}</Text>
+                    <View style={styles.item1}>
+                        <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>ID:   {item.id} </Text>
+                        <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.name} </Text>
+                        <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {item.quantity} </Text>
+                    </View>
                 </View>
-                {access=='admin' ? admin({item}) : emp({item})}
+
+                <View style={styles.item1}>
+                    {access=='admin' ? admin({item}) : emp({item})}
+                </View>
             </Card>
         </TouchableOpacity>      
     );
@@ -130,11 +146,15 @@ const InventoryScreen = ({route}) => {
     return (
         <ImageBackground style={styles.background} source={require('../assets/inventory.png')}>
             <View style={styles.screen}>
+                <SearchBar
+                    data={data}
+                    onChangeValue={(newValue)=>setData(newValue)}
+                    onValueSubmitted={()=> alert(data)}/>
                 <FlatList
                     keyExtractor={item => item.id}
                     data={invData}
-                    renderItem={renderItem}/>  
-
+                    renderItem={renderItem}/>   
+           
                 <Popup visible={visibleRemove}>
                     <Text>Are you Sure?</Text>
                     <View style={styles.buttons}>
@@ -170,11 +190,20 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         padding: 10
     },
+  
     background:{
         flex:1,
         justifyContent:'flex-end',
         alignItems:'center',
     },
+  
+    logo:{
+        width:20,
+        height:20,
+        alignItems:'center',
+        justifyContent: 'center',
+    },
+  
     item: {
         flex: 1,
         width: 300,
@@ -188,17 +217,18 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'flex-start',
         justifyContent: 'center',
-        padding: 10
+        padding: 10,
+        
+        
+    },
+    item1:{
+        width:'50%',
+        flexDirection: "row",
+        justifyContent:"center"
     },
 
     cardText: {
         textAlign: 'left',
-    },
-
-    remove: {
-        textAlign: 'center',
-        fontWeight: 'bold',
-        color: 'red'
     },
 
     buttons: {
@@ -206,13 +236,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignContent: 'center',
         justifyContent: 'space-between',
-        width: '85%'
-    },
-
-    update: {
-        textAlign: 'center',
-        fontWeight: 'bold',
-        color: '#32cd32'
     },
 
     modal: {

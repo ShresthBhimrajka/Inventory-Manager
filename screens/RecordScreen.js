@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {ImageBackground, StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Button } from 'react-native';
 import firebase from 'firebase';
 
+import { Colors } from '../assets/Colors';
+import SearchBar from './SearchBar';
 import Card from '../components/Card';
 import Popup from '../components/Popup';
 
@@ -10,6 +12,7 @@ const RecordScreen = ({route}) => {
     const [recData, setRecData] = useState([]);
     const [visible, setVisible] = useState(false);
     const [selected, setSelected] = useState(null);
+    const [data, setData] = useState([]);
 
     useEffect(() => {
           try {  
@@ -70,6 +73,10 @@ const RecordScreen = ({route}) => {
     return (
         <ImageBackground style={styles.background} source={require('../assets/records.png')}>
             <View style={styles.screen}>
+                <SearchBar
+                    data={data}
+                    onChangeValue={(newValue)=>setData(newValue)}
+                    onValueSubmitted={()=> alert(data)}/>
                 <FlatList
                     keyExtractor={item => item.mil}
                     data={recData}

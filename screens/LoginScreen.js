@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {Image, ImageBackground,ScrollView, View, Text,TouchableOpacity, TouchableWithoutFeedback, StyleSheet, Keyboard, Alert } from 'react-native';
+import {Image,Dimensions, ImageBackground,ScrollView, View, Text,TouchableOpacity, TouchableWithoutFeedback, StyleSheet, Keyboard, Alert } from 'react-native';
 
+//import Search from "./SearchBar";
 import { signIn } from '../Authentication';
 import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
@@ -28,8 +29,10 @@ const LoginScreen = ({navigation}) => {
 
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
-            <ImageBackground style={styles.background} source={require('../assets/login.png')}> 
-        <View style={styles.screen}>
+          <ImageBackground style={styles.background} source={require('../assets/login.png')}>  
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.screen}>
+            
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
                 <View style={styles.container}>
                     <Image style={styles.logo} source={require('../assets/Vennto.png')}/>
@@ -48,14 +51,16 @@ const LoginScreen = ({navigation}) => {
                     <TouchableOpacity style={styles.forgotButton} onPress={() => navigation.push('SignupEmployee')}>
                         <Text style={styles.navButtonText}>Create Account as an Employee</Text>
                     </TouchableOpacity>
-
+                    
                     <TouchableOpacity style={styles.forgotButton} onPress={() => navigation.push('SignupAdmin')}>
                         <Text style={styles.navButtonText}>Sign Up as an Organization and create Admin Account</Text>
                     </TouchableOpacity>
+                    
                 </View>
             </TouchableWithoutFeedback>
-        </View>
-        </ImageBackground>
+            </View>
+        </TouchableWithoutFeedback>
+             </ImageBackground>
         </ScrollView>
     );
 };
@@ -63,12 +68,13 @@ const LoginScreen = ({navigation}) => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        
     },
     background:{
+        //width: "100%",
+        //height: "100%",
         flex:1,
-        justifyContent:'flex-end',
-        alignItems:'center',
+        justifyContent:"flex-start"
+        
     },
     logo:{
         width:40,
@@ -81,10 +87,9 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 30,
-        marginTop: '30%',
-        marginBottom: '39%',
-        
+        padding: 10,        
+        marginTop: '35%',
+        marginBottom: '60%',
     },
 
     text: {
@@ -94,12 +99,12 @@ const styles = StyleSheet.create({
         color: Colors.primaryText
     },
 
-    navButton: {
-        marginTop: 15
+    navButton:{
+        marginTop:15
     },
 
     forgotButton: {
-        marginVertical: 20
+        marginVertical: 10
     },
 
     navButtonText: {

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {ImageBackground, StyleSheet, View, Text, FlatList, TouchableOpacity, Button } from 'react-native';
 import firebase from 'firebase';
+import SearchBar from './SearchBar';
 
 import Popup from '../components/Popup';
 import Card from '../components/Card';
@@ -28,7 +29,7 @@ const StatusScreen = ({route}) => {
         catch (err) {
             Alert.alert('Shipment  Error !');
         }
-  }, [])
+    }, [])
 
     const setDetails = ({item}) => {
         setVisible(true);
@@ -68,6 +69,10 @@ const StatusScreen = ({route}) => {
     return (
         <ImageBackground style={styles.background} source={require('../assets/status.png')}>
         <View style={styles.screen}>
+            <SearchBar
+            data={data}
+            onChangeValue={(newValue)=>setData(newValue)}
+            onValueSubmitted={()=> alert(data)}/>
             <FlatList
                 keyExtractor={item => item.id}
                 data={data}

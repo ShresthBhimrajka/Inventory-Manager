@@ -56,7 +56,7 @@ const SignUp = ({navigation}) => {
             <View style={styles.screen}>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
                     <View style={styles.container}>
-                        <Text style={styles.text}>Create Admin Account</Text>
+                        <Text style={styles.text}>             Create Admin Account             </Text>
 
                         <FormInput labelValue={orgName} onChangeText={(orgName) => {setOrgName(orgName)}} placeholder='Organization Name' autoCorrect={false}/>
                         

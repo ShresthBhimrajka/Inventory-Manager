@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Button} from 'react-native';
 import firebase from 'firebase';
+import SearchBar from './SearchBar';
 
 import Popup from '../components/Popup';
 import Card from '../components/Card';
@@ -11,6 +12,7 @@ const HistoryScreen = ({route}) => {
     const [hisData, setHisData] = useState([]);
     const [visible, setVisible] = useState(false);
     const [selected, setSelected] = useState(null);
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         try {  
@@ -68,6 +70,10 @@ const HistoryScreen = ({route}) => {
 
     return (
         <View style={styles.screen}>
+            <SearchBar
+                data={data}
+                onChangeValue={(newValue)=>setData(newValue)}
+                onValueSubmitted={()=> alert(data)}/>
             <FlatList
                 keyExtractor={item => item.mil}
                 data={hisData}
