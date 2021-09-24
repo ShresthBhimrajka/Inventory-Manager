@@ -53,7 +53,7 @@ const Profile = ({navigation}) => {
     const viewopts = (
         <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Users', {orgname: orgname})}>
             <Card style={styles.buttonContainer}>
-            <Text style={styles.buttonText}><Image style={styles.user} source={require("../assets/users.png")}/> View Users</Text>
+                <Text style={styles.buttonText}><Image style={styles.user} source={require("../assets/users.png")}/> View Users</Text>
             </Card>
         </TouchableOpacity> 
     );
@@ -93,7 +93,7 @@ const Profile = ({navigation}) => {
                 </View>
             </Popup>
             <Card style={styles.card}>
-            <Image style={styles.profile} source={require("../assets/bigprofileicon.png")}/>
+                <Image style={styles.profile} source={require("../assets/bigprofileicon.png")}/>
                 <Text style={styles.heading1}>User Details</Text>
                 {access=='admin' ? code : <View></View>}
                 <Text></Text>
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
         width: 300,
         maxWidth: '70%',
         backgroundColor: "#a9ceff",
-        marginBottom: '60%'
+        marginBottom: '30%'
     },
     
     buttonText: {

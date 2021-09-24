@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ScrollView, Text,TextInput, View, StyleSheet } from 'react-native';
+import { ScrollView, Text, TextInput, View, StyleSheet } from 'react-native';
 import {Feather } from '@expo/vector-icons'
 
 const SearchBar= ({onValueSubmitted,onChangeValue,data}) =>{
@@ -7,12 +7,12 @@ const SearchBar= ({onValueSubmitted,onChangeValue,data}) =>{
     return(
         <View style={styles.viewstyle}>
             <Feather name='search' style={styles.iconStyle}/>
-                <TextInput style={styles.textInputStyle}
+            <TextInput style={styles.textInputStyle}
                 placeholder='Search'
                 placeholderTextColor="#e6e6e6"
                 onChangeText={(newChange)=>onChangeValue(newChange)}
                 onSubmitEditing={(subValue)=>onValueSubmitted(subValue)}/>
-                     </View>
+         </View>
     )
 }
 

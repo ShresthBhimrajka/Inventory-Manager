@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {Image,  StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Button, Keyboard, ImageBackground } from 'react-native';
 import firebase from 'firebase';
 
-import { Colors } from '../assets/Colors';
 import SearchBar from './SearchBar';
 import Card from '../components/Card';
 import { removeItem, updateInv, updateRec, updateHistoy } from '../DataBaseUpdate';
@@ -87,16 +86,9 @@ const InventoryScreen = ({route}) => {
     const showDetails = () => (
         <Popup visible={visibleDetails}>
             <View style={styles.card}> 
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>ID:   {item.id}</Text>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.name}</Text>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {item.quantity}</Text>
-            </View>
-
-            <View style={styles.buttons}>
-                {access=='admin' ? admin({item,orgname,empName,empId}) : emp({item})}
-                <TouchableOpacity onPress = {() => setVisibile(true)}>
-                    <Text adjustsFontSizeToFit numberOfLines={1} style={styles.update}>Update</Text>
-                 </TouchableOpacity> 
+                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>ID:   {selected.id}</Text>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {selected.name}</Text>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {selected.quantity}</Text>
             </View>
 
             <View style={styles.modal}>
@@ -130,13 +122,12 @@ const InventoryScreen = ({route}) => {
             <Card style={styles.item}>
                 <View style={styles.card}> 
                     <View style={styles.item1}>
-                        <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>ID:   {item.id} </Text>
                         <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.name} </Text>
-                        <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {item.quantity} </Text>
+                        <Text style={styles.cardText}>Quantity: {item.quantity} </Text>
                     </View>
                 </View>
 
-                <View style={styles.item1}>
+                <View style={styles.buttons}>
                     {access=='admin' ? admin({item}) : emp({item})}
                 </View>
             </Card>
@@ -157,7 +148,7 @@ const InventoryScreen = ({route}) => {
            
                 <Popup visible={visibleRemove}>
                     <Text>Are you Sure?</Text>
-                    <View style={styles.buttons}>
+                    <View style={styles.buttonConfirm}>
                         <TouchableOpacity onPress={() => setVisibleRemove(false)}>
                             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.remove}>Cancel</Text>
                         </TouchableOpacity>
@@ -207,8 +198,9 @@ const styles = StyleSheet.create({
     item: {
         flex: 1,
         width: 300,
+        flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         paddingVertical: 10,
         margin: '5%'
     },
@@ -216,14 +208,11 @@ const styles = StyleSheet.create({
     card: {
         flex: 1,
         alignItems: 'flex-start',
-        justifyContent: 'center',
-        padding: 10,
-        
-        
+        justifyContent: 'space-between',
+        padding: 10
     },
     item1:{
         width:'50%',
-        flexDirection: "row",
         justifyContent:"center"
     },
 
@@ -233,13 +222,33 @@ const styles = StyleSheet.create({
 
     buttons: {
         flex: 1,
-        flexDirection: 'row',
-        alignContent: 'center',
+        alignContent: 'flex-end',
         justifyContent: 'space-between',
     },
 
     modal: {
         padding: 20
+    },
+
+    remove: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: 'red'
+    },
+
+    update: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: '#32cd32'
+    },
+    
+    buttonConfirm: {
+        flex: 1,
+        flexDirection: 'row',
+        alignContent: 'center',
+        justifyContent: 'space-between',
+        width: '85%',
+        paddingVertical: 10
     }
 }); 
 
