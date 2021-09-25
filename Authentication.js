@@ -67,6 +67,7 @@ export async function registrationEmployee(email, password, name, phone, orgcode
         phone: phone,
         id: currentUser.uid
       });
+      Alert.alert('Sign up successful. Please login');
     }
 
   } catch (err) {
@@ -165,6 +166,18 @@ export async function changePassword(password) {
   try {
     await firebase.auth().currentUser.updatePassword(password);
   } catch (err) {
+      Alert.alert('There is something wrong !!!', err.message);
+  }
+}
+
+export async function deleteAccount(orgname) {
+  try {
+      const userId = firebase.auth().currentUser.uid;
+      await firebase.firestore().collection('allusers').doc(userId).delete();
+      await firebase.firestore().collection('organizations').doc(orgname).collection('users').doc(userId).delete();
+      await firebase.firestore().collection('organizations').doc(orgname).collection('history').doc(userId).delete();
+      await firebase.auth().currentUser.delete();
+  } catch(err) {
       Alert.alert('There is something wrong !!!', err.message);
   }
 }

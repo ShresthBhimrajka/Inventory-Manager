@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {Image, StyleSheet, View, Text, Button, Alert, TouchableOpacity, Keyboard, ImageBackground } from 'react-native';
+import {Image, StyleSheet, View, Text, Button, Alert, TouchableOpacity, Keyboard, ImageBackground, ScrollView } from 'react-native';
 import firebase from 'firebase';
-import { loggingOut, changeEmail, changePhone, changePassword } from '../Authentication';
+import { loggingOut, changeEmail, changePhone, changePassword, deleteAccount } from '../Authentication';
 
 import Popup from '../components/Popup';
 import FormInput from '../components/FormInput';
@@ -21,6 +21,7 @@ const Profile = ({navigation}) => {
     const [newPhone, setNewPhone] = useState('');
     const [pass, setNewPass] = useState('');
     const [conPass, setConPass] = useState('');
+    const [visibleDelete, setVisibleDelete] = useState(false);
 
     useEffect(() => {
         async function getUserInfo() {  
@@ -78,43 +79,68 @@ const Profile = ({navigation}) => {
         setVisible(false);
     };
 
+    const deleteHandler = () => {
+        deleteAccount(orgname);
+        navigation.push('Login');
+    };
+
     return (
-        <ImageBackground style={styles.background} source={require('../assets/profile.png')}>
-        <View style={styles.screen}>
-            <Popup visible={visible}>
-                <Text style={{fontWeight: 'bold'}}>Enter your details</Text>
-                <FormInput labelValue={newEmail} onChangeText={(newEmail) => setNewEmail(newEmail)} placeholder='Email' autocapitalize='false' autocorrect='none' keyboardType='email-address'/>
-                <FormInput labelValue={newPhone} onChangeText={(newPhone) => setNewPhone(newPhone)} placeholder='Phone' keyboardType='numeric' maxLength={10} autocorrect='none'/>
-                <FormInput labelValue={pass} onChangeText={(pass) => setNewPass(pass)} placeholder='Password' autocapitalize='false' autocorrect='none'/>
-                <FormInput labelValue={conPass} onChangeText={(conPass) => setConPass(conPass)} placeholder='Confirm Password' autocapitalize='false' autocorrect='none'/>
-                <FormButton buttonTitle='Update' onPress={updateHandler}/>
-                <View style={styles.modal}>
-                    <Button title='Cancel' color='red' onPress={() => setVisible(false)}/>
+        <ScrollView>
+            <ImageBackground style={styles.background} source={require('../assets/profile.png')}>
+                <View style={styles.screen}>
+                    <Popup visible={visibleDelete}>
+                        <Text>Are you Sure?</Text>
+                        <View style={styles.buttons}>
+                            <TouchableOpacity onPress={() => setVisibleDelete(false)}>
+                                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cancel}>Cancel</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={deleteHandler}>
+                                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.confirm}>Confirm</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </Popup>
+
+                    <Popup visible={visible}>
+                        <Text style={{fontWeight: 'bold'}}>Enter your details</Text>
+                        <FormInput labelValue={newEmail} onChangeText={(newEmail) => setNewEmail(newEmail)} placeholder='Email' autocapitalize='false' autocorrect='none' keyboardType='email-address'/>
+                        <FormInput labelValue={newPhone} onChangeText={(newPhone) => setNewPhone(newPhone)} placeholder='Phone' keyboardType='numeric' maxLength={10} autocorrect='none'/>
+                        <FormInput labelValue={pass} onChangeText={(pass) => setNewPass(pass)} placeholder='Password' autocapitalize='false' autocorrect='none'/>
+                        <FormInput labelValue={conPass} onChangeText={(conPass) => setConPass(conPass)} placeholder='Confirm Password' autocapitalize='false' autocorrect='none'/>
+                        <FormButton buttonTitle='Update' onPress={updateHandler}/>
+                        <TouchableOpacity onPress={() => setVisibleDelete(true)}>
+                            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.delete}>Delete your Account</Text>
+                        </TouchableOpacity>
+                        <View style={styles.modal}>
+                            <Button title='Cancel' color='red' onPress={() => setVisible(false)}/>
+                        </View>
+                    </Popup>
+
+                    <Card style={styles.card}>
+                        <Image style={styles.profile} source={require("../assets/bigprofileicon.png")}/>
+                        <Text style={styles.heading1}>User Details</Text>
+                        {access=='admin' ? code : <View></View>}
+                        <Text></Text>
+                        <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Name:     {name}</Text>
+                        <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Organization:     {orgname}</Text>
+                        <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Phone:    {phone}</Text>
+                        <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Email:    {email}</Text>
+                        <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Access:   {(access=='emp' ? 'employee' : 'admin')}</Text>
+                        <TouchableOpacity onPress={() => setVisible(true)}>
+                            <Text style={styles.update}>Update Details<Image style={styles.logo} source={require('../assets/edit.png')}/>
+                            </Text>
+                        </TouchableOpacity>
+                    </Card>
+
+                    {(access=='admin' ? viewopts: <View></View>)}
+
+                    <View style={{marginBottom: 20}}>
+                        <TouchableOpacity onPress={signoutHandler}>
+                            <Text style={styles.delete}>Sign out</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            </Popup>
-            <Card style={styles.card}>
-                <Image style={styles.profile} source={require("../assets/bigprofileicon.png")}/>
-                <Text style={styles.heading1}>User Details</Text>
-                {access=='admin' ? code : <View></View>}
-                <Text></Text>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Name:     {name}</Text>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Organization:     {orgname}</Text>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Phone:    {phone}</Text>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Email:    {email}</Text>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Access:   {(access=='emp' ? 'employee' : 'admin')}</Text>
-                <TouchableOpacity onPress={() => setVisible(true)}>
-                    <Text style={styles.update}>Update Details<Image style={styles.logo} source={require('../assets/edit.png')}/>
-                    </Text>
-                </TouchableOpacity>
-            </Card>
-
-            {(access=='admin' ? viewopts: <View></View>)}
-
-            <View style={{marginBottom: 20}}>
-                <Button title='Sign Out' onPress={signoutHandler} color='red'/>
-            </View>
-        </View>
-        </ImageBackground>
+            </ImageBackground>
+        </ScrollView>
     );
 };
 
@@ -183,6 +209,7 @@ const styles = StyleSheet.create({
     modal: {
         padding: 20
     },
+
     user:{
         height:15,
         width:20,
@@ -193,6 +220,34 @@ const styles = StyleSheet.create({
         color: 'grey',
         fontSize: 16,
         textAlign: 'center'
+    },
+
+    cancel: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: 'red'
+    },
+
+    confirm: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: '#32cd32'
+    },
+
+    delete: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: 'red',
+        padding: 10
+    },
+    
+    buttons: {
+        flex: 1,
+        flexDirection: 'row',
+        alignContent: 'center',
+        justifyContent: 'space-between',
+        width: '85%',
+        paddingVertical: 10
     }
 });
 

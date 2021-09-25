@@ -44,8 +44,7 @@ const SignUpEmployee = ({navigation}) => {
             setEmail('');
             setPassword('');
             setConfirmPassword('');
-            Alert.alert('Sign up successful. Please login');
-            navigation.replace('Login');
+            setTimeout(() => {navigation.replace('Login');}, 5000)
         }
     };
 
@@ -88,7 +87,7 @@ const SignUpEmployee = ({navigation}) => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        paddingTop: 40
+        paddingTop:40
     },
     
     background:{
@@ -101,8 +100,9 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: '20%',
-        marginBottom: '50%'
+        paddingTop: 50,
+        marginBottom: '50%',
+        padding: 10
     },
 
     text: {

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Image,  StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Button, Keyboard, ImageBackground } from 'react-native';
+import {Image,  StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Button, Keyboard, ImageBackground, TouchableWithoutFeedback } from 'react-native';
 import firebase from 'firebase';
 
 import SearchBar from './SearchBar';
@@ -123,7 +123,7 @@ const InventoryScreen = ({route}) => {
                 <View style={styles.card}> 
                     <View style={styles.item1}>
                         <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.name} </Text>
-                        <Text style={styles.cardText}>Quantity: {item.quantity} </Text>
+                        <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {item.quantity} </Text>
                     </View>
                 </View>
 
@@ -136,40 +136,43 @@ const InventoryScreen = ({route}) => {
 
     return (
         <ImageBackground style={styles.background} source={require('../assets/inventory.png')}>
-            <View style={styles.screen}>
-                <SearchBar
-                    data={data}
-                    onChangeValue={(newValue)=>setData(newValue)}
-                    onValueSubmitted={()=> alert(data)}/>
-                <FlatList
-                    keyExtractor={item => item.id}
-                    data={invData}
-                    renderItem={renderItem}/>   
-           
-                <Popup visible={visibleRemove}>
-                    <Text>Are you Sure?</Text>
-                    <View style={styles.buttonConfirm}>
-                        <TouchableOpacity onPress={() => setVisibleRemove(false)}>
-                            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.remove}>Cancel</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={removeHandler}>
-                            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.update}>Confirm</Text>
-                        </TouchableOpacity>
-                    </View>
-                </Popup>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <View style={styles.screen}>
+                    <SearchBar
+                        data={data}
+                        onChangeValue={(newValue)=>setData(newValue)}
+                        onValueSubmitted={()=> alert(data)}/>
+                    <FlatList
+                        keyExtractor={item => item.id}
+                        data={invData}
+                        renderItem={renderItem}/>   
+            
+                    <Popup visible={visibleRemove}>
+                        <Text>Are you Sure?</Text>
+                        <View style={styles.buttonConfirm}>
+                            <TouchableOpacity onPress={() => setVisibleRemove(false)}>
+                                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.remove}>Cancel</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={removeHandler}>
+                                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.update}>Confirm</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </Popup>
 
-                <Popup visible={visibleUpdate}>
-                    <Text>Enter the changes</Text>
-                    <FormInput labelValue={newId} onChangeText={(newId) => setNewId(newId)} placeholder='ID' autocapitalize='none' autocorrect='none'/>
-                    <FormInput labelValue={newName} onChangeText={(newName) => setNewName(newName)} placeholder='Name' autocapitalize='none' autocorrect='none'/>
-                    <FormInput labelValue={newQuantity} onChangeText={(newQuantity) => setNewQuantity(newQuantity)} placeholder='Quantity' keyboardType='numeric' autocorrect='none'/>
-                    <FormButton buttonTitle='Update Item' onPress={changeHandler}/>
-                    <View style={styles.modal}>
-                        <Button title='Cancel' color='red' onPress={() => setVisibleUpdate(false)}/>
-                    </View>   
-                </Popup>
-                {visibleDetails==true ? showDetails() : <View></View>}
-            </View>
+                    <Popup visible={visibleUpdate}>
+                        <Text>Enter the changes</Text>
+                        <FormInput labelValue={newId} onChangeText={(newId) => setNewId(newId)} placeholder='ID' autocapitalize='none' autocorrect='none'/>
+                        <FormInput labelValue={newName} onChangeText={(newName) => setNewName(newName)} placeholder='Name' autocapitalize='none' autocorrect='none'/>
+                        <FormInput labelValue={newQuantity} onChangeText={(newQuantity) => setNewQuantity(newQuantity)} placeholder='Quantity' keyboardType='numeric' autocorrect='none'/>
+                        <FormButton buttonTitle='Update Item' onPress={changeHandler}/>
+                        <View style={styles.modal}>
+                            <Button title='Cancel' color='red' onPress={() => setVisibleUpdate(false)}/>
+                        </View>   
+                    </Popup>
+                    
+                    {visibleDetails==true ? showDetails() : <View></View>}
+                </View>
+            </TouchableWithoutFeedback>
         </ImageBackground>
     ); 
 };
@@ -197,7 +200,7 @@ const styles = StyleSheet.create({
   
     item: {
         flex: 1,
-        width: 300,
+        width: 270,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -211,8 +214,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         padding: 10
     },
+    
     item1:{
-        width:'50%',
         justifyContent:"center"
     },
 

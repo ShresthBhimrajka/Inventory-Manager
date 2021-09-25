@@ -52,37 +52,35 @@ const SignUp = ({navigation}) => {
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <ImageBackground style={styles.background} source={require('../assets/organization.png')}> 
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={styles.screen}>
-                <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
-                    <View style={styles.container}>
-                        <Text style={styles.text}>             Create Admin Account             </Text>
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                    <View style={styles.screen}>
+                        <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
+                            <View style={styles.container}>
+                                <Text style={styles.text}>             Create Admin Account             </Text>
 
-                        <FormInput labelValue={orgName} onChangeText={(orgName) => {setOrgName(orgName)}} placeholder='Organization Name' autoCorrect={false}/>
-                        
-                        <FormInput labelValue={name} onChangeText={(username) => {setName(username)}} placeholder='Admin Name' autoCapitalize='words' autoCorrect={false}/>
+                                <FormInput labelValue={orgName} onChangeText={(orgName) => {setOrgName(orgName)}} placeholder='Organization Name' autoCorrect={false}/>
+                                
+                                <FormInput labelValue={name} onChangeText={(username) => {setName(username)}} placeholder='Admin Name' autoCapitalize='words' autoCorrect={false}/>
 
-                        <FormInput labelValue={phone} onChangeText={(phone) => {setPhone(phone)}} placeholder='Admin Phone number' keyboardType='numeric' autoCorrect={false} maxLength={10}/>
+                                <FormInput labelValue={phone} onChangeText={(phone) => {setPhone(phone)}} placeholder='Admin Phone number' keyboardType='numeric' autoCorrect={false} maxLength={10}/>
 
-                        <FormInput labelValue={email} onChangeText={(userEmail) => {setEmail(userEmail)}} placeholder='Admin Email' keyboardType='email-address' autoCapitalize='none' autoCorrect={false}/>
+                                <FormInput labelValue={email} onChangeText={(userEmail) => {setEmail(userEmail)}} placeholder='Admin Email' keyboardType='email-address' autoCapitalize='none' autoCorrect={false}/>
 
-                        <FormInput labelValue={password} onChangeText={(userPassword) => {setPassword(userPassword)}} placeholder='Admin Password' secureTextEntry={true}/>
+                                <FormInput labelValue={password} onChangeText={(userPassword) => {setPassword(userPassword)}} placeholder='Admin Password' secureTextEntry={true}/>
 
-                        <FormInput labelValue={confirmPassword} onChangeText={(userPassword) => {setConfirmPassword(userPassword)}} placeholder='Confirm Password' secureTextEntry={true}/>
+                                <FormInput labelValue={confirmPassword} onChangeText={(userPassword) => {setConfirmPassword(userPassword)}} placeholder='Confirm Password' secureTextEntry={true}/>
 
-                        <FormButton buttonTitle='Sign Up' onPress={signupHandler}/>
+                                <FormButton buttonTitle='Sign Up' onPress={signupHandler}/>
 
-                        <TouchableOpacity style={styles.navButton} onPress={() => navigation.push('Login')}>
-                            <Text style={styles.navButtonText}>Already registered? Log in</Text>
-                        </TouchableOpacity>
-
+                                <TouchableOpacity style={styles.navButton} onPress={() => navigation.push('Login')}>
+                                    <Text style={styles.navButtonText}>Already registered? Log in</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </TouchableWithoutFeedback>
                     </View>
                 </TouchableWithoutFeedback>
-            </View>
-        </TouchableWithoutFeedback>
-        </ImageBackground>
-        </ScrollView>
-        
+            </ImageBackground>
+        </ScrollView>    
     );
 };
 
@@ -95,12 +93,12 @@ const styles = StyleSheet.create({
         justifyContent:'flex-end',
         alignItems:'center',
     },
+    
     container: {
-        //backgroundColor: Colors.primaryBackgroud,
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 30,
+        padding: 10,
         paddingTop: 50, 
         marginBottom: '60%'
     },

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ImageBackground, StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Button } from 'react-native';
+import {ImageBackground, StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Button, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import firebase from 'firebase';
 
 import { Colors } from '../assets/Colors';
@@ -72,17 +72,19 @@ const RecordScreen = ({route}) => {
 
     return (
         <ImageBackground style={styles.background} source={require('../assets/records.png')}>
-            <View style={styles.screen}>
-                <SearchBar
-                    data={data}
-                    onChangeValue={(newValue)=>setData(newValue)}
-                    onValueSubmitted={()=> alert(data)}/>
-                <FlatList
-                    keyExtractor={item => item.mil}
-                    data={recData}
-                    renderItem={renderItem}/>
-                {visible ? showDetails() : <View></View>}
-            </View>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <View style={styles.screen}>
+                    <SearchBar
+                        data={data}
+                        onChangeValue={(newValue)=>setData(newValue)}
+                        onValueSubmitted={()=> alert(data)}/>
+                    <FlatList
+                        keyExtractor={item => item.mil}
+                        data={recData}
+                        renderItem={renderItem}/>
+                    {visible ? showDetails() : <View></View>}
+                </View>
+            </TouchableWithoutFeedback>
         </ImageBackground>
     );
 };
@@ -101,8 +103,7 @@ const styles = StyleSheet.create({
     },
     item: {
         flex: 1,
-        width: 300,
-        
+        width: 270,
         alignItems: 'flex-start',
         justifyContent: 'center',
         paddingVertical: 10,

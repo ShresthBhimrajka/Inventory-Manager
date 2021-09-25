@@ -98,12 +98,12 @@ const ViewUsers = ({route}) => {
 
     return (
         <ImageBackground style={styles.background} source={require('../assets/viewusers.png')}>
-        <View style={styles.screen}>
-            <Text style={styles.heading}>Users</Text>
-            <FlatList
-                data={users}
-                renderItem={renderItem}/>   
-        </View>
+            <View style={styles.screen}>
+                <Text style={styles.heading}>Users</Text>
+                <FlatList
+                    data={users}
+                    renderItem={renderItem}/>   
+            </View>
         </ImageBackground>
     );
 };
@@ -115,14 +115,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         padding: 10
     },
+
     background:{
         flex:1,
         justifyContent:'flex-end',
         alignItems:'center',
     },
+
     item: {
         flex: 1,
-        width: 300,
+        width: 270,
         alignItems: 'center',
         justifyContent: 'center',
         paddingVertical: 10,
@@ -163,7 +165,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignContent: 'center',
         justifyContent: 'space-between',
-        width: '85%',
+        width: '95%',
         paddingVertical: 10
     }
 });

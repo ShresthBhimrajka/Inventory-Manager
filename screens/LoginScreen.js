@@ -29,38 +29,36 @@ const LoginScreen = ({navigation}) => {
 
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
-          <ImageBackground style={styles.background} source={require('../assets/login.png')}>  
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={styles.screen}>
-            
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
-                <View style={styles.container}>
-                    <Image style={styles.logo} source={require('../assets/Vennto.png')}/>
-                    <Text style={styles.text}>Vennto</Text>
+            <ImageBackground style={styles.background} source={require('../assets/login.png')}>  
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                    <View style={styles.screen}>
+                        <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
+                            <View style={styles.container}>
+                                <Image style={styles.logo} source={require('../assets/Vennto.png')}/>
+                                <Text style={styles.text}>Vennto</Text>
 
-                    <FormInput labelValue={email} onChangeText={(userEmail) => {setEmail(userEmail)}} placeholder='Email' keyboardType='email-address' autoCapitalize='none' autoCorrect={false}/>
+                                <FormInput labelValue={email} onChangeText={(userEmail) => {setEmail(userEmail)}} placeholder='Email' keyboardType='email-address' autoCapitalize='none' autoCorrect={false}/>
 
-                    <FormInput labelValue={password} onChangeText={(userPassword) => {setPassword(userPassword)}} placeholder='Password' secureTextEntry={true}/>
+                                <FormInput labelValue={password} onChangeText={(userPassword) => {setPassword(userPassword)}} placeholder='Password' secureTextEntry={true}/>
 
-                    <FormButton buttonTitle='Sign In' onPress={loginHandler}/>
-                    
-                    <TouchableOpacity style={styles.forgotButton} onPress={() => navigation.push('ForgotPassword')}>
-                        <Text style={styles.navButtonText}>Forgot Password</Text>
-                    </TouchableOpacity>
+                                <FormButton buttonTitle='Sign In' onPress={loginHandler}/>
+                        
+                                <TouchableOpacity style={styles.forgotButton} onPress={() => navigation.push('ForgotPassword')}>
+                                    <Text style={styles.navButtonText}>Forgot Password</Text>
+                                </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.forgotButton} onPress={() => navigation.push('SignupEmployee')}>
-                        <Text style={styles.navButtonText}>Create Account as an Employee</Text>
-                    </TouchableOpacity>
-                    
-                    <TouchableOpacity style={styles.forgotButton} onPress={() => navigation.push('SignupAdmin')}>
-                        <Text style={styles.navButtonText}>Sign Up as an Organization and create Admin Account</Text>
-                    </TouchableOpacity>
-                    
-                </View>
-            </TouchableWithoutFeedback>
-            </View>
-        </TouchableWithoutFeedback>
-             </ImageBackground>
+                                <TouchableOpacity style={styles.forgotButton} onPress={() => navigation.push('SignupEmployee')}>
+                                    <Text style={styles.navButtonText}>Create Account as an Employee</Text>
+                                </TouchableOpacity>
+                                
+                                <TouchableOpacity style={styles.forgotButton} onPress={() => navigation.push('SignupAdmin')}>
+                                    <Text style={styles.navButtonText}>Sign Up as an Organization and create Admin Account</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </TouchableWithoutFeedback>
+                    </View>
+                </TouchableWithoutFeedback>
+            </ImageBackground>
         </ScrollView>
     );
 };
@@ -82,8 +80,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent: 'center',
     },
-    container: {
-        
+    container: {      
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',

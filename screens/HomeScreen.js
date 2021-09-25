@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'space-between',
       marginTop: 30,
-      marginBottom: '65%'
+      marginBottom: 100
     },
 
     touchableContainerEmp: {
