@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Image,  StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Button, Keyboard, ImageBackground, TouchableWithoutFeedback } from 'react-native';
+import { Image,  StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Button, Keyboard, ImageBackground, TouchableWithoutFeedback, ScrollView } from 'react-native';
 import firebase from 'firebase';
 
 import SearchBar from './SearchBar';
@@ -19,6 +19,7 @@ const InventoryScreen = ({route}) => {
     const [newId, setNewId] = useState('');
     const [newName, setNewName] = useState('');
     const [newQuantity, setNewQuantity] = useState('');
+    const [newDesc, setNewDesc] = useState('');
     const [search, setSearch] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [visibleSearch, setVisibleSearch] = useState(false);
@@ -48,19 +49,22 @@ const InventoryScreen = ({route}) => {
     }, [])
 
     const changeHandler = () => {
-        updateInv(selected, newName, newId, newQuantity, empName, empId, orgname);
-        setNewId('');
-        setNewName('');
-        setNewQuantity('');
-        Keyboard.dismiss;
-        setVisibleUpdate(false);
-        setSelected(null);
+        if(newQuantity > 0){
+            updateInv(selected, newName, newId, newQuantity, newDesc,empName, empId, orgname);
+            setNewId('');
+            setNewName('');
+            setNewQuantity('');
+            setNewDesc('');
+            Keyboard.dismiss;
+            setVisibleUpdate(false);
+            setSelected(null);
+        }
     };
 
     const removeHandler = () => {
         removeItem(selected.id, orgname);
-        updateRec(selected.id, selected.name, selected.quantity, 'removed', empName, empId, orgname);
-        updateHistoy(selected.id, selected.name, selected.quantity, 'removed', empId, orgname);
+        updateRec(selected.id, selected.name, selected.quantity, 'Removed', empName, empId, orgname);
+        updateHistoy(selected.id, selected.name, selected.quantity, 'Removed', empId, orgname);
         setVisibleRemove(false);
         setSelected(null);
     };
@@ -73,6 +77,15 @@ const InventoryScreen = ({route}) => {
     const setUpdate = ({item}) => {
         setSelected(item);
         setVisibleUpdate(true);
+    };
+
+    const closeUpdate = () => {
+        setVisibleUpdate(false);
+        setNewId('');
+        setNewName('');
+        setNewQuantity('');
+        setNewDesc('');
+        setSelected(null);
     };
 
     const setDetails = ({item}) => {
@@ -96,8 +109,9 @@ const InventoryScreen = ({route}) => {
         const data = invData.filter(item => {
             const itemId = item.id.toUpperCase();
             const itemName = item.name.toUpperCase();
+            const itemDesc = item.desc.toUpperCase();
             const searchText = search.toUpperCase();
-            return (itemId.indexOf(searchText) > -1 || itemName.indexOf(searchText) > -1);
+            return ((itemId.indexOf(searchText) > -1) || (itemName.indexOf(searchText) > -1) || (itemDesc.indexOf(searchText) > -1));
         });
         setSearchResults(data);
     };
@@ -108,6 +122,7 @@ const InventoryScreen = ({route}) => {
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>ID:   {selected.id}</Text>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {selected.name}</Text>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {selected.quantity}</Text>
+                <Text style={styles.cardText}>{selected.desc}</Text>
             </View>
 
             <View style={styles.modal}>
@@ -181,13 +196,13 @@ const InventoryScreen = ({route}) => {
                     </Popup>
 
                     <Popup visible={visibleSearch}>
-                        <FlatList
-                            keyExtractor={item => item.id}
-                            data={searchResults}
-                            renderItem={renderItem}/>
                         <TouchableOpacity onPress={closeSearch}>
                             <Text style={styles.remove}>Cancel</Text>
                         </TouchableOpacity>
+                        <FlatList
+                            keyExtractor={item => item.id}
+                            data={searchResults}
+                            renderItem={renderItem}/>    
                     </Popup>
 
                     <Popup visible={visibleUpdate}>
@@ -195,9 +210,10 @@ const InventoryScreen = ({route}) => {
                         <FormInput labelValue={newId} onChangeText={(newId) => setNewId(newId)} placeholder='ID' autocapitalize='none' autocorrect='none'/>
                         <FormInput labelValue={newName} onChangeText={(newName) => setNewName(newName)} placeholder='Name' autocapitalize='none' autocorrect='none'/>
                         <FormInput labelValue={newQuantity} onChangeText={(newQuantity) => setNewQuantity(newQuantity)} placeholder='Quantity' keyboardType='numeric' autocorrect='none'/>
+                        <FormInput labelValue={newDesc} onChangeText={(newDesc) => setNewDesc(newDesc)} placeholder='Description' autocapitalize='none' autocorrect='none'/>
                         <FormButton buttonTitle='Update Item' onPress={changeHandler}/>
                         <View style={styles.modal}>
-                            <Button title='Cancel' color='red' onPress={() => setVisibleUpdate(false)}/>
+                            <Button title='Cancel' color='red' onPress={closeUpdate}/>
                         </View>   
                     </Popup>
                     

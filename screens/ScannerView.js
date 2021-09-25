@@ -14,6 +14,7 @@ const ScannerView = () => {
     const [name, setItemName] = useState('');
     const [quantity, setQuantity] = useState('');
     const [id, setId] = useState('');
+    const [desc, setDesc] = useState('');
     const [empId, setEmpId] = useState('');
     const [empName, setEmpName] = useState('');
     const [orgname, setOrgName] = useState('');
@@ -54,12 +55,13 @@ const ScannerView = () => {
             Alert.alert('Enter the quantity');
         }
         else{
-            addItem(id, name, quantity, orgname);
-            updateRec(id, name, quantity, 'added', empName, empId, orgname);
-            updateHistoy(id, name, quantity, 'added', empId, orgname);
+            addItem(id, name, quantity, desc, orgname);
+            updateRec(id, name, quantity, 'Added', empName, empId, orgname);
+            updateHistoy(id, name, quantity, 'Added', empId, orgname);
             setQuantity('');
             setId('');
             setItemName('');
+            setDesc('');
         }
     };
 
@@ -75,6 +77,7 @@ const ScannerView = () => {
         setQuantity('');
         setId('');
         setItemName('');
+        setDesc('');
     };
 
     if (hasPermission === null) {
@@ -91,8 +94,9 @@ const ScannerView = () => {
                 <FormInput labelValue={id} onChangeText={(id) => {setId(id)}} placeholder={id ? id : 'ID'} autoCorrect={false}/>
                 <FormInput labelValue={name} onChangeText={(name) => {setItemName(name)}} placeholder='Item Name' autoCorrect={false}/>
                 <FormInput labelValue={quantity} onChangeText={(quantity) => {setQuantity(quantity)}} placeholder='Item Quantity' keyboardType='numeric' autoCorrect={false}/>
+                <FormInput labelValue={desc} onChangeText={(desc) => {setDesc(desc)}} placeholder='Item Description' autoCorrect={false}/>
                 <FormButton buttonTitle='Add' onPress={itemHandler}/>
-                <Button title='cancel' color='red' onPress={resetHandler}/>
+                <Button title='Cancel' color='red' onPress={resetHandler}/>
             </Popup>
         </TouchableWithoutFeedback>
     );

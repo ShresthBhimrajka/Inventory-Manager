@@ -58,9 +58,9 @@ const HomeScreen = ({navigation}) => {
                       </Card>
                   </TouchableOpacity>
                   
-                  <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Status', {orgname: orgname})}>
+                  <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Shipping', {orgname: orgname, empName: empName, empId: empId})}>
                       <Card style={styles.buttonContainer}>
-                          <Text style={styles.buttonText}>Status</Text>
+                          <Text style={styles.buttonText}>Shipment</Text>
                       </Card>
                   </TouchableOpacity> 
 
@@ -85,7 +85,7 @@ const HomeScreen = ({navigation}) => {
                       </Card>
                   </TouchableOpacity> 
 
-                  <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Status', {orgname: orgname})}>
+                  <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Shipping', {orgname: orgname, empName: empName, empId: empId})}>
                       <Card style={styles.buttonContainer}>
                           <Text style={styles.buttonText}>Shipment</Text>
                       </Card>

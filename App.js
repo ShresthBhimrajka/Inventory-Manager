@@ -29,7 +29,7 @@ function Home() {
       <HomeStack.Screen  name='Home' component={HomeScreen} options={{headerTitleAlign: 'center'}}/>
       <HomeStack.Screen name='Inventory' component={InventoryScreen} options={{headerTitleAlign: 'center'}}/>
       <HomeStack.Screen name='Records' component={RecordScreen} options={{headerTitleAlign: 'center'}}/>
-      <HomeStack.Screen name='Status' component={StatusScreen} options={{headerTitleAlign: 'center'}}/>
+      <HomeStack.Screen name='Shipping' component={StatusScreen} options={{headerTitleAlign: 'center'}}/>
       <HomeStack.Screen name='History' component={HistoryScreen} options={{headerTitleAlign: 'center'}}/>
     </HomeStack.Navigator>
   );

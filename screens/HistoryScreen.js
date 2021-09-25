@@ -104,13 +104,13 @@ const HistoryScreen = ({route}) => {
                 {visible ? showDetails() : <View></View>}
 
                 <Popup visible={visibleSearch}>
+                    <TouchableOpacity onPress={closeSearch}>
+                        <Text style={styles.remove}>Cancel</Text>
+                    </TouchableOpacity>
                     <FlatList
                         keyExtractor={item => item.id}
                         data={searchResults}
                         renderItem={renderItem}/>
-                    <TouchableOpacity onPress={closeSearch}>
-                        <Text style={styles.remove}>Cancel</Text>
-                    </TouchableOpacity>
                 </Popup>
 
             </View>

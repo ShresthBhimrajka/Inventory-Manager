@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ImageBackground, StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Button, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import {ImageBackground, StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Button, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import firebase from 'firebase';
 
 import SearchBar from './SearchBar';
@@ -106,13 +106,13 @@ const RecordScreen = ({route}) => {
                     {visible ? showDetails() : <View></View>}
 
                     <Popup visible={visibleSearch}>
+                        <TouchableOpacity onPress={closeSearch}>
+                            <Text style={styles.remove}>Cancel</Text>
+                        </TouchableOpacity>
                         <FlatList
                             keyExtractor={item => item.id}
                             data={searchResults}
                             renderItem={renderItem}/>
-                        <TouchableOpacity onPress={closeSearch}>
-                            <Text style={styles.remove}>Cancel</Text>
-                        </TouchableOpacity>
                     </Popup>
                 </View>
             </TouchableWithoutFeedback>
