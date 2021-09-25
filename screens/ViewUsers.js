@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {ImageBackground, StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Keyboard} from 'react-native';
 import firebase from 'firebase';
 
+import SearchBar from './SearchBar';
 import Card from '../components/Card';
 import { removeUser, promote } from '../Authentication';
 import Popup from '../components/Popup';
@@ -17,6 +18,9 @@ const ViewUsers = ({route}) => {
     const [users, setUsers] = useState([]);
     const [visibleRemove, setVisibleRemove] = useState(false);
     const [visiblePromote, setVisiblePromote] = useState(false);
+    const [search, setSearch] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+    const [visibleSearch, setVisibleSearch] = useState(false);
 
     useEffect(() => {
             try {  
@@ -45,6 +49,23 @@ const ViewUsers = ({route}) => {
     const promoteHandler = ({item, orgname}) => {
         promote(item,orgname);
         setVisiblePromote(false);
+    };
+
+    const closeSearch = () => {
+        setVisibleSearch(false);
+        setSearchResults([]);
+        setSearch('');
+    };
+
+    const searchItem = () => {
+        setVisibleSearch(true);
+        const data = users.filter(item => {
+            const itemId = item.id.toUpperCase();
+            const itemName = item.name.toUpperCase();
+            const searchText = search.toUpperCase();
+            return (itemId.indexOf(searchText) > -1 || itemName.indexOf(searchText) > -1);
+        });
+        setSearchResults(data);
     };
 
     const emp = ({item,orgname}) => (
@@ -100,9 +121,26 @@ const ViewUsers = ({route}) => {
         <ImageBackground style={styles.background} source={require('../assets/viewusers.png')}>
             <View style={styles.screen}>
                 <Text style={styles.heading}>Users</Text>
+
+                <SearchBar
+                    placeholdertext='Search by ID or Name'
+                    data={search}
+                    onChangeValue={(search) => setSearch(search)}
+                    onValueSubmitted={searchItem}/>
+
                 <FlatList
                     data={users}
-                    renderItem={renderItem}/>   
+                    renderItem={renderItem}/>  
+
+                <Popup visible={visibleSearch}>
+                    <FlatList
+                        keyExtractor={item => item.id}
+                        data={searchResults}
+                        renderItem={renderItem}/>
+                    <TouchableOpacity onPress={closeSearch}>
+                        <Text style={styles.remove}>Cancel</Text>
+                    </TouchableOpacity>
+                </Popup> 
             </View>
         </ImageBackground>
     );
@@ -113,7 +151,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 10
+        paddingHorizontal: 10
     },
 
     background:{

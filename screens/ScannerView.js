@@ -87,12 +87,12 @@ const ScannerView = () => {
     const form = () => (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <Popup visible={visible}>
-                    <Text>Enter item details</Text>
-                    <FormInput labelValue={id} onChangeText={(id) => {setId(id)}} placeholder={id ? id : 'ID'} autoCorrect={false}/>
-                    <FormInput labelValue={name} onChangeText={(name) => {setItemName(name)}} placeholder='Item Name' autoCorrect={false}/>
-                    <FormInput labelValue={quantity} onChangeText={(quantity) => {setQuantity(quantity)}} placeholder='Item Quantity' keyboardType='numeric' autoCorrect={false}/>
-                    <FormButton buttonTitle='Add' onPress={itemHandler}/>
-                    <Button title='cancel' color='red' onPress={resetHandler}/>
+                <Text>Enter item details</Text>
+                <FormInput labelValue={id} onChangeText={(id) => {setId(id)}} placeholder={id ? id : 'ID'} autoCorrect={false}/>
+                <FormInput labelValue={name} onChangeText={(name) => {setItemName(name)}} placeholder='Item Name' autoCorrect={false}/>
+                <FormInput labelValue={quantity} onChangeText={(quantity) => {setQuantity(quantity)}} placeholder='Item Quantity' keyboardType='numeric' autoCorrect={false}/>
+                <FormButton buttonTitle='Add' onPress={itemHandler}/>
+                <Button title='cancel' color='red' onPress={resetHandler}/>
             </Popup>
         </TouchableWithoutFeedback>
     );

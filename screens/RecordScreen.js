@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {ImageBackground, StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Button, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import firebase from 'firebase';
 
-import { Colors } from '../assets/Colors';
 import SearchBar from './SearchBar';
 import Card from '../components/Card';
 import Popup from '../components/Popup';
@@ -12,7 +11,9 @@ const RecordScreen = ({route}) => {
     const [recData, setRecData] = useState([]);
     const [visible, setVisible] = useState(false);
     const [selected, setSelected] = useState(null);
-    const [data, setData] = useState([]);
+    const [search, setSearch] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+    const [visibleSearch, setVisibleSearch] = useState(false);
 
     useEffect(() => {
           try {  
@@ -43,7 +44,24 @@ const RecordScreen = ({route}) => {
     const closeDetails = () => {
         setSelected(null);
         setVisible(false);
-    }
+    };
+
+    const closeSearch = () => {
+        setVisibleSearch(false);
+        setSearchResults([]);
+        setSearch('');
+    };
+
+    const searchItem = () => {
+        setVisibleSearch(true);
+        const data = recData.filter(item => {
+            const itemId = item.id.toUpperCase();
+            const itemName = item.name.toUpperCase();
+            const searchText = search.toUpperCase();
+            return (itemId.indexOf(searchText) > -1 || itemName.indexOf(searchText) > -1);
+        });
+        setSearchResults(data);
+    };
 
     const showDetails = () => (
         <Popup visible={visible}>
@@ -75,14 +93,27 @@ const RecordScreen = ({route}) => {
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <View style={styles.screen}>
                     <SearchBar
-                        data={data}
-                        onChangeValue={(newValue)=>setData(newValue)}
-                        onValueSubmitted={()=> alert(data)}/>
+                        placeholdertext='Search by ID or Name'
+                        data={search}
+                        onChangeValue={(search) => setSearch(search)}
+                        onValueSubmitted={searchItem}/>
+
                     <FlatList
                         keyExtractor={item => item.mil}
                         data={recData}
                         renderItem={renderItem}/>
+
                     {visible ? showDetails() : <View></View>}
+
+                    <Popup visible={visibleSearch}>
+                        <FlatList
+                            keyExtractor={item => item.id}
+                            data={searchResults}
+                            renderItem={renderItem}/>
+                        <TouchableOpacity onPress={closeSearch}>
+                            <Text style={styles.remove}>Cancel</Text>
+                        </TouchableOpacity>
+                    </Popup>
                 </View>
             </TouchableWithoutFeedback>
         </ImageBackground>
@@ -94,13 +125,15 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 10  
+        paddingHorizontal: 10
     },
+
     background:{
         flex:1,
         justifyContent:'flex-end',
         alignItems:'center',
     },
+    
     item: {
         flex: 1,
         width: 270,
@@ -116,7 +149,13 @@ const styles = StyleSheet.create({
 
     modal: {
         padding: 10
-    }
+    },
+
+    remove: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: 'red'
+    },
 });
 
 export default RecordScreen;

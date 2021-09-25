@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {ImageBackground, StyleSheet, View, Text, FlatList, TouchableOpacity, Button, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import firebase from 'firebase';
-import SearchBar from './SearchBar';
 
+import SearchBar from './SearchBar';
 import Popup from '../components/Popup';
 import Card from '../components/Card';
 
@@ -11,6 +11,9 @@ const StatusScreen = ({route}) => {
     const [visible, setVisible] = useState(false);
     const [selected, setSelected] = useState(null);
     const [data, setData] = useState([]);
+    const [search, setSearch] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+    const [visibleSearch, setVisibleSearch] = useState(false);
 
     useEffect(() => {
         try {  
@@ -39,7 +42,24 @@ const StatusScreen = ({route}) => {
     const closeDetails = () => {
         setSelected(null);
         setVisible(false);
-    }
+    };
+
+    const closeSearch = () => {
+        setVisibleSearch(false);
+        setSearchResults([]);
+        setSearch('');
+    };
+
+    const searchItem = () => {
+        setVisibleSearch(true);
+        const data = data.filter(item => {
+            const itemId = item.id.toUpperCase();
+            const itemName = item.name.toUpperCase();
+            const searchText = search.toUpperCase();
+            return (itemId.indexOf(searchText) > -1 || itemName.indexOf(searchText) > -1);
+        });
+        setSearchResults(data);
+    };
 
     const showDetails = () => (
         <Popup visible={visible}>
@@ -71,14 +91,27 @@ const StatusScreen = ({route}) => {
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <View style={styles.screen}>
                     <SearchBar
-                    data={data}
-                    onChangeValue={(newValue)=>setData(newValue)}
-                    onValueSubmitted={()=> alert(data)}/>
+                        placeholdertext='Search by ID or Name'
+                        data={search}
+                        onChangeValue={(search) => setSearch(search)}
+                        onValueSubmitted={searchItem}/>
+
                     <FlatList
                         keyExtractor={item => item.id}
                         data={data}
                         renderItem={renderItem}/>
+
                     {visible ? showDetails() : <View></View>}
+
+                    <Popup visible={visibleSearch}>
+                        <FlatList
+                            keyExtractor={item => item.id}
+                            data={searchResults}
+                            renderItem={renderItem}/>
+                        <TouchableOpacity onPress={closeSearch}>
+                            <Text style={styles.remove}>Cancel</Text>
+                        </TouchableOpacity>
+                    </Popup>
                 </View>
             </TouchableWithoutFeedback>
         </ImageBackground>
@@ -90,7 +123,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 10  
+        paddingHorizontal: 10  
     },
     background:{
         flex:1,

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Image,  StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Button, Keyboard, ImageBackground, TouchableWithoutFeedback } from 'react-native';
+import { Image,  StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Button, Keyboard, ImageBackground, TouchableWithoutFeedback } from 'react-native';
 import firebase from 'firebase';
 
 import SearchBar from './SearchBar';
@@ -19,7 +19,9 @@ const InventoryScreen = ({route}) => {
     const [newId, setNewId] = useState('');
     const [newName, setNewName] = useState('');
     const [newQuantity, setNewQuantity] = useState('');
-    const [data, setData] = useState([]);
+    const [search, setSearch] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+    const [visibleSearch, setVisibleSearch] = useState(false);
     const [visibleRemove, setVisibleRemove] = useState(false);
     const [selected, setSelected] = useState(null);
     const [visibleDetails, setVisibleDetails] = useState(false);
@@ -83,6 +85,23 @@ const InventoryScreen = ({route}) => {
         setSelected(null);
     };
 
+    const closeSearch = () => {
+        setVisibleSearch(false);
+        setSearchResults([]);
+        setSearch('');
+    };
+
+    const searchItem = () => {
+        setVisibleSearch(true);
+        const data = invData.filter(item => {
+            const itemId = item.id.toUpperCase();
+            const itemName = item.name.toUpperCase();
+            const searchText = search.toUpperCase();
+            return (itemId.indexOf(searchText) > -1 || itemName.indexOf(searchText) > -1);
+        });
+        setSearchResults(data);
+    };
+
     const showDetails = () => (
         <Popup visible={visibleDetails}>
             <View style={styles.card}> 
@@ -139,9 +158,11 @@ const InventoryScreen = ({route}) => {
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <View style={styles.screen}>
                     <SearchBar
-                        data={data}
-                        onChangeValue={(newValue)=>setData(newValue)}
-                        onValueSubmitted={()=> alert(data)}/>
+                        placeholdertext='Search by ID or Name'
+                        data={search}
+                        onChangeValue={(search) => setSearch(search)}
+                        onValueSubmitted={searchItem}/>
+
                     <FlatList
                         keyExtractor={item => item.id}
                         data={invData}
@@ -157,6 +178,16 @@ const InventoryScreen = ({route}) => {
                                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.update}>Confirm</Text>
                             </TouchableOpacity>
                         </View>
+                    </Popup>
+
+                    <Popup visible={visibleSearch}>
+                        <FlatList
+                            keyExtractor={item => item.id}
+                            data={searchResults}
+                            renderItem={renderItem}/>
+                        <TouchableOpacity onPress={closeSearch}>
+                            <Text style={styles.remove}>Cancel</Text>
+                        </TouchableOpacity>
                     </Popup>
 
                     <Popup visible={visibleUpdate}>
@@ -182,7 +213,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 10
+        paddingHorizontal: 10
     },
   
     background:{
