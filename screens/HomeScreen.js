@@ -85,17 +85,17 @@ const HomeScreen = ({navigation}) => {
                       </Card>
                   </TouchableOpacity> 
 
-                  <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('History', {orgname: orgname})}>
-                      <Card style={styles.buttonContainer}>
-                          <Text style={styles.buttonText}>History</Text>
-                      </Card>
-                  </TouchableOpacity> 
-
                   <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('Status', {orgname: orgname})}>
                       <Card style={styles.buttonContainer}>
                           <Text style={styles.buttonText}>Shipment</Text>
                       </Card>
                   </TouchableOpacity> 
+
+                  <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.push('History', {orgname: orgname})}>
+                      <Card style={styles.buttonContainer}>
+                          <Text style={styles.buttonText}>History</Text>
+                      </Card>
+                  </TouchableOpacity>          
               </View>
           </View>
       </ImageBackground>
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'space-between',
       marginTop: 30,
-      marginBottom: '90%'
+      marginBottom: 100
     },
   
     buttonContainer: {

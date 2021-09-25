@@ -85,8 +85,8 @@ const Profile = ({navigation}) => {
     };
 
     return (
-        <ScrollView>
-            <ImageBackground style={styles.background} source={require('../assets/profile.png')}>
+        <ImageBackground style={styles.background} source={require('../assets/profile.png')}>
+            <ScrollView>
                 <View style={styles.screen}>
                     <Popup visible={visibleDelete}>
                         <Text>Are you Sure?</Text>
@@ -139,8 +139,8 @@ const Profile = ({navigation}) => {
                         </TouchableOpacity>
                     </View>
                 </View>
-            </ImageBackground>
-        </ScrollView>
+            </ScrollView>
+        </ImageBackground>
     );
 };
 
@@ -175,7 +175,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems:"center",
         width: '90%',
-        
     },
 
     text: { 
@@ -238,7 +237,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold',
         color: 'red',
-        padding: 10
+        padding: 10,
+        fontSize: 20
     },
     
     buttons: {

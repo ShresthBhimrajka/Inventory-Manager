@@ -27,9 +27,9 @@ const LoginScreen = ({navigation}) => {
         }
     };
 
-    return (
-        <ScrollView showsVerticalScrollIndicator={false}>
-            <ImageBackground style={styles.background} source={require('../assets/login.png')}>  
+    return (  
+        <ImageBackground style={styles.background} source={require('../assets/login.png')}> 
+            <ScrollView showsVerticalScrollIndicator={false}> 
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View style={styles.screen}>
                         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
@@ -58,8 +58,8 @@ const LoginScreen = ({navigation}) => {
                         </TouchableWithoutFeedback>
                     </View>
                 </TouchableWithoutFeedback>
-            </ImageBackground>
-        </ScrollView>
+            </ScrollView>
+        </ImageBackground>
     );
 };
 

@@ -12,7 +12,7 @@ const SearchBar= ({onValueSubmitted,onChangeValue,data}) =>{
                 placeholderTextColor="#e6e6e6"
                 onChangeText={(newChange)=>onChangeValue(newChange)}
                 onSubmitEditing={(subValue)=>onValueSubmitted(subValue)}/>
-         </View>
+        </View>
     )
 }
 

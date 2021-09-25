@@ -50,8 +50,8 @@ const SignUp = ({navigation}) => {
     };
 
     return (
-        <ScrollView showsVerticalScrollIndicator={false}>
-            <ImageBackground style={styles.background} source={require('../assets/organization.png')}> 
+        <ImageBackground style={styles.background} source={require('../assets/organization.png')}> 
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View style={styles.screen}>
                         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
@@ -79,8 +79,8 @@ const SignUp = ({navigation}) => {
                         </TouchableWithoutFeedback>
                     </View>
                 </TouchableWithoutFeedback>
-            </ImageBackground>
-        </ScrollView>    
+            </ScrollView> 
+        </ImageBackground>   
     );
 };
 
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     },
 
     navButtonText: {
-        fontSize: 18,
+        fontSize: 22,
         fontWeight: '500',
         color: Colors.primaryText
     },
