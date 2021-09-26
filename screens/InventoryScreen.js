@@ -163,10 +163,7 @@ const InventoryScreen = ({route}) => {
                         <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {item.quantity} </Text>
                     </View>
                 </View>
-
-                
-                    {access=='admin' ? admin({item}) : emp({item})}
-                
+                {access=='admin' ? admin({item}) : emp({item})}
             </Card>
         </TouchableOpacity>      
     );
@@ -269,7 +266,6 @@ const styles = StyleSheet.create({
 
     card: {
         flex: 1,
-        alignItems: 'center',
         justifyContent: 'space-between',
         padding: 10
     },

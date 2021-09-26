@@ -129,19 +129,37 @@ const StatusScreen = ({route}) => {
     const renderItem = ({item}) => (
         <TouchableOpacity activeOpacity={0.9} onPress={() => setDetails({item})}>
             <Card style={styles.item}>
-               
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.name}</Text>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Order Placed: {item.datetime}</Text>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText1}>Status:   {item.status}</Text>
-               
+                <View>
+                    <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.name}</Text>
+                    <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Order Placed: {item.datetime}</Text>
+                    {item.status=='Preparing for Dispatch' ? stat1() : (item.status=='Dispatched' ? stat2() : (item.status=='Arrived' ? stat3() : (item.status=='Awaiting Processing' ? stat4() : (item.status=='Processed' ? stat5() : <Text></Text>))))}
+                </View>
                 <TouchableOpacity onPress = {() => setUpdate({item})}>
                     <Image style={styles.logo} source={require('../assets/edit.png')}/>
                 </TouchableOpacity>
-               
             </Card>
         </TouchableOpacity>       
     );
-   
+        
+    const stat1 = () => (
+        <Text style={{color:'#EFCC42'}}>Preparing for Dispatch</Text>
+    );
+
+    const stat2 = () => (
+        <Text style={{color:'#2ED19B'}}>Dispatched</Text>
+    );
+
+    const stat3 = () => (
+        <Text style={{color:'#CE4AEF'}}>Arrived</Text>
+    );
+
+    const stat4 = () => (
+        <Text style={{color:'#D74D2B'}} >Awaiting Processing</Text>
+    );
+
+    const stat5 = () => (
+        <Text style={{color:'#1C59FF'}}>Processed</Text>
+    );
 
     return (
         <ImageBackground style={styles.background} source={require('../assets/shipping.png')}>
@@ -188,15 +206,14 @@ const StatusScreen = ({route}) => {
                     <Popup visible={visibleUpdate}>
                         <View style={styles.table}>
                             <TouchableOpacity onPress={closeUpdate}>
-                                <Text style={styles.remove}>Close<Image style={styles.logo1} source={require('../assets/cancel.png')}/></Text>
+                                <Text style={styles.remove}><Image style={styles.logo1} source={require('../assets/cancel.png')}/></Text>
                             </TouchableOpacity>
                         </View>
 
                         <View style={styles.table}>
                             <TouchableOpacity onPress={() => {setStatus('Preparing for Dispatch'),updateHandler();}}>
-                                <Text style={{color:'#EFCC42'}}>Preparing for Dispatch</Text>
                                 <Card>
-                                    <Text>Preparing for Dispatch</Text>
+                                    {stat1()}
                                 </Card>
                             </TouchableOpacity>
                         </View>
@@ -204,7 +221,7 @@ const StatusScreen = ({route}) => {
                         <View style={styles.table}>
                             <TouchableOpacity activeOpacity={0.9} onPress={() => {setStatus('Dispatched'),updateHandler();}}>
                                 <Card>
-                                    <Text style={{color:'#2ED19B'}}>Dispatched</Text>
+                                    {stat2()}
                                 </Card>
                             </TouchableOpacity>
                         </View>
@@ -212,14 +229,15 @@ const StatusScreen = ({route}) => {
                         <View style={styles.table}>
                             <TouchableOpacity activeOpacity={0.9} onPress={() => {setStatus('Arrived'),updateHandler();}}>
                                 <Card>
-                                    <Text style={{color:'#CE4AEF'}}>Arrived</Text>
+                                    {stat3()}
+                                </Card>
                             </TouchableOpacity>
                         </View>
                         
                         <View style={styles.table}>
                             <TouchableOpacity activeOpacity={0.9} onPress={() => {setStatus('Awaiting Processing'),updateHandler();}}>
                                 <Card>
-                                    <Text style={{color:'#D74D2B'}} >Awaiting Processing</Text>
+                                    {stat4()}
                                 </Card>
                             </TouchableOpacity>
                         </View>
@@ -227,7 +245,7 @@ const StatusScreen = ({route}) => {
                         <View style={styles.table}>
                             <TouchableOpacity activeOpacity={0.9} onPress={() => {setStatus('Processed'),updateHandler();}}>
                                 <Card>
-                                    <Text style={{color:'#1C59FF'}}>Processed</Text>
+                                    {stat5()}
                                 </Card>
                             </TouchableOpacity>
                         </View>
@@ -271,6 +289,7 @@ const styles = StyleSheet.create({
     item: {
         flex: 1,
         width: 270,
+        flexDirection: 'row',
         alignItems: 'flex-start',
         justifyContent: 'center',
         paddingVertical: 10,
@@ -280,16 +299,7 @@ const styles = StyleSheet.create({
     cardText: {
         textAlign: 'left',
     },
-    /*colors
-        Processed   ##1C59FF
-        Awaiting Processed  #D74D2B 
-        Arrived #CE4AEF
-        dispatch  #2ED19B
-        preparing for dispatch #EFCC42
 
-    },
-    
-    */
     modal: {
         padding: 20
     },
@@ -298,7 +308,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold',
         color: 'red',
-        fontSize:20
     },
 
     update: {
