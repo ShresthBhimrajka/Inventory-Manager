@@ -59,7 +59,7 @@ const HistoryScreen = ({route}) => {
             const itemId = item.id.toUpperCase();
             const itemName = item.name.toUpperCase();
             const searchText = search.toUpperCase();
-            return (itemId.indexOf(searchText) > -1 || itemName.indexOf(searchText) > -1);
+            return (itemId == searchText || itemName.indexOf(searchText) > -1);
         });
         setSearchResults(data);
     };

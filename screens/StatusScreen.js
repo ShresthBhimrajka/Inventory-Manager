@@ -70,7 +70,7 @@ const StatusScreen = ({route}) => {
             const itemId = item.id.toUpperCase();
             const itemName = item.name.toUpperCase();
             const searchText = search.toUpperCase();
-            return (itemId.indexOf(searchText) > -1 || itemName.indexOf(searchText) > -1);
+            return (itemId == searchText || itemName.indexOf(searchText) > -1);
         });
         setSearchResults(res);
     };
@@ -195,30 +195,40 @@ const StatusScreen = ({route}) => {
                         <View style={styles.table}>
                             <TouchableOpacity onPress={() => {setStatus('Preparing for Dispatch'),updateHandler();}}>
                                 <Text style={{color:'#EFCC42'}}>Preparing for Dispatch</Text>
+                                <Card>
+                                    <Text>Preparing for Dispatch</Text>
+                                </Card>
                             </TouchableOpacity>
                         </View>
                            
                         <View style={styles.table}>
-                            <TouchableOpacity onPress={() => {setStatus('Dispatched'),updateHandler();}}>
-                                <Text style={{color:'#2ED19B'}}>Dispatched</Text>
+                            <TouchableOpacity activeOpacity={0.9} onPress={() => {setStatus('Dispatched'),updateHandler();}}>
+                                <Card>
+                                    <Text style={{color:'#2ED19B'}}>Dispatched</Text>
+                                </Card>
                             </TouchableOpacity>
                         </View>
 
                         <View style={styles.table}>
-                            <TouchableOpacity onPress={() => {setStatus('Arrived'),updateHandler();}}>
-                                <Text style={{color:'#CE4AEF'}}>Arrived</Text>
+                            <TouchableOpacity activeOpacity={0.9} onPress={() => {setStatus('Arrived'),updateHandler();}}>
+                                <Card>
+                                    <Text style={{color:'#CE4AEF'}}>Arrived</Text>
                             </TouchableOpacity>
                         </View>
                         
                         <View style={styles.table}>
-                            <TouchableOpacity onPress={() => {setStatus('Awaiting Processing'),updateHandler();}}>
-                                <Text style={{color:'#D74D2B'}} >Awaiting Processing</Text>
+                            <TouchableOpacity activeOpacity={0.9} onPress={() => {setStatus('Awaiting Processing'),updateHandler();}}>
+                                <Card>
+                                    <Text style={{color:'#D74D2B'}} >Awaiting Processing</Text>
+                                </Card>
                             </TouchableOpacity>
                         </View>
                         
                         <View style={styles.table}>
-                            <TouchableOpacity onPress={() => {setStatus('Processed'),updateHandler();}}>
-                                <Text style={{color:'#1C59FF'}}>Processed</Text>
+                            <TouchableOpacity activeOpacity={0.9} onPress={() => {setStatus('Processed'),updateHandler();}}>
+                                <Card>
+                                    <Text style={{color:'#1C59FF'}}>Processed</Text>
+                                </Card>
                             </TouchableOpacity>
                         </View>
                     </Popup>
@@ -298,7 +308,7 @@ const styles = StyleSheet.create({
     },
 
     table: {
-        width:'100%',
+        width: '100%',
         padding: 10,
         alignContent: 'space-between'
     },

@@ -89,7 +89,7 @@ const Profile = ({navigation}) => {
             <ScrollView>
                 <View style={styles.screen}>
                     <Popup visible={visibleDelete}>
-                        <Text>Are you Sure?</Text>
+                        <Text style={{textAlign:'center'}}>Are you Sure?</Text>
                         <View style={styles.buttons}>
                             <TouchableOpacity onPress={() => setVisibleDelete(false)}>
                                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cancel}>Cancel</Text>
@@ -101,7 +101,7 @@ const Profile = ({navigation}) => {
                     </Popup>
 
                     <Popup visible={visible}>
-                        <Text style={{fontWeight: 'bold'}}>Enter your details</Text>
+                        <Text style={{fontWeight: 'bold', textAlign: 'center'}}>Enter your details</Text>
                         <FormInput labelValue={newEmail} onChangeText={(newEmail) => setNewEmail(newEmail)} placeholder='Email' autocapitalize='false' autocorrect='none' keyboardType='email-address'/>
                         <FormInput labelValue={newPhone} onChangeText={(newPhone) => setNewPhone(newPhone)} placeholder='Phone' keyboardType='numeric' maxLength={10} autocorrect='none'/>
                         <FormInput labelValue={pass} onChangeText={(pass) => setNewPass(pass)} placeholder='Password' autocapitalize='false' autocorrect='none'/>
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
   
     heading1: {
         fontSize: 22,
-        alignItems: "center",
+        textAlign: "center",
         fontWeight:"bold"        
     },
   
@@ -255,7 +255,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignContent: 'center',
         justifyContent: 'space-between',
-        width: '85%',
         paddingVertical: 10
     }
 });

@@ -63,7 +63,7 @@ const ViewUsers = ({route}) => {
             const itemId = item.id.toUpperCase();
             const itemName = item.name.toUpperCase();
             const searchText = search.toUpperCase();
-            return (itemId.indexOf(searchText) > -1 || itemName.indexOf(searchText) > -1);
+            return (itemId == searchText || itemName.indexOf(searchText) > -1);
         });
         setSearchResults(data);
     };
@@ -71,7 +71,7 @@ const ViewUsers = ({route}) => {
     const emp = ({item,orgname}) => (
         <View style={styles.buttons}>
             <Popup visible={visibleRemove}>
-                <Text>Are you Sure?</Text>
+                <Text style={{textAlign:'center'}}>Are you Sure?</Text>
                 <View style={styles.buttons}>
                     <TouchableOpacity onPress={() => setVisibleRemove(false)}>
                         <Text adjustsFontSizeToFit numberOfLines={1} style={styles.remove}>Cancel</Text>
@@ -83,7 +83,7 @@ const ViewUsers = ({route}) => {
             </Popup>
 
             <Popup visible={visiblePromote}>
-                <Text>Are you Sure?</Text>
+                <Text style={{textAlign:'center'}}>Are you Sure?</Text>
                 <View style={styles.buttons}>
                     <TouchableOpacity onPress={() => setVisiblePromote(false)}>
                         <Text adjustsFontSizeToFit numberOfLines={1} style={styles.remove}>Cancel</Text>

@@ -19,27 +19,24 @@ const ResetPasswordScreen = ({navigation}) => {
             navigation.push('Login');
         }
     };
-
-    return (
-        <ImageBackground style={styles.background} source={require('../assets/forgot.png')}>    
-            <ScrollView showsVerticalScrollIndicator={false}>  
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>      
-            <View style={styles.screen}>
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <View style={styles.container}>
-                    <Text style={styles.text} adjustsFontSizeToFit numberOfLines={2} >Enter your registered mail id to recieve password reset link</Text>
-                    <FormInput labelValue={email} onChangeText={(userEmail) => {setEmail(userEmail)}} placeholder='Email' keyboardType='email-address' autoCapitalize='none' autoCorrect={false}/>
-                    <FormButton buttonTitle='Send link' onPress={mailHandler}/>
-                    <TouchableOpacity style={styles.backButton} onPress={() => navigation.push('Login')}>
-                        <Text style={styles.navButtonText}>Back to login</Text>
-                    </TouchableOpacity>
+    
+    return ( 
+        <ImageBackground style={styles.background} source={require('../assets/forgot.png')}>     
+            <ScrollView showsVerticalScrollIndicator={false}>       
+                <View style={styles.screen}>
+                    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                        <View style={styles.container}>
+                            <Text style={styles.text} adjustsFontSizeToFit numberOfLines={2} >Enter your registered mail id to recieve password reset link</Text>
+                            <FormInput labelValue={email} onChangeText={(userEmail) => {setEmail(userEmail)}} placeholder='Email' keyboardType='email-address' autoCapitalize='none' autoCorrect={false}/>
+                            <FormButton buttonTitle='Send link' onPress={mailHandler}/>
+                            <TouchableOpacity style={styles.backButton} onPress={() => navigation.push('Login')}>
+                                <Text style={styles.navButtonText}>Back to login</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </TouchableWithoutFeedback>
                 </View>
-            </TouchableWithoutFeedback>
-            </View>
-            </TouchableWithoutFeedback>
             </ScrollView>
         </ImageBackground>
-        
     );
 };
 

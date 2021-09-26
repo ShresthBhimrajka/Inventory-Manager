@@ -81,8 +81,8 @@ export async function updateRec(id, name, quantity, inex, empName, empId, orgnam
         const date = new String(d.getDate());
         const hrs = new String(d.getHours());
         var min = new String(d.getMinutes());
-        if(min=='0') {
-            min = '00';
+        if(min.length==1) {
+            min = '0'+min;
         }
         const mil = d.getTime().toString();
         const dt = date + '.' + mon + '.' + yr + ' - ' + hrs + ':' + min;
@@ -110,8 +110,8 @@ export async function updateHistoy(id, name, quantity, inex, empId, orgname) {
         const date = new String(d.getDate());
         const hrs = new String(d.getHours());
         var min = new String(d.getMinutes());
-        if(min=='0') {
-            min = '00';
+        if(min.length==1) {
+            min = '0'+min;
         }
         const mil = d.getTime().toString();
         const dt = date + '.' + mon + '.' + yr + ' - ' + hrs + ':' + min;
@@ -137,8 +137,8 @@ export async function addShipment(id, name, quantity, desc, inex, empname, empid
         const date = new String(d.getDate());
         const hrs = new String(d.getHours());
         var min = new String(d.getMinutes());
-        if(min=='0') {
-            min = '00';
+        if(min.length==1) {
+            min = '0'+min;
         }
         const mil = d.getTime().toString();
         const dt = date + '.' + mon + '.' + yr + ' - ' + hrs + ':' + min;

@@ -31,7 +31,6 @@ const Popup = ({visible,children}) => {
 const styles = StyleSheet.create({
     modal: {
         flex: 1,
-        alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'white',
         padding: 30,
