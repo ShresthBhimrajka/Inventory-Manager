@@ -111,7 +111,7 @@ const InventoryScreen = ({route}) => {
             const itemName = item.name.toUpperCase();
             const itemDesc = item.desc.toUpperCase();
             const searchText = search.toUpperCase();
-            return ((itemId.indexOf(searchText) > -1) || (itemName.indexOf(searchText) > -1) || (itemDesc.indexOf(searchText) > -1));
+            return ((itemId == searchText) || (itemName.indexOf(searchText) > -1) || (itemDesc.indexOf(searchText) > -1));
         });
         setSearchResults(data);
     };
@@ -184,7 +184,7 @@ const InventoryScreen = ({route}) => {
                         renderItem={renderItem}/>   
             
                     <Popup visible={visibleRemove}>
-                        <Text>Are you Sure?</Text>
+                        <Text style={{textAlign:'center'}}>Are you Sure?</Text>
                         <View style={styles.buttonConfirm}>
                             <TouchableOpacity onPress={() => setVisibleRemove(false)}>
                                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.remove}>Cancel</Text>
@@ -206,7 +206,7 @@ const InventoryScreen = ({route}) => {
                     </Popup>
 
                     <Popup visible={visibleUpdate}>
-                        <Text>Enter the changes</Text>
+                        <Text style={{textAlign:'center'}}>Enter the changes</Text>
                         <FormInput labelValue={newId} onChangeText={(newId) => setNewId(newId)} placeholder='ID' autocapitalize='none' autocorrect='none'/>
                         <FormInput labelValue={newName} onChangeText={(newName) => setNewName(newName)} placeholder='Name' autocapitalize='none' autocorrect='none'/>
                         <FormInput labelValue={newQuantity} onChangeText={(newQuantity) => setNewQuantity(newQuantity)} placeholder='Quantity' keyboardType='numeric' autocorrect='none'/>
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
     },
     
     item1:{
-        justifyContent:"center"
+        justifyContent: "center",
     },
 
     cardText: {
@@ -295,9 +295,8 @@ const styles = StyleSheet.create({
     buttonConfirm: {
         flex: 1,
         flexDirection: 'row',
-        alignContent: 'center',
+        alignItems: 'center',
         justifyContent: 'space-between',
-        width: '85%',
         paddingVertical: 10
     }
 }); 

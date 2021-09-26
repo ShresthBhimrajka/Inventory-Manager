@@ -90,25 +90,27 @@ const ScannerView = () => {
     const form = () => (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <Popup visible={visible}>
-                <Text>Enter item details</Text>
+                <Text style={{textAlign:'center'}}>Enter item details</Text>
                 <FormInput labelValue={id} onChangeText={(id) => {setId(id)}} placeholder={id ? id : 'ID'} autoCorrect={false}/>
                 <FormInput labelValue={name} onChangeText={(name) => {setItemName(name)}} placeholder='Item Name' autoCorrect={false}/>
                 <FormInput labelValue={quantity} onChangeText={(quantity) => {setQuantity(quantity)}} placeholder='Item Quantity' keyboardType='numeric' autoCorrect={false}/>
                 <FormInput labelValue={desc} onChangeText={(desc) => {setDesc(desc)}} placeholder='Item Description' autoCorrect={false}/>
                 <FormButton buttonTitle='Add' onPress={itemHandler}/>
-                <Button title='Cancel' color='red' onPress={resetHandler}/>
+                <View style={{padding: 10}}>
+                    <Button title='Cancel' color='red' onPress={resetHandler}/>
+                </View>
             </Popup>
         </TouchableWithoutFeedback>
     );
 
     return (
-            <View style={styles.container}>
-                <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={StyleSheet.absoluteFillObject}/>
-                {scanned==true || visible? form() : <View></View>}
-                <View style={styles.button}>
-                    <Button title='Enter data' onPress={() => setVisible(true)}/>
-                </View> 
-            </View>
+        <View style={styles.container}>
+            <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={StyleSheet.absoluteFillObject}/>
+            {scanned==true || visible? form() : <View></View>}
+            <View style={styles.button}>
+                <Button title='Enter data' onPress={() => setVisible(true)}/>
+            </View> 
+        </View>
     );
 }
 
