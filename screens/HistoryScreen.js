@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Button, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import { StyleSheet, View, Text,Image, FlatList, Alert, TouchableOpacity,ImageBackground, Button, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import firebase from 'firebase';
 
 import SearchBar from './SearchBar';
@@ -72,8 +72,10 @@ const HistoryScreen = ({route}) => {
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Date: {selected.datetime}</Text>
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>In/Ex: {selected.inex}</Text>
             <View style={styles.modal}>
-                <Button title='Cancel' color='red' onPress={closeDetails}/>
-            </View>
+                <TouchableOpacity onPress={closeDetails}>
+                    <Image style={styles.logo} source={require('../assets/close.png')}/>
+                </TouchableOpacity>
+                </View>
         </Popup>
     );
 
@@ -88,6 +90,7 @@ const HistoryScreen = ({route}) => {
     );
 
     return (
+        <ImageBackground style={styles.background} source={require('../assets/history.png')}> 
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.screen}>
                 <SearchBar
@@ -115,6 +118,7 @@ const HistoryScreen = ({route}) => {
 
             </View>
         </TouchableWithoutFeedback>
+        </ImageBackground>
     );
 };
 
@@ -124,6 +128,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingHorizontal: 10  
+    },
+    logo:{
+        width:50,
+        height:50,
+        alignItems:'center',
+        justifyContent: 'center',
+    },
+    background:{
+        //width: "100%",
+        //height: "100%",
+        flex:1,
+        justifyContent:"flex-start"
+        
     },
 
     item: {

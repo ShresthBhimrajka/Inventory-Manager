@@ -111,7 +111,10 @@ const Profile = ({navigation}) => {
                             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.delete}>Delete your Account</Text>
                         </TouchableOpacity>
                         <View style={styles.modal}>
-                            <Button title='Cancel' color='red' onPress={() => setVisible(false)}/>
+                        <TouchableOpacity onPress={() => setVisible(false)}>
+                            <Text style={styles.delete}>Cancel<Image style={styles.logo} source={require('../assets/cancel.png')}/></Text>
+                        </TouchableOpacity>
+                           
                         </View>
                     </Popup>
 
@@ -126,7 +129,7 @@ const Profile = ({navigation}) => {
                         <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Email:    {email}</Text>
                         <Text adjustsFontSizeToFit numberOfLines={1} style={styles.text}>Access:   {(access=='emp' ? 'employee' : 'admin')}</Text>
                         <TouchableOpacity onPress={() => setVisible(true)}>
-                            <Text style={styles.update}>Update Details<Image style={styles.logo} source={require('../assets/edit.png')}/>
+                            <Text style={styles.update}>Update Details <Image style={styles.logo} source={require('../assets/edit.png')}/>
                             </Text>
                         </TouchableOpacity>
                     </Card>
@@ -135,7 +138,7 @@ const Profile = ({navigation}) => {
 
                     <View style={{marginBottom: 20}}>
                         <TouchableOpacity onPress={signoutHandler}>
-                            <Text style={styles.delete}>Sign out</Text>
+                           <Image style={styles.logo1} source={require('../assets/signout.png')}/>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -161,6 +164,12 @@ const styles = StyleSheet.create({
     logo:{
         width:20,
         height:20,
+        alignItems:'center',
+        justifyContent: 'center',
+    },
+    logo1:{
+        width:50,
+        height:50,
         alignItems:'center',
         justifyContent: 'center',
     },
@@ -193,10 +202,10 @@ const styles = StyleSheet.create({
     },
 
     buttonContainer: {
-        height: 100,
+        height: 50,
         width: 300,
         maxWidth: '70%',
-        backgroundColor: "#a9ceff",
+        backgroundColor: "#cee1f5",
         marginBottom: '30%'
     },
     
@@ -236,9 +245,9 @@ const styles = StyleSheet.create({
     delete: {
         textAlign: 'center',
         fontWeight: 'bold',
-        color: 'red',
+        color: '#fc3d3d',
         padding: 10,
-        fontSize: 20
+        fontSize: 15
     },
     
     buttons: {

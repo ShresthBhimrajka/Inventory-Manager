@@ -8,6 +8,7 @@ import { removeItem, updateInv, updateRec, updateHistoy } from '../DataBaseUpdat
 import Popup from '../components/Popup';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton'
+import { processFontFamily } from 'expo-font';
 
 const InventoryScreen = ({route}) => {
     const orgname = route.params.orgname;
@@ -126,7 +127,9 @@ const InventoryScreen = ({route}) => {
             </View>
 
             <View style={styles.modal}>
-                 <Button title='Cancel' color='red' onPress={closeDetails}/>
+                <TouchableOpacity onPress={closeDetails}>
+                    <Image style={styles.close} source={require('../assets/close.png')}/>
+                </TouchableOpacity>
             </View>
         </Popup>
     );
@@ -142,13 +145,13 @@ const InventoryScreen = ({route}) => {
     const admin = ({item}) => (
         <View style={styles.buttons}>
             <TouchableOpacity onPress = {() => setRemove({item})}>
-                <Image style={styles.logo} source={require('../assets/remove.png')}/> 
+            <Image style={styles.logo} source={require('../assets/remove.png')}/>    
             </TouchableOpacity>
-
+            <Text></Text>
             <TouchableOpacity onPress = {() => setUpdate({item})}>
                 <Image style={styles.logo} source={require('../assets/edit.png')}/>
             </TouchableOpacity>
-        </View>  
+            </View>
     );
 
     const renderItem = ({item}) => (
@@ -161,9 +164,9 @@ const InventoryScreen = ({route}) => {
                     </View>
                 </View>
 
-                <View style={styles.buttons}>
+                
                     {access=='admin' ? admin({item}) : emp({item})}
-                </View>
+                
             </Card>
         </TouchableOpacity>      
     );
@@ -172,7 +175,7 @@ const InventoryScreen = ({route}) => {
         <ImageBackground style={styles.background} source={require('../assets/inventory.png')}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <View style={styles.screen}>
-                    <SearchBar
+                    <SearchBar 
                         placeholdertext='Search by ID or Name'
                         data={search}
                         onChangeValue={(search) => setSearch(search)}
@@ -197,7 +200,7 @@ const InventoryScreen = ({route}) => {
 
                     <Popup visible={visibleSearch}>
                         <TouchableOpacity onPress={closeSearch}>
-                            <Text style={styles.remove}>Cancel</Text>
+                            <Text style={styles.remove}>Close</Text>
                         </TouchableOpacity>
                         <FlatList
                             keyExtractor={item => item.id}
@@ -213,7 +216,9 @@ const InventoryScreen = ({route}) => {
                         <FormInput labelValue={newDesc} onChangeText={(newDesc) => setNewDesc(newDesc)} placeholder='Description' autocapitalize='none' autocorrect='none'/>
                         <FormButton buttonTitle='Update Item' onPress={changeHandler}/>
                         <View style={styles.modal}>
-                            <Button title='Cancel' color='red' onPress={closeUpdate}/>
+                            <TouchableOpacity onPress={closeUpdate}>
+                                <Text style={styles.remove}>Cancel</Text>
+                            </TouchableOpacity>
                         </View>   
                     </Popup>
                     
@@ -239,31 +244,39 @@ const styles = StyleSheet.create({
     },
   
     logo:{
-        width:20,
-        height:20,
+        width:23,
+        height:23,
+        alignItems:'center',
+        justifyContent: 'flex-start',
+    },
+    close:{
+        width:50,
+        height:50,
         alignItems:'center',
         justifyContent: 'center',
     },
   
     item: {
         flex: 1,
+        height: 70,
         width: 270,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingVertical: 10,
-        margin: '5%'
+        margin: '3%'
     },
 
     card: {
         flex: 1,
-        alignItems: 'flex-start',
+        alignItems: 'center',
         justifyContent: 'space-between',
         padding: 10
     },
     
     item1:{
-        justifyContent: "center",
+        justifyContent:"center",
+        width: "30%"
     },
 
     cardText: {
@@ -271,7 +284,8 @@ const styles = StyleSheet.create({
     },
 
     buttons: {
-        flex: 1,
+        width:'10%',
+        //flex: 1,
         alignContent: 'flex-end',
         justifyContent: 'space-between',
     },

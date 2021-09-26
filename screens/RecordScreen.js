@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ImageBackground, StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Button, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import {ImageBackground, StyleSheet, View,Image, Text, FlatList, Alert, TouchableOpacity, Button, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import firebase from 'firebase';
 
 import SearchBar from './SearchBar';
@@ -73,7 +73,9 @@ const RecordScreen = ({route}) => {
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Employee Id: {selected.empid}</Text>
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>In/Ex: {selected.inex}</Text>
             <View style={styles.modal}>
-                <Button title='Cancel' color='red' onPress={closeDetails}/>
+                <TouchableOpacity onPress={closeDetails}>
+                            <Image style={styles.logo} source={require('../assets/close.png')}/>
+                </TouchableOpacity>
             </View>
         </Popup>
     );
@@ -107,7 +109,7 @@ const RecordScreen = ({route}) => {
 
                     <Popup visible={visibleSearch}>
                         <TouchableOpacity onPress={closeSearch}>
-                            <Text style={styles.remove}>Cancel</Text>
+                            <Text style={styles.remove}>Close</Text>
                         </TouchableOpacity>
                         <FlatList
                             keyExtractor={item => item.id}
@@ -126,6 +128,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingHorizontal: 10
+    },
+    logo:{
+        width:50,
+        height:50,
+        alignItems:'center',
+        justifyContent: 'center',
     },
 
     background:{

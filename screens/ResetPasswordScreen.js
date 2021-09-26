@@ -19,7 +19,7 @@ const ResetPasswordScreen = ({navigation}) => {
             navigation.push('Login');
         }
     };
-
+    
     return ( 
         <ImageBackground style={styles.background} source={require('../assets/forgot.png')}>     
             <ScrollView showsVerticalScrollIndicator={false}>       
@@ -42,7 +42,7 @@ const ResetPasswordScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
     screen: {
-        //flex: 1,
+        flex: 1,
         
     },
     background:{
@@ -54,9 +54,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignContent: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         padding: 30,
-        marginTop: '50%',
+        paddingTop: '50%',
         marginBottom: '85%'
     },
 
