@@ -106,7 +106,7 @@ const ScannerView = () => {
                 <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={StyleSheet.absoluteFillObject}/>
                 {scanned==true || visible? form() : <View></View>}
                 <View style={styles.button}>
-                    <Button title='Enter data' onPress={() => setVisible(true)}/>
+                    <Button title='or Enter data Manually' onPress={() => setVisible(true)}/>
                 </View> 
             </View>
     );

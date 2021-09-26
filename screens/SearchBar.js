@@ -16,8 +16,9 @@ const styles=StyleSheet.create({
         backgroundColor: 'skyblue',
         flexDirection: 'row',
         marginTop: 10,
-        height: 50,
-        borderRadius: 10
+        height: 40,
+        borderRadius: 10,
+        width: "80%"
     },
 
     textInputStyle: {

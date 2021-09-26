@@ -21,9 +21,10 @@ const ResetPasswordScreen = ({navigation}) => {
     };
 
     return (
-        <ScrollView showsVerticalScrollIndicator={false}>
-            <ImageBackground style={styles.background} source={require('../assets/forgot.png')}>            
-        <View style={styles.screen}>
+        <ImageBackground style={styles.background} source={require('../assets/forgot.png')}>    
+            <ScrollView showsVerticalScrollIndicator={false}>  
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>      
+            <View style={styles.screen}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <View style={styles.container}>
                     <Text style={styles.text} adjustsFontSizeToFit numberOfLines={2} >Enter your registered mail id to recieve password reset link</Text>
@@ -34,15 +35,17 @@ const ResetPasswordScreen = ({navigation}) => {
                     </TouchableOpacity>
                 </View>
             </TouchableWithoutFeedback>
-        </View>
+            </View>
+            </TouchableWithoutFeedback>
+            </ScrollView>
         </ImageBackground>
-        </ScrollView>
+        
     );
 };
 
 const styles = StyleSheet.create({
     screen: {
-        //flex: 1,
+        flex: 1,
         
     },
     background:{
@@ -54,9 +57,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignContent: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         padding: 30,
-        marginTop: '50%',
+        paddingTop: '50%',
         marginBottom: '85%'
     },
 

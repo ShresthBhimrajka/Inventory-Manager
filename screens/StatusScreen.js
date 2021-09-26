@@ -66,13 +66,13 @@ const StatusScreen = ({route}) => {
 
     const searchItem = () => {
         setVisibleSearch(true);
-        const data = data.filter(item => {
+        const res = data.filter(item => {
             const itemId = item.id.toUpperCase();
             const itemName = item.name.toUpperCase();
             const searchText = search.toUpperCase();
             return (itemId.indexOf(searchText) > -1 || itemName.indexOf(searchText) > -1);
         });
-        setSearchResults(data);
+        setSearchResults(res);
     };
 
     const closeAdd = () => {
@@ -119,7 +119,9 @@ const StatusScreen = ({route}) => {
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Employee ID:   {selected.empid}</Text>
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>{selected.desc}</Text>
             <View style={styles.modal}>
-                <Button title='Cancel' color='red' onPress={closeDetails}/>
+                <TouchableOpacity onPress={closeDetails}>
+                    <Image style={styles.close} source={require('../assets/close.png')}/>
+                </TouchableOpacity>
             </View>
         </Popup>
     );
@@ -127,18 +129,22 @@ const StatusScreen = ({route}) => {
     const renderItem = ({item}) => (
         <TouchableOpacity activeOpacity={0.9} onPress={() => setDetails({item})}>
             <Card style={styles.item}>
+               
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.name}</Text>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Order Placed: {item.datetime}</Text>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Status:   {item.status}</Text>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText1}>Status:   {item.status}</Text>
+               
                 <TouchableOpacity onPress = {() => setUpdate({item})}>
                     <Image style={styles.logo} source={require('../assets/edit.png')}/>
                 </TouchableOpacity>
+               
             </Card>
         </TouchableOpacity>       
     );
+   
 
     return (
-        <ImageBackground style={styles.background} source={require('../assets/status.png')}>
+        <ImageBackground style={styles.background} source={require('../assets/shipping.png')}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <View style={styles.screen}>
                     <SearchBar
@@ -148,7 +154,7 @@ const StatusScreen = ({route}) => {
                         onValueSubmitted={searchItem}/>
                     
                     <View style={styles.table}>
-                        <Button title='Add Shipmet' color='green' onPress={() => setVisibleAdd(true)}/>
+                        <Button title='Add Shipment' color='green' onPress={() => setVisibleAdd(true)}/>
                     </View>
 
                     <FlatList
@@ -160,7 +166,7 @@ const StatusScreen = ({route}) => {
 
                     <Popup visible={visibleSearch}>
                         <TouchableOpacity onPress={closeSearch}>
-                            <Text style={styles.remove}>Cancel</Text>
+                            <Text style={styles.remove}>Close</Text>
                         </TouchableOpacity>
                         <FlatList
                             keyExtractor={item => item.id}
@@ -175,44 +181,44 @@ const StatusScreen = ({route}) => {
                         <FormInput labelValue={desc} onChangeText={(desc) => setDesc(desc)} placeholder='Item Description' autocorrect={false} autoCapitalize='Sentences'/>
                         <FormButton buttonTitle='Add Shipment' onPress={addHandler}/>
                         <TouchableOpacity onPress={closeAdd}>
-                            <Text style={styles.remove}>Cancel</Text>
+                            <Image style={styles.logo1} source={require('../assets/cancel.png')}/>
                         </TouchableOpacity>
                     </Popup>
 
                     <Popup visible={visibleUpdate}>
                         <View style={styles.table}>
                             <TouchableOpacity onPress={closeUpdate}>
-                                <Text style={styles.remove}>Close</Text>
+                                <Text style={styles.remove}>Close<Image style={styles.logo1} source={require('../assets/cancel.png')}/></Text>
                             </TouchableOpacity>
                         </View>
 
                         <View style={styles.table}>
                             <TouchableOpacity onPress={() => {setStatus('Preparing for Dispatch'),updateHandler();}}>
-                                <Text>Preparing for Dispatch</Text>
+                                <Text style={{color:'#EFCC42'}}>Preparing for Dispatch</Text>
                             </TouchableOpacity>
                         </View>
                            
                         <View style={styles.table}>
                             <TouchableOpacity onPress={() => {setStatus('Dispatched'),updateHandler();}}>
-                                <Text>Dispatched</Text>
+                                <Text style={{color:'#2ED19B'}}>Dispatched</Text>
                             </TouchableOpacity>
                         </View>
 
                         <View style={styles.table}>
                             <TouchableOpacity onPress={() => {setStatus('Arrived'),updateHandler();}}>
-                                <Text>Arrived</Text>
+                                <Text style={{color:'#CE4AEF'}}>Arrived</Text>
                             </TouchableOpacity>
                         </View>
                         
                         <View style={styles.table}>
                             <TouchableOpacity onPress={() => {setStatus('Awaiting Processing'),updateHandler();}}>
-                                <Text>Awaiting Processing</Text>
+                                <Text style={{color:'#D74D2B'}} >Awaiting Processing</Text>
                             </TouchableOpacity>
                         </View>
                         
                         <View style={styles.table}>
                             <TouchableOpacity onPress={() => {setStatus('Processed'),updateHandler();}}>
-                                <Text>Processed</Text>
+                                <Text style={{color:'#1C59FF'}}>Processed</Text>
                             </TouchableOpacity>
                         </View>
                     </Popup>
@@ -228,6 +234,24 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingHorizontal: 10  
+    },
+    button:{
+        width:'20%',
+        flex: 1,
+        alignContent: 'flex-end',
+        justifyContent: 'space-between',
+    },
+    logo:{
+        width:20,
+        height:20,
+        alignItems:'center',
+        justifyContent: 'center',
+    },
+    logo1:{
+        width:30,
+        height:30,
+        alignItems:'center',
+        justifyContent: 'center',
     },
     background:{
         flex:1,
@@ -246,7 +270,16 @@ const styles = StyleSheet.create({
     cardText: {
         textAlign: 'left',
     },
+    /*colors
+        Processed   ##1C59FF
+        Awaiting Processed  #D74D2B 
+        Arrived #CE4AEF
+        dispatch  #2ED19B
+        preparing for dispatch #EFCC42
+
+    },
     
+    */
     modal: {
         padding: 20
     },
@@ -254,7 +287,8 @@ const styles = StyleSheet.create({
     remove: {
         textAlign: 'center',
         fontWeight: 'bold',
-        color: 'red'
+        color: 'red',
+        fontSize:20
     },
 
     update: {
@@ -263,17 +297,16 @@ const styles = StyleSheet.create({
         color: '#32cd32'
     },
 
-    logo:{
-        width:20,
-        height:20,
+    table: {
+        width:'100%',
+        padding: 10,
+        alignContent: 'space-between'
+    },
+    close:{
+        width:50,
+        height:50,
         alignItems:'center',
         justifyContent: 'center',
-    },
-
-    table: {
-        padding: 10,
-        alignItems: 'center',
-        alignContent: 'space-between'
     },
 
     switch: {
