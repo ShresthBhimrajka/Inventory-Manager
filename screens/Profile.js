@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     },
 
     buttonContainer: {
-        height: 50,
+        height: 55,
         width: 300,
         maxWidth: '70%',
         backgroundColor: "#cee1f5",

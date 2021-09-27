@@ -272,7 +272,7 @@ const styles = StyleSheet.create({
     
     item1:{
         justifyContent:"center",
-        width: "30%"
+        width: "70%"
     },
 
     cardText: {
