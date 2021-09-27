@@ -118,13 +118,10 @@ const InventoryScreen = ({route}) => {
 
     const showDetails = () => (
         <Popup visible={visibleDetails}>
-            <View style={styles.card}> 
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>ID:   {selected.id}</Text>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {selected.name}</Text>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {selected.quantity}</Text>
-                <Text style={styles.cardText}>{selected.desc}</Text>
-            </View>
-
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>ID:   {selected.id}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {selected.name}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {selected.quantity}</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>{selected.desc}</Text>
             <View style={styles.modal}>
                 <TouchableOpacity onPress={closeDetails}>
                     <Image style={styles.close} source={require('../assets/close.png')}/>
@@ -150,7 +147,7 @@ const InventoryScreen = ({route}) => {
             <TouchableOpacity onPress = {() => setUpdate({item})}>
                 <Image style={styles.logo} source={require('../assets/edit.png')}/>
             </TouchableOpacity>
-            </View>
+        </View>
     );
 
     const renderItem = ({item}) => (
@@ -256,6 +253,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent: 'flex-start',
     },
+    
     close:{
         width:50,
         height:50,
@@ -296,7 +294,8 @@ const styles = StyleSheet.create({
     },
 
     modal: {
-        padding: 20
+        padding: 10,
+        alignItems: 'center'
     },
 
     remove: {

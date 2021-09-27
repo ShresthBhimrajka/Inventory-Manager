@@ -75,7 +75,7 @@ const HistoryScreen = ({route}) => {
                 <TouchableOpacity onPress={closeDetails}>
                     <Text style={styles.textwhite}>. <Image style={styles.logo} source={require('../assets/close.png')}/></Text>
                 </TouchableOpacity>
-                </View>
+            </View>
         </Popup>
     );
 
@@ -108,10 +108,10 @@ const HistoryScreen = ({route}) => {
 
                 <Popup visible={visibleSearch}>
                     <TouchableOpacity onPress={closeSearch}>
-                        <Text style={styles.remove}>Cancel</Text>
+                            <Text style={styles.textwhite}>. <Image style={styles.cancel} source={require('../assets/close1.png')}/></Text>
                     </TouchableOpacity>
                     <FlatList
-                        keyExtractor={item => item.id}
+                        keyExtractor={item => item.mil}
                         data={searchResults}
                         renderItem={renderItem}/>
                 </Popup>
@@ -136,8 +136,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     background:{
-        //width: "100%",
-        //height: "100%",
         flex:1,
         justifyContent:"flex-start"
         
@@ -170,6 +168,13 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'red'
     },
+
+    cancel:{
+        width:50,
+        height:40,
+        alignItems:'center',
+        justifyContent: 'center',
+    }
 });
 
 export default HistoryScreen;

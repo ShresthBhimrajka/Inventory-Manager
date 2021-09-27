@@ -74,7 +74,7 @@ const RecordScreen = ({route}) => {
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>In/Ex: {selected.inex}</Text>
             <View style={styles.modal}>
                 <TouchableOpacity onPress={closeDetails}>
-                            <Image style={styles.logo} source={require('../assets/close.png')}/>
+                    <Image style={styles.logo} source={require('../assets/close.png')}/>
                 </TouchableOpacity>
             </View>
         </Popup>
@@ -101,7 +101,7 @@ const RecordScreen = ({route}) => {
                         onValueSubmitted={searchItem}/>
 
                     <FlatList
-                        keyExtractor={item => item.mil}
+                        keyExtractor={item => item.mil+item.empid}
                         data={recData}
                         renderItem={renderItem}/>
 
@@ -109,10 +109,10 @@ const RecordScreen = ({route}) => {
 
                     <Popup visible={visibleSearch}>
                         <TouchableOpacity onPress={closeSearch}>
-                            <Text style={styles.remove}>Close</Text>
+                            <Text style={styles.textwhite}>.<Image style={styles.cancel} source={require('../assets/close1.png')}/></Text>
                         </TouchableOpacity>
                         <FlatList
-                            keyExtractor={item => item.id}
+                            keyExtractor={item => item.mil+item.empid}
                             data={searchResults}
                             renderItem={renderItem}/>
                     </Popup>
@@ -156,7 +156,8 @@ const styles = StyleSheet.create({
     },
 
     modal: {
-        padding: 10
+        padding: 10,
+        alignItems: 'center'
     },
 
     remove: {
@@ -164,6 +165,27 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'red'
     },
+
+    textwhite: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: 'white',
+        fontSize:30     
+    },
+
+    close1:{
+        width:20,
+        height:20,
+        alignItems:'center',
+        justifyContent: 'center',
+    },
+
+    cancel:{
+        width:50,
+        height:40,
+        alignItems:'center',
+        justifyContent: 'center',
+    }
 });
 
 export default RecordScreen;

@@ -176,7 +176,7 @@ const StatusScreen = ({route}) => {
                     </View>
 
                     <FlatList
-                        keyExtractor={item => item.id}
+                        keyExtractor={item => item.mil+item.id}
                         data={data}
                         renderItem={renderItem}/>
 
@@ -187,7 +187,7 @@ const StatusScreen = ({route}) => {
                             <Text style={styles.textwhite}>.<Image style={styles.cancel} source={require('../assets/close1.png')}/></Text>
                         </TouchableOpacity>
                         <FlatList
-                            keyExtractor={item => item.id}
+                            keyExtractor={item => item.mil+item.id}
                             data={searchResults}
                             renderItem={renderItem}/>      
                     </Popup>
@@ -211,7 +211,7 @@ const StatusScreen = ({route}) => {
                         </View>
 
                         <View style={styles.table}>
-                            <TouchableOpacity onPress={() => {setStatus('Preparing for Dispatch'),updateHandler();}}>
+                            <TouchableOpacity onPress={() => {setStatus('Preparing for Dispatch');updateHandler();}}>
                                 <Card>
                                     {stat1()}
                                 </Card>
@@ -219,7 +219,7 @@ const StatusScreen = ({route}) => {
                         </View>
                            
                         <View style={styles.table}>
-                            <TouchableOpacity activeOpacity={0.9} onPress={() => {setStatus('Dispatched'),updateHandler();}}>
+                            <TouchableOpacity activeOpacity={0.9} onPress={() => {setStatus('Dispatched');updateHandler();}}>
                                 <Card>
                                     {stat2()}
                                 </Card>
@@ -227,7 +227,7 @@ const StatusScreen = ({route}) => {
                         </View>
 
                         <View style={styles.table}>
-                            <TouchableOpacity activeOpacity={0.9} onPress={() => {setStatus('Arrived'),updateHandler();}}>
+                            <TouchableOpacity activeOpacity={0.9} onPress={() => {setStatus('Arrived');updateHandler();}}>
                                 <Card>
                                     {stat3()}
                                 </Card>
@@ -235,7 +235,7 @@ const StatusScreen = ({route}) => {
                         </View>
                         
                         <View style={styles.table}>
-                            <TouchableOpacity activeOpacity={0.9} onPress={() => {setStatus('Awaiting Processing'),updateHandler();}}>
+                            <TouchableOpacity activeOpacity={0.9} onPress={() => {setStatus('Awaiting Processing');updateHandler();}}>
                                 <Card>
                                     {stat4()}
                                 </Card>
@@ -243,7 +243,7 @@ const StatusScreen = ({route}) => {
                         </View>
                         
                         <View style={styles.table}>
-                            <TouchableOpacity activeOpacity={0.9} onPress={() => {setStatus('Processed'),updateHandler();}}>
+                            <TouchableOpacity activeOpacity={0.9} onPress={() => {setStatus('Processed');updateHandler();}}>
                                 <Card>
                                     {stat5()}
                                 </Card>
@@ -281,6 +281,7 @@ const styles = StyleSheet.create({
         justifyContent:'flex-end',
         alignItems:'center',
     },
+
     item: {
         flex: 1,
         width: 270,
@@ -290,19 +291,21 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         margin: '5%'
     },
+
     textwhite: {
         textAlign: 'center',
         fontWeight: 'bold',
-           color: 'white',
-           fontSize:30
-           
+        color: 'white',
+        fontSize:30     
     },
+
     close1:{
         width:20,
         height:20,
         alignItems:'center',
         justifyContent: 'center',
     },
+
     cardText: {
         textAlign: 'left',
     },
@@ -328,12 +331,14 @@ const styles = StyleSheet.create({
         padding: 10,
         alignContent: 'space-between'
     },
+
     close:{
         width:50,
         height:50,
         alignItems:'center',
         justifyContent: 'center',
     },
+
     cancel:{
         width:50,
         height:40,
