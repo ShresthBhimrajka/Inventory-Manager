@@ -196,7 +196,7 @@ const StatusScreen = ({route}) => {
                         <FormInput labelValue={id} onChangeText={(id) => setId(id)} placeholder='Item ID' autocorrect={false} autoCapitalize='none'/>
                         <FormInput labelValue={name} onChangeText={(name) => setName(name)} placeholder='Item Name' autocorrect={false} autoCapitalize='words'/>
                         <FormInput labelValue={quantity} onChangeText={(quantity) => setQuantity(quantity)} placeholder='Item Quantity' keyboardType='numeric' autocorrect={false}/>
-                        <FormInput labelValue={desc} onChangeText={(desc) => setDesc(desc)} placeholder='Item Description' autocorrect={false} autoCapitalize='Sentences'/>
+                        <FormInput labelValue={desc} onChangeText={(desc) => setDesc(desc)} placeholder='Item Description' autocorrect={false} autoCapitalize='sentences'/>
                         <FormButton buttonTitle='Add Shipment' onPress={addHandler}/>
                         <TouchableOpacity onPress={closeAdd}>
                             <Text style={styles.textwhite}>.<Image style={styles.logo1} source={require('../assets/cancel.png')}/></Text>

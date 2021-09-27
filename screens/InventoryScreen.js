@@ -49,16 +49,17 @@ const InventoryScreen = ({route}) => {
     }, [])
 
     const changeHandler = () => {
-        if(newQuantity > 0){
-            updateInv(selected, newName, newId, newQuantity, newDesc,empName, empId, orgname);
-            setNewId('');
-            setNewName('');
+        if(parseInt(newQuantity) <= 0){
             setNewQuantity('');
-            setNewDesc('');
-            Keyboard.dismiss;
-            setVisibleUpdate(false);
-            setSelected(null);
         }
+        updateInv(selected, newName, newId, newQuantity, newDesc,empName, empId, orgname);
+        setNewId('');
+        setNewName('');
+        setNewQuantity('');
+        setNewDesc('');
+        Keyboard.dismiss;
+        setVisibleUpdate(false);
+        setSelected(null);
     };
 
     const removeHandler = () => {

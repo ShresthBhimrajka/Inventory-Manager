@@ -2,9 +2,10 @@
   "expo": {
     "name": "Inventory_Manager",
     "slug": "Inventory_Manager",
+    "sdkVersion": "42.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/Vennto.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -20,6 +21,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.vennto.vennto",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"

@@ -63,7 +63,7 @@ export async function updateInv(item, name, id, quantity, desc, empName, empId, 
             id: curid,
             name: curname,
             quantity: curquantity,
-            desc: desc
+            desc: curdesc
         });
         updateRec(curid, curname, curquantity, 'Updated', empName, empId, orgname);
         updateHistoy(curid, curname, curquantity, 'Updated', empId, orgname);
@@ -129,7 +129,7 @@ export async function updateHistoy(id, name, quantity, inex, empId, orgname) {
     }
 }
 
-export async function addShipment(id, name, quantity, desc, inex, empname, empid, orgname) {
+export async function addShipment(id, name, quantity, desc, empname, empid, orgname) {
     try {
         const d = new Date();
         const yr = new String(d.getFullYear());
