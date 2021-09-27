@@ -159,8 +159,8 @@ const InventoryScreen = ({route}) => {
             <Card style={styles.item}>
                 <View style={styles.card}> 
                     <View style={styles.item1}>
-                        <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.name} </Text>
-                        <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {item.quantity} </Text>
+                        <Text style={styles.cardText}>Name: {item.name} </Text>
+                        <Text style={styles.cardText}>Quantity: {item.quantity} </Text>
                     </View>
                 </View>
                 {access=='admin' ? admin({item}) : emp({item})}
@@ -281,7 +281,6 @@ const styles = StyleSheet.create({
 
     buttons: {
         width:'10%',
-        //flex: 1,
         alignContent: 'flex-end',
         justifyContent: 'space-between',
     },

@@ -39,9 +39,6 @@ export async function registrationAdmin(orgname, email, password, phone, name) {
 
 export async function registrationEmployee(email, password, name, phone, orgcode) {
   try {
-    await firebase.auth().createUserWithEmailAndPassword(email, password);
-    const currentUser = firebase.auth().currentUser;
-
     orgcode = orgcode.trim();
     orgcode = orgcode;
 
@@ -54,6 +51,9 @@ export async function registrationEmployee(email, password, name, phone, orgcode
     else{
       let dataObj = docorg.data();
       const orgname = dataObj.name;
+
+      await firebase.auth().createUserWithEmailAndPassword(email, password);
+      const currentUser = firebase.auth().currentUser;
 
       db.collection('allusers').doc(currentUser.uid).set({
         orgname: orgname,
