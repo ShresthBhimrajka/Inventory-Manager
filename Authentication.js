@@ -8,7 +8,7 @@ export async function registrationAdmin(orgname, email, password, phone, name) {
     const currentUser = firebase.auth().currentUser;
 
     orgname = orgname.trim();
-    const orgcode = new String(orgname.substring(0,3) + orgname.substring(orgname.length-3));
+    const orgcode = orgname.substring(0,3) + orgname.substring(orgname.length-3);
 
     const db = firebase.firestore();
 
@@ -16,6 +16,7 @@ export async function registrationAdmin(orgname, email, password, phone, name) {
         orgname: orgname,
         access: 'admin',
         name: name,
+        orgcode: orgcode
       });
 
     db.collection('organizations').doc(orgname).collection('users').doc(currentUser.uid).set({
@@ -42,7 +43,7 @@ export async function registrationEmployee(email, password, name, phone, orgcode
     const currentUser = firebase.auth().currentUser;
 
     orgcode = orgcode.trim();
-    orgcode = new String(orgcode);
+    orgcode = orgcode;
 
     const db = firebase.firestore();
     let docorg = await db.collection('allorgs').doc(orgcode).get();
