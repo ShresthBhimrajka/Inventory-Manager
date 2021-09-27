@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button, TouchableWithoutFeedback, Keyboard, Dimensions, Alert } from 'react-native';
+import { Text,Image, View, StyleSheet, Button,TouchableOpacity, TouchableWithoutFeedback, Keyboard, Dimensions, Alert } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import firebase from 'firebase';
 
@@ -97,7 +97,9 @@ const ScannerView = () => {
                 <FormInput labelValue={desc} onChangeText={(desc) => {setDesc(desc)}} placeholder='Item Description' autoCorrect={false}/>
                 <FormButton buttonTitle='Add' onPress={itemHandler}/>
                 <View style={{padding: 10}}>
-                    <Button title='Cancel' color='red' onPress={resetHandler}/>
+                    <TouchableOpacity onPress={resetHandler}>
+                     <Text style={styles.textwhite}>Cancel<Image style={styles.logo1} source={require('../assets/cancel.png')}/></Text>
+                    </TouchableOpacity>               
                 </View>
             </Popup>
         </TouchableWithoutFeedback>
@@ -123,7 +125,20 @@ const styles = StyleSheet.create({
     button: {
         alignItems: 'center',
         marginTop: Dimensions.get('screen').height/1.5,
-    }
+    },
+    textwhite: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: 'red',
+        fontSize:20
+    },
+    logo1:{
+        width:22,
+        height:25,
+        alignItems:'center',
+        justifyContent: 'center',
+    },
+
 });
 
 export default ScannerView;

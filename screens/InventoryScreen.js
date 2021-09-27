@@ -8,7 +8,6 @@ import { removeItem, updateInv, updateRec, updateHistoy } from '../DataBaseUpdat
 import Popup from '../components/Popup';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton'
-import { processFontFamily } from 'expo-font';
 
 const InventoryScreen = ({route}) => {
     const orgname = route.params.orgname;
@@ -197,7 +196,7 @@ const InventoryScreen = ({route}) => {
 
                     <Popup visible={visibleSearch}>
                         <TouchableOpacity onPress={closeSearch}>
-                            <Text style={styles.remove}>Close</Text>
+                            <Text style={styles.textwhite}>. <Image style={styles.cancel} source={require('../assets/close1.png')}/></Text>
                         </TouchableOpacity>
                         <FlatList
                             keyExtractor={item => item.id}
@@ -239,7 +238,18 @@ const styles = StyleSheet.create({
         justifyContent:'flex-end',
         alignItems:'center',
     },
-  
+    textwhite: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: 'white',
+      
+    },
+    cancel:{
+        width:50,
+        height:40,
+        alignItems:'center',
+        justifyContent: 'center',
+    },
     logo:{
         width:23,
         height:23,

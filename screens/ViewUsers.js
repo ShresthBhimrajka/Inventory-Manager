@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ImageBackground, StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Keyboard} from 'react-native';
+import {ImageBackground,Image, StyleSheet, View, Text, FlatList, Alert, TouchableOpacity, Keyboard} from 'react-native';
 import firebase from 'firebase';
 
 import SearchBar from './SearchBar';
@@ -134,7 +134,8 @@ const ViewUsers = ({route}) => {
 
                 <Popup visible={visibleSearch}>
                     <TouchableOpacity onPress={closeSearch}>
-                        <Text style={styles.remove}>Cancel</Text>
+                        <Text style={styles.remove1}>.<Image style={styles.close} source={require('../assets/close1.png')}/></Text>
+                
                     </TouchableOpacity>
                     <FlatList
                         keyExtractor={item => item.id}
@@ -189,7 +190,20 @@ const styles = StyleSheet.create({
     remove: {
         textAlign: 'center',
         fontWeight: 'bold',
-        color: 'red'
+        color:'red'
+    },
+
+    remove1: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: 'white'
+    },
+
+    close:{
+        width:50,
+        height:40,
+        alignItems:'center',
+        justifyContent: 'center',
     },
 
     promote: {
