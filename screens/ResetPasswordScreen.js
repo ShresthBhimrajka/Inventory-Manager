@@ -26,7 +26,7 @@ const ResetPasswordScreen = ({navigation}) => {
                 <View style={styles.screen}>
                     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                         <View style={styles.container}>
-                            <Text style={styles.text} adjustsFontSizeToFit numberOfLines={2} >Enter your registered mail id to recieve password reset link</Text>
+                            <Text style={styles.text} adjustsFontSizeToFit numberOfLines={2} >Enter your registered mail id to receive password reset link</Text>
                             <FormInput labelValue={email} onChangeText={(userEmail) => {setEmail(userEmail)}} placeholder='Email' keyboardType='email-address' autoCapitalize='none' autoCorrect={false}/>
                             <FormButton buttonTitle='Send link' onPress={mailHandler}/>
                             <TouchableOpacity style={styles.backButton} onPress={() => navigation.push('Login')}>

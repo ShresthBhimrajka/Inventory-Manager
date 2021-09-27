@@ -73,7 +73,7 @@ const HistoryScreen = ({route}) => {
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>In/Ex: {selected.inex}</Text>
             <View style={styles.modal}>
                 <TouchableOpacity onPress={closeDetails}>
-                    <Image style={styles.logo} source={require('../assets/close.png')}/>
+                    <Text style={styles.textwhite}>. <Image style={styles.logo} source={require('../assets/close.png')}/></Text>
                 </TouchableOpacity>
                 </View>
         </Popup>
@@ -142,7 +142,12 @@ const styles = StyleSheet.create({
         justifyContent:"flex-start"
         
     },
-
+    textwhite: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+           color: 'white',
+           fontSize:30
+    },
     item: {
         flex: 1,
         width: 270,

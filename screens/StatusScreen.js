@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ImageBackground, StyleSheet, View, Text, FlatList, TouchableOpacity, Button, TouchableWithoutFeedback, Keyboard, Image, Switch } from 'react-native';
+import {ImageBackground, StyleSheet, View, Text, FlatList, TouchableOpacity,Alert, Button, TouchableWithoutFeedback, Keyboard, Image, Switch } from 'react-native';
 import firebase from 'firebase';
 
 import { addShipment, updateStatus } from '../DataBaseUpdate';
@@ -120,7 +120,7 @@ const StatusScreen = ({route}) => {
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>{selected.desc}</Text>
             <View style={styles.modal}>
                 <TouchableOpacity onPress={closeDetails}>
-                    <Image style={styles.close} source={require('../assets/close.png')}/>
+                    <Text style={styles.textwhite}>.<Image style={styles.cancel} source={require('../assets/close1.png')}/></Text>
                 </TouchableOpacity>
             </View>
         </Popup>
@@ -184,7 +184,7 @@ const StatusScreen = ({route}) => {
 
                     <Popup visible={visibleSearch}>
                         <TouchableOpacity onPress={closeSearch}>
-                            <Text style={styles.remove}>Close</Text>
+                            <Text style={styles.textwhite}>.<Image style={styles.cancel} source={require('../assets/close1.png')}/></Text>
                         </TouchableOpacity>
                         <FlatList
                             keyExtractor={item => item.id}
@@ -199,14 +199,14 @@ const StatusScreen = ({route}) => {
                         <FormInput labelValue={desc} onChangeText={(desc) => setDesc(desc)} placeholder='Item Description' autocorrect={false} autoCapitalize='Sentences'/>
                         <FormButton buttonTitle='Add Shipment' onPress={addHandler}/>
                         <TouchableOpacity onPress={closeAdd}>
-                            <Image style={styles.logo1} source={require('../assets/cancel.png')}/>
+                            <Text style={styles.textwhite}>.<Image style={styles.logo1} source={require('../assets/cancel.png')}/></Text>
                         </TouchableOpacity>
                     </Popup>
 
                     <Popup visible={visibleUpdate}>
                         <View style={styles.table}>
                             <TouchableOpacity onPress={closeUpdate}>
-                                <Text style={styles.remove}><Image style={styles.logo1} source={require('../assets/cancel.png')}/></Text>
+                                <Text style={styles.remove}>Close<Image style={styles.close1} source={require('../assets/cancel.png')}/></Text>
                             </TouchableOpacity>
                         </View>
 
@@ -275,12 +275,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent: 'center',
     },
-    logo1:{
-        width:30,
-        height:30,
-        alignItems:'center',
-        justifyContent: 'center',
-    },
+    
     background:{
         flex:1,
         justifyContent:'flex-end',
@@ -295,7 +290,19 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         margin: '5%'
     },
-
+    textwhite: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+           color: 'white',
+           fontSize:30
+           
+    },
+    close1:{
+        width:20,
+        height:20,
+        alignItems:'center',
+        justifyContent: 'center',
+    },
     cardText: {
         textAlign: 'left',
     },
@@ -327,7 +334,25 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent: 'center',
     },
+    cancel:{
+        width:50,
+        height:40,
+        alignItems:'center',
+        justifyContent: 'center',
+    },
 
+    textwhite: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: 'white',
+        fontSize:25
+    },
+    logo1:{
+        width:31,
+        height:32,
+        alignItems:'center',
+        justifyContent: 'center',
+    },
     switch: {
         flex: 1,
         flexDirection: 'row',
