@@ -4,6 +4,8 @@ To clone and run the project on your system, first install node.js from your web
 
 npm install -g expo-cli
 
+Then clone the repository and download the dependencies required below
+
 Dependencies required:
 
   -Step 1: cd project_folder
