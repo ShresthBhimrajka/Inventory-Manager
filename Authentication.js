@@ -7,7 +7,7 @@ export async function registrationAdmin(orgname, email, password, phone, name) {
     await firebase.auth().createUserWithEmailAndPassword(email, password);
     const currentUser = firebase.auth().currentUser;
 
-    orgname = orgname.trim();
+    orgname = orgname.replace(/ /g, "");
     const orgcode = orgname.substring(0,3) + orgname.substring(orgname.length-3);
 
     const db = firebase.firestore();
