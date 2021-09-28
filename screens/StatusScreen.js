@@ -93,8 +93,11 @@ const StatusScreen = ({route}) => {
     };
 
     const setUpdate = ({item}) => {
-        setSelected(item);
-        setVisibleUpdate(true);
+        var s = parseInt(item.status);
+        if(s < 5){
+            s = s + 1;
+            updateStatus(item, s.toString(), orgname, empname, empid);
+        }
     };
 
     const closeUpdate = () => {
@@ -132,7 +135,7 @@ const StatusScreen = ({route}) => {
                 <View>
                     <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {item.name}</Text>
                     <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Order Placed: {item.datetime}</Text>
-                    {item.status=='Preparing for Dispatch' ? stat1() : (item.status=='Dispatched' ? stat2() : (item.status=='Arrived' ? stat3() : (item.status=='Awaiting Processing' ? stat4() : (item.status=='Processed' ? stat5() : <Text></Text>))))}
+                    {item.status=='1' ? stat1() : (item.status=='2' ? stat2() : (item.status=='3' ? stat3() : (item.status=='4' ? stat4() : (item.status='5' ? stat5() : <Text></Text>))))}
                 </View>
                 <TouchableOpacity onPress = {() => setUpdate({item})}>
                     <Image style={styles.logo} source={require('../assets/edit.png')}/>

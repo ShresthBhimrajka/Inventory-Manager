@@ -148,7 +148,7 @@ export async function addShipment(id, name, quantity, desc, empname, empid, orgn
             name: name,
             quantity: quantity,
             desc: desc,
-            status: 'Preparing for Dispatch',
+            status: '1',
             empid: empid,
             empname: empname,
             mil: mil,
