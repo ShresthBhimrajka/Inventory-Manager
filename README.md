@@ -1,5 +1,9 @@
 # Inventory-Manager
 
+To clone and run the project on your system, first install node.js from your web browser and run the following command to install the expo client
+
+npm install -g expo-cli
+
 Dependencies required:
 
   -Step 1: cd project_folder
