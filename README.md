@@ -23,3 +23,8 @@ Dependencies required:
   -Step 10: npm install expo-font
   
   -Step 11: npx react-native link
+
+
+To the run app make your you have a mobile emulator installed or you can use your own smartphone if on the same wireless connection .
+Run the command "npm start" in your project folder directory.
+In the web browser scan the given qr code to run the project.
