@@ -117,10 +117,10 @@ const StatusScreen = ({route}) => {
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Name: {selected.name}</Text>
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Quantity: {selected.quantity}</Text>
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Order Placed: {selected.datetime}</Text>
-            <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Status:   {selected.status}</Text>
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Employee Name:   {selected.empname}</Text>
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>Employee ID:   {selected.empid}</Text>
             <Text adjustsFontSizeToFit numberOfLines={1} style={styles.cardText}>{selected.desc}</Text>
+            {selected.status=='1' ? stat1() : (selected.status=='2' ? stat2() : (selected.status=='3' ? stat3() : (selected.status=='4' ? stat4() : (selected.status='5' ? stat5() : <Text></Text>))))}
             <View style={styles.modal}>
                 <TouchableOpacity onPress={closeDetails}>
                     <Text style={styles.textwhite}>.<Image style={styles.cancel} source={require('../assets/close1.png')}/></Text>
@@ -138,7 +138,7 @@ const StatusScreen = ({route}) => {
                     {item.status=='1' ? stat1() : (item.status=='2' ? stat2() : (item.status=='3' ? stat3() : (item.status=='4' ? stat4() : (item.status='5' ? stat5() : <Text></Text>))))}
                 </View>
                 <TouchableOpacity onPress = {() => setUpdate({item})}>
-                    <Image style={styles.logo} source={require('../assets/edit.png')}/>
+                    <Image style={styles.logo} source={require('../assets/next.png')}/>
                 </TouchableOpacity>
             </Card>
         </TouchableOpacity>       
@@ -273,8 +273,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     logo:{
-        width:20,
-        height:20,
+        width:25,
+        height:28,
         alignItems:'center',
         justifyContent: 'center',
     },
