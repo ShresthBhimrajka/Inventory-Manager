@@ -1,12 +1,13 @@
 # Inventory-Manager
 
-To clone and run the project on your system, first install node.js from your web browser and run the following command to install the expo client
+To clone and run the project on your system, first install node.js from your web browser and run the following command to install the expo client.
 
+# Run the Command:
 npm install -g expo-cli
 
 Then clone the repository and download the dependencies required below
 
-Dependencies required:
+# Dependencies required:
 
   -Step 1: cd project_folder
   
@@ -32,10 +33,10 @@ Dependencies required:
 
 
 To the run app make your you have a mobile emulator installed or you can use your own smartphone if on the same wireless connection .
-Run the command "npm start" in your project folder directory.
+# Run the command "npm start" in your project folder directory.
 In the web browser scan the given qr code to run the project.
 
 
-APK LINK:
+# APK LINK:
 https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40venntodev/Vennto-93cf2063a0964736823b18970d47acce-signed.apk
 
