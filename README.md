@@ -1,5 +1,15 @@
 # Inventory-Manager
 
+
+<h3>APK LINK:</h3>
+https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40venntodev/Vennto-93cf2063a0964736823b18970d47acce-signed.apk
+
+
+**In the app.json file bundle for iOS is also created**
+
+
+<h3>USER MANUAL:</h3>
+
 To clone and run the project on your system, first install node.js from your web browser and run the following command to install the expo client.
 
  **Run the Command:**
@@ -38,8 +48,4 @@ To the run app make your you have a mobile emulator installed or you can use you
  
 In the web browser scan the given qr code to run the project.
 
-**In the app.json file bundle for iOS is also created**
-
-# APK LINK:
-https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40venntodev/Vennto-93cf2063a0964736823b18970d47acce-signed.apk
 
