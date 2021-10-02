@@ -5,7 +5,7 @@
 https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40venntodev/Vennto-93cf2063a0964736823b18970d47acce-signed.apk
 
 
-**In the app.json file bundle for iOS is also created**
+**In the app.json file , bundle for iOS is also created**
 
 <h4>Demo Link</h4>
 https://drive.google.com/file/d/1j1JMNeMujLvqhpnP2EM7wJEgcCuxnYmw/view?usp=sharing
