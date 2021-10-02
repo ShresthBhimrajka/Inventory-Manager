@@ -4,6 +4,9 @@
 <h3>APK LINK:</h3>
 https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40venntodev/Vennto-93cf2063a0964736823b18970d47acce-signed.apk
 
+<h2>Demo Link</h2>
+https://drive.google.com/file/d/1j1JMNeMujLvqhpnP2EM7wJEgcCuxnYmw/view?usp=sharing
+
 
 **In the app.json file bundle for iOS is also created**
 
