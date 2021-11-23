@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { ScrollView, Text, TextInput, View, StyleSheet } from 'react-native';
+import React from 'react';
+import { TextInput, View, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons'
 
 const SearchBar = ({placeholdertext, onValueSubmitted, onChangeValue, data}) => {

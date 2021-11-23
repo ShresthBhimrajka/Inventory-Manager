@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ImageBackground, ScrollView, Text, View, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import { ImageBackground, ScrollView, Text, View, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 
 import { registrationAdmin } from '../Authentication';
 import { Colors } from '../assets/Colors';

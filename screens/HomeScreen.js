@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {ImageBackground, StyleSheet, View, Text, TouchableOpacity, Alert} from 'react-native';
 import firebase from 'firebase';
-import { useFonts } from 'expo-font';
 
 import Card from '../components/Card';
 
@@ -10,18 +9,7 @@ const HomeScreen = ({navigation}) => {
     const [orgname, setOrgName] = useState('');
     const [empName, setEmpName] = useState('');
     const [empId, setEmpId] = useState('');
-	/*const [loaded] = useFonts({
-      bold: require('../assets/fonts/GemunuLibre-Bold.ttf'),
-      extrabold: require('../assets/fonts/GemunuLibre-ExtraBold.ttf'),
-      extralight: require('../assets/fonts/GemunuLibre-ExtraLight.ttf'),
-      light: require('../assets/fonts/GemunuLibre-Light.ttf'),
-      medium: require('../assets/fonts/GemunuLibre-Medium.ttf'),
-      regular: require('../assets/fonts/GemunuLibre-Regular.ttf'),
-      semibold: require('../assets/fonts/GemunuLibre-SemiBold.ttf'),
-    });
-    if (!loaded) {
-      return null;
-    }*/
+	
     let userId = firebase.auth().currentUser.uid;  
 
     useEffect(() => {

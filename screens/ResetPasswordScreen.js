@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {ImageBackground, ScrollView, StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TouchableOpacity, Alert} from "react-native";
+import { ImageBackground, ScrollView, StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TouchableOpacity, Alert } from "react-native";
 
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';

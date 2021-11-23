@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-import {Image,Dimensions, ImageBackground,ScrollView, View, Text,TouchableOpacity, TouchableWithoutFeedback, StyleSheet, Keyboard, Alert } from 'react-native';
+import { Image, ImageBackground,ScrollView, View, Text,TouchableOpacity, TouchableWithoutFeedback, StyleSheet, Keyboard, Alert } from 'react-native';
 
-//import Search from "./SearchBar";
 import { signIn } from '../Authentication';
 import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';

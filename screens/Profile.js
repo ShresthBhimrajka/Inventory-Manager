@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Image, StyleSheet, View, Text, Button, Alert, TouchableOpacity, Keyboard, ImageBackground, ScrollView } from 'react-native';
+import { Image, StyleSheet, View, Text, Alert, TouchableOpacity, Keyboard, ImageBackground, ScrollView } from 'react-native';
 import firebase from 'firebase';
 import { loggingOut, changeEmail, changePhone, changePassword, deleteAccount } from '../Authentication';
 

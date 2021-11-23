@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ImageBackground, StyleSheet, View, Text, FlatList, TouchableOpacity,Alert, Button, TouchableWithoutFeedback, Keyboard, Image, Switch } from 'react-native';
+import { ImageBackground, StyleSheet, View, Text, FlatList, TouchableOpacity,Alert, Button, TouchableWithoutFeedback, Keyboard, Image } from 'react-native';
 import firebase from 'firebase';
 
 import { addShipment, updateStatus } from '../DataBaseUpdate';
@@ -24,8 +24,6 @@ const StatusScreen = ({route}) => {
     const [quantity, setQuantity] = useState('');
     const [id, setId] = useState('');
     const [desc, setDesc] = useState('');
-    const [visibleUpdate, setVisibleUpdate] = useState(false);
-    const [status, setStatus] = useState('');
 
     useEffect(() => {
         try {  
@@ -99,17 +97,6 @@ const StatusScreen = ({route}) => {
             updateStatus(item, s.toString(), orgname, empname, empid);
         }
     };
-
-    const closeUpdate = () => {
-        setSelected(null);
-        setVisibleUpdate(false);
-    };
-
-    const updateHandler = () => {
-        updateStatus(selected, status, orgname, empname, empid);
-        setSelected(null);
-        setVisibleUpdate(false);
-    }
 
     const showDetails = () => (
         <Popup visible={visible}>
@@ -204,54 +191,6 @@ const StatusScreen = ({route}) => {
                         <TouchableOpacity onPress={closeAdd}>
                             <Text style={styles.textwhite}>.<Image style={styles.logo1} source={require('../assets/cancel.png')}/></Text>
                         </TouchableOpacity>
-                    </Popup>
-
-                    <Popup visible={visibleUpdate}>
-                        <View style={styles.table}>
-                            <TouchableOpacity onPress={closeUpdate}>
-                                <Text style={styles.remove}>Close<Image style={styles.close1} source={require('../assets/cancel.png')}/></Text>
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={styles.table}>
-                            <TouchableOpacity onPress={() => {setStatus('Preparing for Dispatch');updateHandler();}}>
-                                <Card>
-                                    {stat1()}
-                                </Card>
-                            </TouchableOpacity>
-                        </View>
-                           
-                        <View style={styles.table}>
-                            <TouchableOpacity activeOpacity={0.9} onPress={() => {setStatus('Dispatched');updateHandler();}}>
-                                <Card>
-                                    {stat2()}
-                                </Card>
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={styles.table}>
-                            <TouchableOpacity activeOpacity={0.9} onPress={() => {setStatus('Arrived');updateHandler();}}>
-                                <Card>
-                                    {stat3()}
-                                </Card>
-                            </TouchableOpacity>
-                        </View>
-                        
-                        <View style={styles.table}>
-                            <TouchableOpacity activeOpacity={0.9} onPress={() => {setStatus('Awaiting Processing');updateHandler();}}>
-                                <Card>
-                                    {stat4()}
-                                </Card>
-                            </TouchableOpacity>
-                        </View>
-                        
-                        <View style={styles.table}>
-                            <TouchableOpacity activeOpacity={0.9} onPress={() => {setStatus('Processed');updateHandler();}}>
-                                <Card>
-                                    {stat5()}
-                                </Card>
-                            </TouchableOpacity>
-                        </View>
                     </Popup>
                 </View>
             </TouchableWithoutFeedback>

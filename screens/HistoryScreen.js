@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, Text,Image, FlatList, Alert, TouchableOpacity,ImageBackground, Button, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import { StyleSheet, View, Text,Image, FlatList, Alert, TouchableOpacity,ImageBackground, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import firebase from 'firebase';
 
 import SearchBar from './SearchBar';
